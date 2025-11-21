@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-sans antialiased text-navy bg-white;
+    @apply leading-relaxed;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold text-navy text-center mb-4;
+    @apply font-display;
+  }
+
+  .section-subtitle {
+    @apply text-lg sm:text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto;
+  }
+
+  .cta-button {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+    @apply transform hover:scale-105 active:scale-95;
+    @apply shadow-lg hover:shadow-xl;
+  }
+
+  .cta-button.primary {
+    @apply bg-gradient-to-r from-primary to-primary-light text-white;
+  }
+
+  .cta-button.secondary {
+    @apply bg-navy text-white hover:bg-navy-dark;
+  }
+
+  .fade-in-section {
+    @apply opacity-0 translate-y-8 transition-all duration-700;
+  }
+
+  .fade-in-section.visible {
+    @apply opacity-100 translate-y-0;
+  }
+}
