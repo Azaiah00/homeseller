@@ -95,7 +95,7 @@ const NetSheetCalculator = () => {
     
     doc.setFontSize(12)
     doc.setTextColor(201, 169, 97) // gold
-    doc.text('Frederick Sales | KS Team', 105, 28, { align: 'center' })
+    doc.text('Fred Sales | KS Team', 105, 28, { align: 'center' })
     
     doc.setDrawColor(201, 169, 97)
     doc.setLineWidth(0.5)

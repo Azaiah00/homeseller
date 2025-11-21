@@ -161,7 +161,7 @@ function App() {
                 isScrolled ? 'text-navy' : 'text-white'
               }`}
             >
-              Frederick Sales
+              Fred Sales
             </button>
 
             {/* Desktop Navigation */}
@@ -350,7 +350,7 @@ function App() {
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">Hi, I'm Frederick Sales!</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">Hi, I'm Fred Sales!</h2>
                   <p className="text-lg text-gray-700 leading-relaxed mb-4">
                     I grew up in Alexandria, VA and I currently live in Washington DC in the SW Waterfront neighborhood. 
                     Selling your home is a huge decision, and as your realtor, I'm here to make it smarter, simpler, and 
@@ -382,7 +382,7 @@ function App() {
           >
             <h2 className="section-title text-white">Why Work With Me & The KS Team?</h2>
             <p className="section-subtitle text-gray-300 mb-12">
-              When you work with me as your realtor, you're not just hiring Frederick Sales; you're hiring the entire KS Team.
+              When you work with me as your realtor, you're not just hiring Fred Sales; you're hiring the entire KS Team.
             </p>
           </motion.div>
 
@@ -1285,7 +1285,7 @@ function App() {
       <footer className="bg-navy-dark text-white py-12">
         <div className="container">
           <div className="text-center space-y-4">
-            <p className="text-xl font-bold">Frederick Sales | Realtor®</p>
+            <p className="text-xl font-bold">Fred Sales | Realtor®</p>
             <p className="text-gray-400">Licensed in VA, DC, & MD</p>
             <p className="text-sm text-gray-500">Equal Housing Opportunity</p>
           </div>
