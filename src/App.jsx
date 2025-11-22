@@ -1088,27 +1088,27 @@ function App() {
                     </h5>
                     <ul className="space-y-2 text-gray-700">
                       <li className="flex items-start gap-2">
-                        <span className="text-green-600 mt-1">✓</span>
+                        <CheckCircle size={18} className="text-green-600 mt-0.5 flex-shrink-0" />
                         <span><strong>Maximum Exposure:</strong> More buyer agents will show your home when they know they'll be compensated</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-green-600 mt-1">✓</span>
+                        <CheckCircle size={18} className="text-green-600 mt-0.5 flex-shrink-0" />
                         <span><strong>Faster Sales:</strong> Your home gets shown more often, leading to quicker offers</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-green-600 mt-1">✓</span>
+                        <CheckCircle size={18} className="text-green-600 mt-0.5 flex-shrink-0" />
                         <span><strong>Higher Sale Prices:</strong> More competition among buyers typically results in better offers</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-green-600 mt-1">✓</span>
+                        <CheckCircle size={18} className="text-green-600 mt-0.5 flex-shrink-0" />
                         <span><strong>Industry Standard:</strong> Most buyers expect their agent to be compensated, making your home more attractive</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-green-600 mt-1">✓</span>
+                        <CheckCircle size={18} className="text-green-600 mt-0.5 flex-shrink-0" />
                         <span><strong>Better Qualified Buyers:</strong> Buyer's agents typically work with pre-approved, serious buyers</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-green-600 mt-1">✓</span>
+                        <CheckCircle size={18} className="text-green-600 mt-0.5 flex-shrink-0" />
                         <span><strong>Professional Representation:</strong> Buyer's agents help ensure smooth transactions and fewer issues</span>
                       </li>
                     </ul>
