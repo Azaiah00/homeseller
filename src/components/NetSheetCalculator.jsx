@@ -189,8 +189,8 @@ const NetSheetCalculator = () => {
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10">
-            <div className="grid md:grid-cols-2 gap-8">
+          <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 md:p-10">
+            <div className="grid md:grid-cols-2 gap-6 md:gap-8">
               {/* Inputs */}
               <div className="space-y-6">
                 <div>
@@ -206,7 +206,8 @@ const NetSheetCalculator = () => {
                       value={formData.listingPrice}
                       onChange={handleInputChange}
                       placeholder="500,000"
-                      className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                      style={{ fontSize: '16px' }}
                     />
                   </div>
                 </div>
@@ -224,7 +225,8 @@ const NetSheetCalculator = () => {
                       value={formData.mortgagePayoff}
                       onChange={handleInputChange}
                       placeholder="300,000"
-                      className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                      style={{ fontSize: '16px' }}
                     />
                   </div>
                 </div>
@@ -242,7 +244,8 @@ const NetSheetCalculator = () => {
                       value={formData.propertyTaxes}
                       onChange={handleInputChange}
                       placeholder="6,000"
-                      className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                      style={{ fontSize: '16px' }}
                     />
                   </div>
                 </div>
@@ -257,7 +260,8 @@ const NetSheetCalculator = () => {
                     name="closingDate"
                     value={formData.closingDate}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                    style={{ fontSize: '16px' }}
                   />
                 </div>
 
@@ -275,7 +279,8 @@ const NetSheetCalculator = () => {
                       min="0"
                       max="10"
                       step="0.5"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                      style={{ fontSize: '16px' }}
                     />
                     <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">%</span>
                   </div>
@@ -294,7 +299,8 @@ const NetSheetCalculator = () => {
                       value={formData.miscClosingCosts}
                       onChange={handleInputChange}
                       placeholder="3,000"
-                      className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                      style={{ fontSize: '16px' }}
                     />
                   </div>
                 </div>
@@ -302,12 +308,12 @@ const NetSheetCalculator = () => {
 
               {/* Results */}
               <div className="space-y-6">
-                <div className="bg-gradient-to-br from-primary to-primary-light rounded-xl p-8 text-white">
-                  <div className="text-sm font-semibold mb-2">ESTIMATED NET PROCEEDS</div>
-                  <div className="text-4xl md:text-5xl font-bold mb-4">
+                <div className="bg-gradient-to-br from-primary to-primary-light rounded-xl p-6 sm:p-8 text-white">
+                  <div className="text-xs sm:text-sm font-semibold mb-2">ESTIMATED NET PROCEEDS</div>
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 break-words">
                     {formatCurrency(netProceeds)}
                   </div>
-                  <div className="text-sm opacity-90">
+                  <div className="text-xs sm:text-sm opacity-90">
                     This is your estimated cash at closing
                   </div>
                 </div>
@@ -350,9 +356,10 @@ const NetSheetCalculator = () => {
 
                 <motion.button
                   onClick={downloadPDF}
-                  className="w-full cta-button primary flex items-center justify-center gap-2"
+                  className="w-full cta-button primary flex items-center justify-center gap-2 min-h-[48px] text-base"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
+                  style={{ touchAction: 'manipulation' }}
                 >
                   <Download size={20} />
                   Download Official PDF Report

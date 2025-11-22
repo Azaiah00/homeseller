@@ -428,9 +428,10 @@ function App() {
           </p>
           <motion.button
             onClick={() => scrollToSection('contact')}
-            className="cta-button primary"
+            className="cta-button primary min-h-[48px] text-base sm:text-lg px-6 sm:px-8"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            style={{ touchAction: 'manipulation' }}
           >
             Schedule My Free Seller Consultation
           </motion.button>
@@ -453,27 +454,27 @@ function App() {
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">5,275+</div>
-              <div className="text-gray-300 font-semibold">Families Helped</div>
+            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-2">5,275+</div>
+              <div className="text-xs sm:text-sm text-gray-300 font-semibold">Families Helped</div>
             </motion.div>
-            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">$5 BILLION+</div>
-              <div className="text-gray-300 font-semibold">In Team Sales</div>
+            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
+              <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-2">$5 BILLION+</div>
+              <div className="text-xs sm:text-sm text-gray-300 font-semibold">In Team Sales</div>
             </motion.div>
-            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-primary mb-2">TOP TEAM</div>
-              <div className="text-gray-300 font-semibold">In the DMV Since 2008</div>
+            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
+              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-2">TOP TEAM</div>
+              <div className="text-xs sm:text-sm text-gray-300 font-semibold">In the DMV Since 2008</div>
             </motion.div>
-            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-6 text-center">
-              <div className="text-2xl md:text-3xl font-bold text-primary mb-2">7+ YEARS</div>
-              <div className="text-gray-300 font-semibold">Experience</div>
+            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
+              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-2">7+ YEARS</div>
+              <div className="text-xs sm:text-sm text-gray-300 font-semibold">Experience</div>
             </motion.div>
           </motion.div>
 
@@ -506,7 +507,7 @@ function App() {
           </motion.div>
 
           <motion.div
-            className="max-w-4xl mx-auto space-y-8"
+            className="max-w-4xl mx-auto space-y-6 sm:space-y-8"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -515,13 +516,13 @@ function App() {
             {/* Step 1 */}
             <motion.div
               variants={fadeInUp}
-              className="relative pl-12 border-l-4 border-primary"
+              className="relative pl-10 sm:pl-12 border-l-4 border-primary"
             >
-              <div className="absolute -left-6 top-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">
+              <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 1
               </div>
-              <div className="bg-gray-50 rounded-lg p-6 ml-4">
-                <h3 className="text-2xl font-bold text-navy mb-3">Strategic Consultation</h3>
+              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Strategic Consultation</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   We start by reviewing your goals, timeline, and conducting a comprehensive market analysis. 
                   This foundation sets the stage for everything that follows.
@@ -539,13 +540,13 @@ function App() {
             {/* Step 2 */}
             <motion.div
               variants={fadeInUp}
-              className="relative pl-12 border-l-4 border-primary"
+              className="relative pl-10 sm:pl-12 border-l-4 border-primary"
             >
-              <div className="absolute -left-6 top-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">
+              <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 2
               </div>
-              <div className="bg-gray-50 rounded-lg p-6 ml-4">
-                <h3 className="text-2xl font-bold text-navy mb-3">Property Prep & Staging</h3>
+              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Property Prep & Staging</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Decluttering, repairs, and leveraging our "Virtual Staging Advantage" (more on this later). 
                   We transform your home into a buyer's dream before they even step foot inside.
@@ -563,13 +564,13 @@ function App() {
             {/* Step 3 */}
             <motion.div
               variants={fadeInUp}
-              className="relative pl-12 border-l-4 border-primary"
+              className="relative pl-10 sm:pl-12 border-l-4 border-primary"
             >
-              <div className="absolute -left-6 top-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">
+              <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 3
               </div>
-              <div className="bg-gray-50 rounded-lg p-6 ml-4">
-                <h3 className="text-2xl font-bold text-navy mb-3">Pricing Strategy</h3>
+              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Pricing Strategy</h3>
                 <p className="text-gray-700 leading-relaxed">
                   Positioning your home to attract the maximum pool of buyers. We analyze comparable sales 
                   and market conditions to price it right from day one.
@@ -580,13 +581,13 @@ function App() {
             {/* Step 4 */}
             <motion.div
               variants={fadeInUp}
-              className="relative pl-12 border-l-4 border-primary"
+              className="relative pl-10 sm:pl-12 border-l-4 border-primary"
             >
-              <div className="absolute -left-6 top-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">
+              <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 4
               </div>
-              <div className="bg-gray-50 rounded-lg p-6 ml-4">
-                <h3 className="text-2xl font-bold text-navy mb-3">The "Coming Soon" Launch</h3>
+              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">The "Coming Soon" Launch</h3>
                 <p className="text-gray-700 leading-relaxed">
                   Generating buzz before we even hit the MLS. We create anticipation and build a waiting list 
                   of qualified buyers before your home officially goes live.
@@ -597,13 +598,13 @@ function App() {
             {/* Step 5 */}
             <motion.div
               variants={fadeInUp}
-              className="relative pl-12 border-l-4 border-primary"
+              className="relative pl-10 sm:pl-12 border-l-4 border-primary"
             >
-              <div className="absolute -left-6 top-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">
+              <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 5
               </div>
-              <div className="bg-gray-50 rounded-lg p-6 ml-4">
-                <h3 className="text-2xl font-bold text-navy mb-3">Live on Market & Open Houses</h3>
+              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Live on Market & Open Houses</h3>
                 <p className="text-gray-700 leading-relaxed">
                   We don't just open doors; we collect critical feedback from every visitor to adjust our 
                   strategy in real-time. Every showing is an opportunity to refine and improve.
@@ -614,13 +615,13 @@ function App() {
             {/* Step 6 */}
             <motion.div
               variants={fadeInUp}
-              className="relative pl-12 border-l-4 border-primary"
+              className="relative pl-10 sm:pl-12 border-l-4 border-primary"
             >
-              <div className="absolute -left-6 top-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">
+              <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 6
               </div>
-              <div className="bg-gray-50 rounded-lg p-6 ml-4">
-                <h3 className="text-2xl font-bold text-navy mb-3">Reviewing Offers & Negotiations</h3>
+              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Reviewing Offers & Negotiations</h3>
                 <p className="text-gray-700 leading-relaxed">
                   We negotiate terms, not just price. From closing dates to contingencies, we ensure every 
                   aspect of the deal works in your favor.
@@ -631,13 +632,13 @@ function App() {
             {/* Step 7 */}
             <motion.div
               variants={fadeInUp}
-              className="relative pl-12 border-l-4 border-primary"
+              className="relative pl-10 sm:pl-12 border-l-4 border-primary"
             >
-              <div className="absolute -left-6 top-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl">
+              <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 7
               </div>
-              <div className="bg-gray-50 rounded-lg p-6 ml-4">
-                <h3 className="text-2xl font-bold text-navy mb-3">Escrow & Closing</h3>
+              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+                <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Escrow & Closing</h3>
                 <p className="text-gray-700 leading-relaxed">
                   Managing inspections, appraisals, and paperwork until you get paid. We handle every detail 
                   so you can focus on your next chapter.
@@ -754,8 +755,8 @@ function App() {
                 </div>
 
                 {/* Virtual Staging */}
-                <div className="p-8 bg-primary/5">
-                  <h4 className="text-2xl font-bold text-primary mb-6 text-center">Virtual Staging (Our Method)</h4>
+                <div className="p-6 sm:p-8 bg-primary/5">
+                  <h4 className="text-xl sm:text-2xl font-bold text-primary mb-4 sm:mb-6 text-center">Virtual Staging (Our Method)</h4>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="text-green-600 mt-1 flex-shrink-0" size={20} />
@@ -1009,18 +1010,18 @@ function App() {
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 text-center">
-              <div className="text-5xl mb-4">🎉</div>
-              <h3 className="text-xl font-bold text-navy mb-3">Fun Client Events</h3>
+            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 sm:p-8 text-center">
+              <div className="text-4xl sm:text-5xl mb-4">🎉</div>
+              <h3 className="text-lg sm:text-xl font-bold text-navy mb-3">Fun Client Events</h3>
               <p className="text-gray-700">
                 You're invited! Get exclusive invitations to our annual Nats game, fall family fun day, 
                 brunch with Santa, and more. Build lasting relationships with other homeowners.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 text-center">
-              <div className="text-5xl mb-4">❤️</div>
-              <h3 className="text-xl font-bold text-navy mb-3">We Give Back Together</h3>
+            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 sm:p-8 text-center">
+              <div className="text-4xl sm:text-5xl mb-4">❤️</div>
+              <h3 className="text-lg sm:text-xl font-bold text-navy mb-3">We Give Back Together</h3>
               <p className="text-gray-700">
                 We love the DMV. For every referral we receive, we donate $250 to charities like Habitat 
                 for Humanity, St. Jude's, and Meals on Wheels.
@@ -1089,7 +1090,7 @@ function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Start Your Home Sale?</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Ready to Start Your Home Sale?</h2>
             <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-4">
               "All we ask from you is your loyalty. In return, you get our 100% commitment and expertise."
             </p>
@@ -1150,7 +1151,7 @@ function App() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="max-w-2xl mx-auto"
           >
-            <div className="bg-white rounded-xl shadow-2xl p-8 md:p-12">
+            <div className="bg-white rounded-xl shadow-2xl p-6 sm:p-8 md:p-12">
               <form
                 name="seller-contact"
                 method="POST"
@@ -1178,10 +1179,11 @@ function App() {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy ${
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
                         formErrors.name ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="John Smith"
+                      style={{ fontSize: '16px' }}
                     />
                     {formErrors.name && <span className="text-red-500 text-sm mt-1 block">{formErrors.name}</span>}
                   </div>
@@ -1197,10 +1199,11 @@ function App() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy ${
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
                         formErrors.email ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="john@example.com"
+                      style={{ fontSize: '16px' }}
                     />
                     {formErrors.email && <span className="text-red-500 text-sm mt-1 block">{formErrors.email}</span>}
                   </div>
@@ -1218,10 +1221,11 @@ function App() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy ${
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
                         formErrors.phone ? 'border-red-500' : 'border-gray-300'
                       }`}
                       placeholder="(703) 555-1234"
+                      style={{ fontSize: '16px' }}
                     />
                     {formErrors.phone && <span className="text-red-500 text-sm mt-1 block">{formErrors.phone}</span>}
                   </div>
@@ -1236,9 +1240,10 @@ function App() {
                       value={formData.timeline}
                       onChange={handleInputChange}
                       required
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy ${
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
                         formErrors.timeline ? 'border-red-500' : 'border-gray-300'
                       }`}
+                      style={{ fontSize: '16px' }}
                     >
                       <option value="">Select timeline</option>
                       <option value="asap">ASAP</option>
@@ -1255,23 +1260,25 @@ function App() {
                   <label htmlFor="propertyAddress" className="block text-sm font-semibold text-navy mb-2">
                     Property Address (Optional)
                   </label>
-                  <input
-                    type="text"
-                    id="propertyAddress"
-                    name="propertyAddress"
-                    value={formData.propertyAddress}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy"
-                    placeholder="123 Main St, City, State"
-                  />
+                    <input
+                      type="text"
+                      id="propertyAddress"
+                      name="propertyAddress"
+                      value={formData.propertyAddress}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px]"
+                      placeholder="123 Main St, City, State"
+                      style={{ fontSize: '16px' }}
+                    />
                 </div>
 
                 <button
                   type="submit"
-                  className={`w-full cta-button primary text-lg py-4 ${
+                  className={`w-full cta-button primary text-lg py-4 min-h-[48px] ${
                     formSubmitted ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
                   disabled={formSubmitted}
+                  style={{ touchAction: 'manipulation' }}
                 >
                   {formSubmitted ? 'Submitting...' : 'Schedule My Free Seller Consultation'}
                 </button>

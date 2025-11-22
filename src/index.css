@@ -228,18 +228,25 @@
       min-height: 80vh;
       padding: 3rem 1.5rem;
       padding-top: 6rem;
+      background-attachment: scroll; /* Better performance on mobile */
     }
 
     .hero-title {
       font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
     }
 
     .hero-slogan {
       font-size: 1.2rem;
+      margin-bottom: 1.5rem;
     }
 
     .hero-intro {
       font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      padding: 0 0.5rem;
     }
 
     .hero-photo-placeholder {
@@ -255,6 +262,186 @@
     .hero-photo {
       width: 150px;
       height: 150px;
+    }
+
+    .hero-trust-badge {
+      font-size: 0.85rem;
+      padding: 0.5rem 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  /* Comprehensive Mobile Optimizations */
+  @media (max-width: 640px) {
+    /* Prevent iOS zoom on input focus - critical for mobile UX */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="date"],
+    select,
+    textarea {
+      font-size: 16px !important; /* Prevents iOS zoom */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    /* Ensure minimum touch target sizes (44px minimum, 48px recommended) */
+    button,
+    .cta-button,
+    a[role="button"] {
+      min-height: 48px;
+      min-width: 48px;
+      padding: 0.875rem 1.5rem;
+      font-size: 1rem;
+      touch-action: manipulation; /* Prevents double-tap zoom */
+    }
+
+    /* Mobile navigation improvements */
+    .nav-logo {
+      font-size: 1.1rem;
+    }
+
+    /* Section spacing on mobile */
+    section {
+      padding: 3rem 0;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    /* Text sizes for readability */
+    .section-title {
+      font-size: 1.75rem;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+
+    /* Form improvements */
+    form input,
+    form select,
+    form textarea {
+      min-height: 48px;
+      padding: 0.875rem 1rem;
+      border-radius: 8px;
+    }
+
+    /* Calculator mobile optimization */
+    .calculator-wrapper {
+      padding: 1rem 0;
+    }
+
+    /* Grid improvements for mobile */
+    .grid {
+      gap: 1rem;
+    }
+
+    /* Stats grid on mobile */
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* Testimonials grid */
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    /* FAQ items */
+    .faq-item {
+      padding: 1rem;
+    }
+
+    /* Contact form */
+    .contact-form {
+      padding: 1.5rem;
+    }
+
+    /* Modal improvements */
+    .modal {
+      padding: 1.5rem;
+      margin: 1rem;
+      max-width: calc(100% - 2rem);
+    }
+  }
+
+  /* Extra small devices (iPhone SE, small Android) */
+  @media (max-width: 375px) {
+    .hero-title {
+      font-size: 1.75rem;
+    }
+
+    .hero-slogan {
+      font-size: 1.1rem;
+    }
+
+    .hero-intro {
+      font-size: 0.95rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    button,
+    .cta-button {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  /* Landscape mobile optimization */
+  @media (max-width: 896px) and (orientation: landscape) {
+    .hero {
+      min-height: 100vh;
+      padding-top: 4rem;
+    }
+
+    .hero-content {
+      padding-top: 2rem;
+    }
+  }
+
+  /* Touch device optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets for touch devices */
+    button,
+    a,
+    input[type="button"],
+    input[type="submit"],
+    .cta-button {
+      min-height: 48px;
+      min-width: 48px;
+    }
+
+    /* Remove hover effects on touch devices */
+    .hover\:scale-105:hover {
+      transform: none;
+    }
+  }
+
+  /* High DPI displays */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-photo,
+    img {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
     }
   }
 }
