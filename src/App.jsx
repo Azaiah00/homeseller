@@ -314,24 +314,26 @@ function App() {
   return (
     <div className="min-h-screen bg-white lg:pl-48">
       {/* SIDEBAR NAVIGATION */}
-      <aside className="hidden lg:block fixed left-0 top-1/2 transform -translate-y-1/2 z-40 ml-6 xl:ml-8">
-        <nav className="bg-white/95 backdrop-blur-lg rounded-lg shadow-lg p-4 border border-gray-200 min-w-[180px]">
-          <div className="space-y-1">
+      <aside className="hidden lg:block fixed left-0 top-0 bottom-0 z-40 flex items-center ml-6 xl:ml-8">
+        <nav className="bg-white/95 backdrop-blur-lg rounded-lg shadow-lg p-6 border border-gray-200 min-w-[180px]">
+          <div className="space-y-3">
             {chapters.map((chapter) => (
               <button
                 key={chapter.id}
                 onClick={() => scrollToSection(chapter.id)}
-                className={`block w-full text-left px-4 py-2.5 rounded-md transition-all duration-200 text-sm ${
+                className={`block w-full text-left px-4 py-3 rounded-md transition-all duration-200 ${
                   activeChapter === chapter.id
                     ? 'bg-primary text-white shadow-md'
                     : 'text-gray-700 hover:bg-primary/10 hover:text-primary'
                 }`}
               >
-                <span className={`text-xs ${activeChapter === chapter.id ? 'opacity-90' : 'opacity-70'}`}>
-                  Chapter {chapter.number}
-                </span>
-                <div className={`font-semibold ${activeChapter === chapter.id ? 'text-white' : ''}`}>
-                  {chapter.title}
+                <div className="flex items-center gap-2">
+                  <span className={`text-lg font-bold ${activeChapter === chapter.id ? 'text-white' : 'text-primary'}`}>
+                    {chapter.number}
+                  </span>
+                  <span className={`font-semibold text-sm ${activeChapter === chapter.id ? 'text-white' : ''}`}>
+                    {chapter.title}
+                  </span>
                 </div>
               </button>
             ))}
@@ -342,22 +344,22 @@ function App() {
       {/* STICKY NAVIGATION */}
       <nav 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg' : 'bg-transparent'
         }`}
         role="navigation"
         aria-label="Main navigation"
       >
         <div className="container py-4">
           <div className="flex items-center justify-between">
-            {/* Center - Fred Sales */}
+            {/* Center - Frederick Sales */}
             <button
               onClick={scrollToTop}
-              className={`text-xl md:text-2xl lg:text-3xl font-bold transition-colors mx-auto ${
+              className={`text-xl md:text-2xl lg:text-3xl font-bold transition-colors mx-auto tracking-wider ${
                 isScrolled ? 'text-navy' : 'text-white'
               }`}
-              aria-label="Fred Sales - Return to top"
+              aria-label="Frederick Sales - Return to top"
             >
-              Fred Sales
+              F r e d e r i c k &nbsp; S a l e s
             </button>
 
             {/* Right Side - CTA Button (Desktop) */}
@@ -396,7 +398,7 @@ function App() {
               aria-label="Mobile navigation"
             >
               {chapters.map((chapter) => (
-                <button
+              <button
                   key={chapter.id}
                   onClick={() => scrollToSection(chapter.id)}
                   className={`block w-full text-left font-semibold py-2 px-2 rounded-md transition-colors ${
@@ -405,8 +407,8 @@ function App() {
                       : 'text-navy hover:text-primary'
                   }`}
                 >
-                  Chapter {chapter.number}: {chapter.title}
-                </button>
+                  {chapter.number}. {chapter.title}
+              </button>
               ))}
               <button
                 onClick={() => scrollToSection('contact')}
@@ -426,7 +428,7 @@ function App() {
           <div className="hero-image-wrapper">
             <img 
               src="/images/fred-professional1.jpg" 
-              alt="Fred Sales - Real Estate Agent"
+              alt="Frederick Sales - Real Estate Agent"
               className="hero-photo cursor-pointer hover:scale-105 transition-transform"
               onClick={() => setShowPhotoModal(true)}
               onError={(e) => {
@@ -447,7 +449,7 @@ function App() {
           <h1 className="hero-title">Sell Your Home with Confidence</h1>
           <p className="hero-slogan">Expert guidance for home sellers in DC, VA & MD.</p>
           <p className="hero-intro">
-            Hi, I'm Fred Sales! I grew up in Alexandria, VA and I currently live in Washington DC in the SW Waterfront neighborhood. As a native of the DMV, I have deep, local knowledge of the neighborhoods, market trends, and what buyers are looking for in Washington DC, Virginia, and Maryland. This insider perspective helps me price your home competitively, market it effectively, and connect with the right buyers faster. Selling your home in the DMV area is a huge decision, and as your realtor, I'm here to make it smarter, simpler, and way more profitable. 
+            Hi, I'm Frederick Sales! I grew up in Alexandria, VA and I currently live in Washington DC in the SW Waterfront neighborhood. As a native of the DMV, I have deep, local knowledge of the neighborhoods, market trends, and what buyers are looking for in Washington DC, Virginia, and Maryland. This insider perspective helps me price your home competitively, market it effectively, and connect with the right buyers faster. Selling your home in the DMV area is a huge decision, and as your realtor, I'm here to make it smarter, simpler, and way more profitable. 
             With 7+ years of experience helping home sellers in Northern Virginia, Washington DC, and Maryland, I've built a proven system to get your home sold for top dollar. Whether you're selling in Washington DC, Arlington, Alexandria, Bethesda, Fairfax, or anywhere in the DMV, I'll guide you through every step with expertise and care. <strong>Let's work together to maximize your home's value!</strong>
           </p>
           <motion.button
@@ -1666,7 +1668,7 @@ function App() {
           >
             <h2 className="section-title text-white">Why Work With Me & The KS Team?</h2>
             <p className="section-subtitle text-gray-300 mb-12">
-              When you work with me as your realtor, you're not just hiring Fred Sales; you're hiring the entire KS Team.
+              When you work with me as your realtor, you're not just hiring Frederick Sales; you're hiring the entire KS Team.
             </p>
           </motion.div>
 
@@ -1729,7 +1731,7 @@ function App() {
           >
             <img 
               src="/images/fred-professional1.jpg" 
-              alt="Fred Sales - Real Estate Agent"
+              alt="Frederick Sales - Real Estate Agent"
               className="w-full h-auto rounded-lg shadow-2xl"
               loading="lazy"
             />
@@ -1748,7 +1750,7 @@ function App() {
       <footer className="bg-navy-dark text-white py-12">
         <div className="container">
           <div className="text-center space-y-4">
-            <p className="text-xl font-bold">Fred Sales | Realtor®</p>
+            <p className="text-xl font-bold">Frederick Sales | Realtor®</p>
             <p className="text-gray-400">Licensed in VA, DC, & MD</p>
             <p className="text-sm text-gray-500">Equal Housing Opportunity</p>
           </div>
