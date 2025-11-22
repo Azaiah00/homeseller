@@ -312,30 +312,35 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-white lg:pl-48">
+    <div className="min-h-screen bg-white lg:pl-64">
       {/* SIDEBAR NAVIGATION */}
-      <aside className="hidden lg:block fixed left-0 top-0 bottom-0 z-40 flex items-center ml-6 xl:ml-8">
-        <nav className="bg-white/95 backdrop-blur-lg rounded-lg shadow-lg p-6 border border-gray-200 min-w-[180px]">
-          <div className="space-y-3">
-            {chapters.map((chapter) => (
-              <button
-                key={chapter.id}
-                onClick={() => scrollToSection(chapter.id)}
-                className={`block w-full text-left px-4 py-3 rounded-md transition-all duration-200 ${
-                  activeChapter === chapter.id
-                    ? 'bg-primary text-white shadow-md'
-                    : 'text-gray-700 hover:bg-primary/10 hover:text-primary'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <span className={`text-lg font-bold ${activeChapter === chapter.id ? 'text-white' : 'text-primary'}`}>
-                    {chapter.number}
-                  </span>
-                  <span className={`font-semibold text-sm ${activeChapter === chapter.id ? 'text-white' : ''}`}>
+      <aside className="hidden lg:block fixed left-0 top-0 bottom-0 z-40 flex items-center ml-8 xl:ml-12">
+        <nav className="bg-white/98 backdrop-blur-xl rounded-2xl shadow-2xl p-8 border border-gray-100 min-w-[200px]">
+          <div className="space-y-1">
+            {chapters.map((chapter, index) => (
+              <div key={chapter.id}>
+                <button
+                  onClick={() => scrollToSection(chapter.id)}
+                  className={`w-full text-left px-5 py-4 rounded-xl transition-all duration-300 group ${
+                    activeChapter === chapter.id
+                      ? 'bg-gradient-to-r from-primary to-primary-light text-white shadow-lg transform scale-105'
+                      : 'text-gray-700 hover:bg-gray-50 hover:text-primary'
+                  }`}
+                >
+                  <div className={`font-semibold text-base tracking-wide transition-colors ${
+                    activeChapter === chapter.id ? 'text-white' : 'text-gray-800 group-hover:text-primary'
+                  }`}>
                     {chapter.title}
-                  </span>
-                </div>
-              </button>
+                  </div>
+                </button>
+                {index < chapters.length - 1 && (
+                  <div className={`h-px mx-2 my-2 transition-colors ${
+                    activeChapter === chapter.id || activeChapter === chapters[index + 1]?.id
+                      ? 'bg-primary/20'
+                      : 'bg-gray-100'
+                  }`} />
+                )}
+              </div>
             ))}
           </div>
         </nav>
@@ -354,12 +359,12 @@ function App() {
             {/* Center - Frederick Sales */}
             <button
               onClick={scrollToTop}
-              className={`text-xl md:text-2xl lg:text-3xl font-bold transition-colors mx-auto tracking-wider ${
+              className={`text-xl md:text-2xl lg:text-3xl font-bold transition-colors mx-auto ${
                 isScrolled ? 'text-navy' : 'text-white'
               }`}
               aria-label="Frederick Sales - Return to top"
             >
-              F r e d e r i c k &nbsp; S a l e s
+              Frederick Sales
             </button>
 
             {/* Right Side - CTA Button (Desktop) */}
