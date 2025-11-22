@@ -289,85 +289,43 @@ function App() {
       </nav>
 
       {/* HERO SECTION */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-navy via-navy-dark to-navy pt-20">
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        ></div>
-        
-        <motion.div
-          className="container relative z-10 text-center text-white py-20"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <CheckCircle className="text-primary" size={24} />
-            <span className="text-sm font-semibold">Licensed in VA, DC & MD • 7+ Years Experience</span>
+      <section className="hero">
+        <div className="hero-overlay"></div>
+        <div className="hero-content">
+          <div className="hero-image-wrapper">
+            <img 
+              src="/images/fred-headshot.jpg" 
+              alt="Fred Sales - Real Estate Agent"
+              className="hero-photo"
+              onError={(e) => {
+                // Fallback to placeholder if image doesn't exist
+                e.target.style.display = 'none';
+                e.target.nextElementSibling.style.display = 'flex';
+              }}
+            />
+            <div className="hero-photo-placeholder" style={{display: 'none'}}>
+              <span>📸</span>
+              <p>Add Your Professional Photo Here</p>
+            </div>
           </div>
-          
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            Maximize Your Home's Value
-            <br />
-            <span className="text-primary-light">from Day One</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
-            The modern roadmap to selling your home for top dollar with less stress.
+          <div className="hero-trust-badge">
+            <span className="trust-badge-icon">✓</span>
+            <span>Licensed in VA, DC & MD • 7+ Years Experience</span>
+          </div>
+          <h1 className="hero-title">Maximize Your Home's Value<br />from Day One</h1>
+          <p className="hero-slogan">The modern roadmap to selling your home for top dollar with less stress.</p>
+          <p className="hero-intro">
+            Hi, I'm Fred Sales! I grew up in Alexandria, VA and I currently live in Washington DC in the SW Waterfront neighborhood. Selling your home is a huge decision, and as your realtor, I'm here to make it smarter, simpler, and way more profitable. 
+            With 7+ years of experience in VA, DC, and MD, I've built a proven system to get your home sold for top dollar. Whether you're downsizing, relocating, or just ready for your next chapter, I'll guide you through every step with expertise and care. <strong>Let's work together to maximize your home's value!</strong>
           </p>
-          
           <motion.button
             onClick={() => scrollToSection('calculator')}
-            className="cta-button primary text-lg px-8 py-4"
+            className="cta-button primary"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Calculate My Net Proceeds
           </motion.button>
-        </motion.div>
-      </section>
-
-      {/* PERSONAL INTRODUCTION SECTION */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container">
-          <motion.div
-            className="max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="bg-white rounded-xl shadow-lg p-8 md:p-12">
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="flex-shrink-0">
-                  <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto md:mx-0">
-                    <span className="text-4xl">👋</span>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">Hi, I'm Fred Sales!</h2>
-                  <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                    I grew up in Alexandria, VA and I currently live in Washington DC in the SW Waterfront neighborhood. 
-                    Selling your home is a huge decision, and as your realtor, I'm here to make it smarter, simpler, and 
-                    way more profitable.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                    With 7+ years of experience in VA, DC, and MD, I've built a proven system to get your home sold for 
-                    top dollar. Whether you're downsizing, relocating, or just ready for your next chapter, I'll guide you 
-                    through every step with expertise and care.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    <strong>Let's work together to maximize your home's value and make your sale smooth and stress-free!</strong>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 
