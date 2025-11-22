@@ -312,10 +312,10 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-white lg:pl-64">
+    <div className="min-h-screen bg-white">
       {/* SIDEBAR NAVIGATION */}
-      <aside className="hidden lg:block fixed left-0 top-24 bottom-0 z-40 flex items-start pt-8 ml-8 xl:ml-12">
-        <nav className="bg-white/98 backdrop-blur-xl rounded-2xl shadow-2xl p-8 border border-gray-100 min-w-[200px]">
+      <aside className="hidden lg:block fixed left-0 top-24 bottom-0 z-40 flex items-start pt-8 ml-6 xl:ml-8">
+        <nav className="bg-white/90 backdrop-blur-2xl rounded-r-2xl shadow-xl p-6 border-r border-gray-200/50 min-w-[180px]">
           <div className="space-y-1">
             {chapters.map((chapter, index) => (
               <div key={chapter.id}>
