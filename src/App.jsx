@@ -23,7 +23,9 @@ import {
   Target,
   TrendingUp,
   Home,
-  FileText
+  FileText,
+  BarChart3,
+  MessageCircle
 } from 'lucide-react'
 import NetSheetCalculator from './components/NetSheetCalculator'
 import ROICalculator from './components/ROICalculator'
