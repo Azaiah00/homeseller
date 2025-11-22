@@ -17,6 +17,7 @@ import {
   Youtube
 } from 'lucide-react'
 import NetSheetCalculator from './components/NetSheetCalculator'
+import ROICalculator from './components/ROICalculator'
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -44,6 +45,28 @@ function App() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Handle escape key for modals
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        if (showSuccessModal) setShowSuccessModal(false)
+        if (showPhotoModal) setShowPhotoModal(false)
+      }
+    }
+
+    if (showSuccessModal || showPhotoModal) {
+      document.addEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'unset'
+    }
+  }, [showSuccessModal, showPhotoModal])
 
   // Add FAQPage Schema for SEO
   useEffect(() => {
@@ -259,25 +282,30 @@ function App() {
   return (
     <div className="min-h-screen bg-white">
       {/* STICKY NAVIGATION */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg' : 'bg-transparent'
-      }`}>
+      <nav 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg' : 'bg-transparent'
+        }`}
+        role="navigation"
+        aria-label="Main navigation"
+      >
         <div className="container py-4">
           <div className="flex items-center justify-between">
             <button
               onClick={scrollToTop}
-              className={`text-xl md:text-2xl font-bold transition-colors ${
+              className={`text-xl md:text-2xl font-bold transition-colors flex-shrink-0 ${
                 isScrolled ? 'text-navy' : 'text-white'
               }`}
+              aria-label="Fred Sales - Return to top"
             >
               Fred Sales
             </button>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-4 lg:gap-6">
+            <div className="hidden md:flex items-center justify-between flex-1 ml-8 lg:ml-12">
               <button
                 onClick={() => scrollToSection('trust')}
-                className={`font-semibold transition-colors text-sm lg:text-base ${
+                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
                   isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
                 }`}
               >
@@ -285,7 +313,7 @@ function App() {
               </button>
               <button
                 onClick={() => scrollToSection('roadmap')}
-                className={`font-semibold transition-colors text-sm lg:text-base ${
+                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
                   isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
                 }`}
               >
@@ -293,15 +321,23 @@ function App() {
               </button>
               <button
                 onClick={() => scrollToSection('marketing')}
-                className={`font-semibold transition-colors text-sm lg:text-base ${
+                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
                   isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
                 }`}
               >
                 Marketing
               </button>
               <button
+                onClick={() => scrollToSection('financials')}
+                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
+                  isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
+                }`}
+              >
+                Financials
+              </button>
+              <button
                 onClick={() => scrollToSection('calculator')}
-                className={`font-semibold transition-colors text-sm lg:text-base ${
+                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
                   isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
                 }`}
               >
@@ -309,7 +345,7 @@ function App() {
               </button>
               <button
                 onClick={() => scrollToSection('testimonials')}
-                className={`font-semibold transition-colors text-sm lg:text-base ${
+                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
                   isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
                 }`}
               >
@@ -317,7 +353,7 @@ function App() {
               </button>
               <button
                 onClick={() => scrollToSection('faq')}
-                className={`font-semibold transition-colors text-sm lg:text-base ${
+                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
                   isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
                 }`}
               >
@@ -325,7 +361,7 @@ function App() {
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
-                className="cta-button primary text-sm px-4 py-2"
+                className="cta-button primary text-sm px-4 py-2 whitespace-nowrap"
               >
                 Get Started
               </button>
@@ -337,6 +373,9 @@ function App() {
               className={`md:hidden p-2 transition-colors ${
                 isScrolled ? 'text-navy' : 'text-white'
               }`}
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -345,10 +384,13 @@ function App() {
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
             <motion.div
+              id="mobile-menu"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               className="md:hidden mt-4 pb-4 space-y-3"
+              role="navigation"
+              aria-label="Mobile navigation"
             >
               <button
                 onClick={() => scrollToSection('trust')}
@@ -367,6 +409,12 @@ function App() {
                 className="block w-full text-left font-semibold text-navy py-2"
               >
                 Marketing
+              </button>
+              <button
+                onClick={() => scrollToSection('financials')}
+                className="block w-full text-left font-semibold text-navy py-2"
+              >
+                Financials
               </button>
               <button
                 onClick={() => scrollToSection('calculator')}
@@ -425,15 +473,16 @@ function App() {
           <h1 className="hero-title">Sell Your Home with Confidence</h1>
           <p className="hero-slogan">Expert guidance for home sellers in DC, VA & MD.</p>
           <p className="hero-intro">
-            Hi, I'm Fred Sales! I grew up in Alexandria, VA and I currently live in Washington DC in the SW Waterfront neighborhood. Selling your home in the DMV area (Washington DC, Virginia, Maryland) is a huge decision, and as your realtor, I'm here to make it smarter, simpler, and way more profitable. 
+            Hi, I'm Fred Sales! I grew up in Alexandria, VA and I currently live in Washington DC in the SW Waterfront neighborhood. As a native of the DMV, I have deep, local knowledge of the neighborhoods, market trends, and what buyers are looking for in Washington DC, Virginia, and Maryland. This insider perspective helps me price your home competitively, market it effectively, and connect with the right buyers faster. Selling your home in the DMV area is a huge decision, and as your realtor, I'm here to make it smarter, simpler, and way more profitable. 
             With 7+ years of experience helping home sellers in Northern Virginia, Washington DC, and Maryland, I've built a proven system to get your home sold for top dollar. Whether you're selling in Washington DC, Arlington, Alexandria, Bethesda, Fairfax, or anywhere in the DMV, I'll guide you through every step with expertise and care. <strong>Let's work together to maximize your home's value!</strong>
           </p>
           <motion.button
             onClick={() => scrollToSection('contact')}
-            className="cta-button primary min-h-[48px] text-base sm:text-lg px-6 sm:px-8"
+            className="cta-button primary min-h-[48px] text-base sm:text-lg px-6 sm:px-8 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             style={{ touchAction: 'manipulation' }}
+            aria-label="Schedule your free seller consultation"
           >
             Schedule My Free Seller Consultation
           </motion.button>
@@ -659,13 +708,13 @@ function App() {
             {/* Professional Photography */}
             <motion.div
               variants={fadeInUp}
-              className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-2xl transition-shadow"
+              className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
             >
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300 hover:scale-110">
                 <Camera className="text-primary" size={32} />
               </div>
               <h3 className="text-xl font-bold text-navy mb-3">Professional Photography</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 leading-relaxed">
                 First impressions are digital. We use HDR editorial-grade photography that makes your home 
                 stand out in online listings.
               </p>
@@ -674,13 +723,13 @@ function App() {
             {/* Floor Plans */}
             <motion.div
               variants={fadeInUp}
-              className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-2xl transition-shadow"
+              className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
             >
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300 hover:scale-110">
                 <Layout className="text-primary" size={32} />
               </div>
               <h3 className="text-xl font-bold text-navy mb-3">Floor Plans</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 leading-relaxed">
                 Buyers need to visualize the flow. Included with every listing to help buyers understand 
                 your home's layout and potential.
               </p>
@@ -689,13 +738,13 @@ function App() {
             {/* Open House Strategy */}
             <motion.div
               variants={fadeInUp}
-              className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-2xl transition-shadow"
+              className="bg-white rounded-xl shadow-lg p-8 text-center hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
             >
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300 hover:scale-110">
                 <Calendar className="text-primary" size={32} />
               </div>
               <h3 className="text-xl font-bold text-navy mb-3">Open House Strategy</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 leading-relaxed">
                 We use Open Houses to identify qualified buyers, convert lookers into offers, and perform 
                 aggressive follow-up prospecting immediately after the event.
               </p>
@@ -1202,8 +1251,18 @@ function App() {
             ].map((faq, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-lg p-6 cursor-pointer hover:shadow-lg transition-shadow"
+                className="bg-white rounded-lg p-6 cursor-pointer hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 border border-gray-100 focus-within:ring-2 focus-within:ring-primary/50"
                 onClick={() => toggleFAQ(index + 1)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    toggleFAQ(index + 1)
+                  }
+                }}
+                aria-expanded={activeFAQ === index + 1}
+                aria-controls={`faq-answer-${index + 1}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -1220,10 +1279,13 @@ function App() {
                 </div>
                 {activeFAQ === index + 1 && (
                   <motion.p
+                    id={`faq-answer-${index + 1}`}
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
                     className="text-gray-700 mt-4 leading-relaxed"
+                    role="region"
+                    aria-live="polite"
                   >
                     {faq.a}
                   </motion.p>
@@ -1256,28 +1318,28 @@ function App() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 text-center">
-              <div className="text-5xl mb-4">🔧</div>
+            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/20">
+              <div className="text-5xl mb-4" aria-hidden="true">🔧</div>
               <h3 className="text-xl font-bold text-navy mb-3">Your Vendor Source</h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 leading-relaxed">
                 Need a great plumber, painter, or contractor? Our trusted vendor list is now your list. 
                 We've vetted the best service providers in the DMV area.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 sm:p-8 text-center">
-              <div className="text-4xl sm:text-5xl mb-4">🎉</div>
+            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 sm:p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/20">
+              <div className="text-4xl sm:text-5xl mb-4" aria-hidden="true">🎉</div>
               <h3 className="text-lg sm:text-xl font-bold text-navy mb-3">Fun Client Events</h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 leading-relaxed">
                 You're invited! Get exclusive invitations to our annual Nats game, fall family fun day, 
                 brunch with Santa, and more. Build lasting relationships with other homeowners.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 sm:p-8 text-center">
-              <div className="text-4xl sm:text-5xl mb-4">❤️</div>
+            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 sm:p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/20">
+              <div className="text-4xl sm:text-5xl mb-4" aria-hidden="true">❤️</div>
               <h3 className="text-lg sm:text-xl font-bold text-navy mb-3">We Give Back Together</h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 leading-relaxed">
                 We love the DMV. For every referral we receive, we donate $250 to charities like Habitat 
                 for Humanity, St. Jude's, and Meals on Wheels.
               </p>
@@ -1334,6 +1396,9 @@ function App() {
 
       {/* NET SHEET CALCULATOR */}
       <NetSheetCalculator />
+
+      {/* ROI CALCULATOR */}
+      <ROICalculator />
 
       {/* CONTACT SECTION */}
       <section id="contact" className="py-20 bg-gradient-to-br from-navy to-navy-dark text-white">
@@ -1529,11 +1594,12 @@ function App() {
 
                 <button
                   type="submit"
-                  className={`w-full cta-button primary text-lg py-4 min-h-[48px] ${
+                  className={`w-full cta-button primary text-lg py-4 min-h-[48px] focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2 ${
                     formSubmitted ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
                   disabled={formSubmitted}
                   style={{ touchAction: 'manipulation' }}
+                  aria-label="Submit seller consultation form"
                 >
                   {formSubmitted ? 'Submitting...' : 'Schedule My Free Seller Consultation'}
                 </button>
@@ -1583,23 +1649,29 @@ function App() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
               onClick={closeSuccessModal}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="success-modal-title"
             >
               <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="bg-white rounded-xl p-8 max-w-md w-full text-center"
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="bg-white rounded-xl p-8 max-w-md w-full text-center shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="text-6xl mb-4">✓</div>
-                <h3 className="text-2xl font-bold text-navy mb-4">Thank You!</h3>
+                <div className="text-6xl mb-4" aria-hidden="true">✓</div>
+                <h3 id="success-modal-title" className="text-2xl font-bold text-navy mb-4">Thank You!</h3>
                 <p className="text-gray-700 mb-6">
                   We've received your information and will be in touch soon to schedule your seller consultation.
                 </p>
                 <button
                   onClick={closeSuccessModal}
-                  className="cta-button primary w-full"
+                  className="cta-button primary w-full focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
+                  aria-label="Close success message"
                 >
                   Got It!
                 </button>
@@ -1631,19 +1703,19 @@ function App() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
+            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center hover:bg-white/15 transition-all duration-300 border border-white/20">
               <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-2">5,275+</div>
               <div className="text-xs sm:text-sm text-gray-300 font-semibold">Families Helped</div>
             </motion.div>
-            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
+            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center hover:bg-white/15 transition-all duration-300 border border-white/20">
               <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-2">$5 BILLION+</div>
               <div className="text-xs sm:text-sm text-gray-300 font-semibold">In Team Sales</div>
             </motion.div>
-            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
+            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center hover:bg-white/15 transition-all duration-300 border border-white/20">
               <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-2">TOP TEAM</div>
               <div className="text-xs sm:text-sm text-gray-300 font-semibold">In the DMV Since 2008</div>
             </motion.div>
-            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
+            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center hover:bg-white/15 transition-all duration-300 border border-white/20">
               <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-2">7+ YEARS</div>
               <div className="text-xs sm:text-sm text-gray-300 font-semibold">Experience</div>
             </motion.div>
@@ -1667,12 +1739,17 @@ function App() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
           onClick={() => setShowPhotoModal(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="photo-modal-title"
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
             className="max-w-md w-full relative"
             onClick={(e) => e.stopPropagation()}
           >
@@ -1680,10 +1757,12 @@ function App() {
               src="/images/fred-professional1.jpg" 
               alt="Fred Sales - Real Estate Agent"
               className="w-full h-auto rounded-lg shadow-2xl"
+              loading="lazy"
             />
             <button
               onClick={() => setShowPhotoModal(false)}
-              className="absolute top-4 right-4 bg-white rounded-full p-2 hover:bg-gray-200 transition-colors"
+              className="absolute top-4 right-4 bg-white rounded-full p-2 hover:bg-gray-200 transition-colors focus:outline-none focus:ring-4 focus:ring-white/50"
+              aria-label="Close photo"
             >
               <X size={24} className="text-navy" />
             </button>
@@ -1706,16 +1785,14 @@ function App() {
       {showBackToTop && (
         <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-12 h-12 bg-primary rounded-full shadow-lg flex items-center justify-center text-white hover:bg-primary-light transition-colors z-40"
+          className="fixed bottom-8 right-8 w-12 h-12 bg-primary rounded-full shadow-lg flex items-center justify-center text-white hover:bg-primary-light transition-colors z-40 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
+          aria-label="Scroll to top"
         >
           <ArrowUp size={24} />
-
-
-
         </motion.button>
       )}
     </div>

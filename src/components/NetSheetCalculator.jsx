@@ -10,8 +10,15 @@ const NetSheetCalculator = () => {
     propertyTaxes: '',
     closingDate: '',
     commissionFees: 6, // Default 6% total commission
+    transferTax: '',
+    titleInsurance: '',
+    escrowFees: '',
+    hoaFees: '',
+    homeWarranty: '',
+    repairsConcessions: '',
     miscClosingCosts: ''
   })
+  const [showDetailedCosts, setShowDetailedCosts] = useState(false)
 
   const [netProceeds, setNetProceeds] = useState(0)
   const [breakdown, setBreakdown] = useState({
@@ -19,7 +26,14 @@ const NetSheetCalculator = () => {
     mortgagePayoff: 0,
     proratedTaxes: 0,
     commission: 0,
-    closingCosts: 0,
+    transferTax: 0,
+    titleInsurance: 0,
+    escrowFees: 0,
+    hoaFees: 0,
+    homeWarranty: 0,
+    repairsConcessions: 0,
+    miscClosingCosts: 0,
+    totalClosingCosts: 0,
     netAmount: 0
   })
 
@@ -42,19 +56,33 @@ const NetSheetCalculator = () => {
     const mortgagePayoff = parseFloat(formData.mortgagePayoff.toString().replace(/,/g, '')) || 0
     const yearlyTaxes = parseFloat(formData.propertyTaxes.toString().replace(/,/g, '')) || 0
     const commissionPercent = parseFloat(formData.commissionFees) || 0
+    const transferTax = parseFloat(formData.transferTax.toString().replace(/,/g, '')) || 0
+    const titleInsurance = parseFloat(formData.titleInsurance.toString().replace(/,/g, '')) || 0
+    const escrowFees = parseFloat(formData.escrowFees.toString().replace(/,/g, '')) || 0
+    const hoaFees = parseFloat(formData.hoaFees.toString().replace(/,/g, '')) || 0
+    const homeWarranty = parseFloat(formData.homeWarranty.toString().replace(/,/g, '')) || 0
+    const repairsConcessions = parseFloat(formData.repairsConcessions.toString().replace(/,/g, '')) || 0
     const miscCosts = parseFloat(formData.miscClosingCosts.toString().replace(/,/g, '')) || 0
 
     const proratedTaxes = calculateProratedTaxes(yearlyTaxes, formData.closingDate)
     const commission = (listingPrice * commissionPercent) / 100
+    const totalClosingCosts = transferTax + titleInsurance + escrowFees + hoaFees + homeWarranty + repairsConcessions + miscCosts
 
-    const netAmount = listingPrice - mortgagePayoff - proratedTaxes - commission - miscCosts
+    const netAmount = listingPrice - mortgagePayoff - proratedTaxes - commission - totalClosingCosts
 
     setBreakdown({
       listingPrice,
       mortgagePayoff,
       proratedTaxes,
       commission,
-      closingCosts: miscCosts,
+      transferTax,
+      titleInsurance,
+      escrowFees,
+      hoaFees,
+      homeWarranty,
+      repairsConcessions,
+      miscClosingCosts: miscCosts,
+      totalClosingCosts,
       netAmount: Math.max(0, netAmount)
     })
 
@@ -64,7 +92,10 @@ const NetSheetCalculator = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target
 
-    if (name === 'listingPrice' || name === 'mortgagePayoff' || name === 'propertyTaxes' || name === 'miscClosingCosts') {
+    if (name === 'listingPrice' || name === 'mortgagePayoff' || name === 'propertyTaxes' || 
+        name === 'transferTax' || name === 'titleInsurance' || name === 'escrowFees' || 
+        name === 'hoaFees' || name === 'homeWarranty' || name === 'repairsConcessions' || 
+        name === 'miscClosingCosts') {
       // Format with commas for display
       const numericValue = value.replace(/,/g, '')
       if (numericValue === '' || /^\d+$/.test(numericValue)) {
@@ -136,9 +167,45 @@ const NetSheetCalculator = () => {
     
     yPos += 10
     doc.setFont(undefined, 'bold')
-    doc.text('Less: Closing Costs', 20, yPos)
+    doc.text('Less: Transfer Tax', 20, yPos)
     doc.setFont(undefined, 'normal')
-    doc.text(`-${formatCurrency(breakdown.closingCosts)}`, 150, yPos, { align: 'right' })
+    doc.text(`-${formatCurrency(breakdown.transferTax)}`, 150, yPos, { align: 'right' })
+    
+    yPos += 10
+    doc.setFont(undefined, 'bold')
+    doc.text('Less: Title Insurance', 20, yPos)
+    doc.setFont(undefined, 'normal')
+    doc.text(`-${formatCurrency(breakdown.titleInsurance)}`, 150, yPos, { align: 'right' })
+    
+    yPos += 10
+    doc.setFont(undefined, 'bold')
+    doc.text('Less: Escrow Fees', 20, yPos)
+    doc.setFont(undefined, 'normal')
+    doc.text(`-${formatCurrency(breakdown.escrowFees)}`, 150, yPos, { align: 'right' })
+    
+    yPos += 10
+    doc.setFont(undefined, 'bold')
+    doc.text('Less: HOA Fees', 20, yPos)
+    doc.setFont(undefined, 'normal')
+    doc.text(`-${formatCurrency(breakdown.hoaFees)}`, 150, yPos, { align: 'right' })
+    
+    yPos += 10
+    doc.setFont(undefined, 'bold')
+    doc.text('Less: Home Warranty', 20, yPos)
+    doc.setFont(undefined, 'normal')
+    doc.text(`-${formatCurrency(breakdown.homeWarranty)}`, 150, yPos, { align: 'right' })
+    
+    yPos += 10
+    doc.setFont(undefined, 'bold')
+    doc.text('Less: Repairs/Concessions', 20, yPos)
+    doc.setFont(undefined, 'normal')
+    doc.text(`-${formatCurrency(breakdown.repairsConcessions)}`, 150, yPos, { align: 'right' })
+    
+    yPos += 10
+    doc.setFont(undefined, 'bold')
+    doc.text('Less: Other Closing Costs', 20, yPos)
+    doc.setFont(undefined, 'normal')
+    doc.text(`-${formatCurrency(breakdown.miscClosingCosts)}`, 150, yPos, { align: 'right' })
     
     yPos += 15
     doc.setDrawColor(201, 169, 97)
@@ -286,24 +353,153 @@ const NetSheetCalculator = () => {
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="miscClosingCosts" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Misc Closing Costs (Est. $)
-                  </label>
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
-                    <input
-                      type="text"
-                      id="miscClosingCosts"
-                      name="miscClosingCosts"
-                      value={formData.miscClosingCosts}
-                      onChange={handleInputChange}
-                      placeholder="3,000"
-                      className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
-                      style={{ fontSize: '16px' }}
-                    />
-                  </div>
+                <div className="pt-4 border-t border-gray-200">
+                  <button
+                    type="button"
+                    onClick={() => setShowDetailedCosts(!showDetailedCosts)}
+                    className="flex items-center justify-between w-full text-sm font-semibold text-primary hover:text-primary-dark transition-colors"
+                  >
+                    <span>{showDetailedCosts ? 'Hide' : 'Show'} Detailed Closing Costs</span>
+                    <span className="text-lg">{showDetailedCosts ? '−' : '+'}</span>
+                  </button>
                 </div>
+
+                {showDetailedCosts && (
+                  <div className="space-y-4 pt-4 border-t border-gray-200">
+                    <div>
+                      <label htmlFor="transferTax" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Transfer Tax ($)
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                        <input
+                          type="text"
+                          id="transferTax"
+                          name="transferTax"
+                          value={formData.transferTax}
+                          onChange={handleInputChange}
+                          placeholder="2,000"
+                          className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                          style={{ fontSize: '16px' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="titleInsurance" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Title Insurance ($)
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                        <input
+                          type="text"
+                          id="titleInsurance"
+                          name="titleInsurance"
+                          value={formData.titleInsurance}
+                          onChange={handleInputChange}
+                          placeholder="1,500"
+                          className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                          style={{ fontSize: '16px' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="escrowFees" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Escrow Fees ($)
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                        <input
+                          type="text"
+                          id="escrowFees"
+                          name="escrowFees"
+                          value={formData.escrowFees}
+                          onChange={handleInputChange}
+                          placeholder="500"
+                          className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                          style={{ fontSize: '16px' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="hoaFees" className="block text-sm font-semibold text-gray-700 mb-2">
+                        HOA Fees (Prorated) ($)
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                        <input
+                          type="text"
+                          id="hoaFees"
+                          name="hoaFees"
+                          value={formData.hoaFees}
+                          onChange={handleInputChange}
+                          placeholder="300"
+                          className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                          style={{ fontSize: '16px' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="homeWarranty" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Home Warranty ($)
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                        <input
+                          type="text"
+                          id="homeWarranty"
+                          name="homeWarranty"
+                          value={formData.homeWarranty}
+                          onChange={handleInputChange}
+                          placeholder="600"
+                          className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                          style={{ fontSize: '16px' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="repairsConcessions" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Repairs/Concessions ($)
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                        <input
+                          type="text"
+                          id="repairsConcessions"
+                          name="repairsConcessions"
+                          value={formData.repairsConcessions}
+                          onChange={handleInputChange}
+                          placeholder="2,000"
+                          className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                          style={{ fontSize: '16px' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="miscClosingCosts" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Other Closing Costs ($)
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                        <input
+                          type="text"
+                          id="miscClosingCosts"
+                          name="miscClosingCosts"
+                          value={formData.miscClosingCosts}
+                          onChange={handleInputChange}
+                          placeholder="500"
+                          className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                          style={{ fontSize: '16px' }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Results */}
@@ -341,9 +537,39 @@ const NetSheetCalculator = () => {
                     <span className="font-semibold text-red-600">-{formatCurrency(breakdown.commission)}</span>
                   </div>
 
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">- Closing Costs:</span>
-                    <span className="font-semibold text-red-600">-{formatCurrency(breakdown.closingCosts)}</span>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">- Transfer Tax:</span>
+                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.transferTax)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">- Title Insurance:</span>
+                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.titleInsurance)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">- Escrow Fees:</span>
+                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.escrowFees)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">- HOA Fees:</span>
+                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.hoaFees)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">- Home Warranty:</span>
+                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.homeWarranty)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">- Repairs/Concessions:</span>
+                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.repairsConcessions)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">- Other Costs:</span>
+                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.miscClosingCosts)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm pt-2 border-t border-gray-300">
+                      <span className="font-semibold text-gray-700">Total Closing Costs:</span>
+                      <span className="font-bold text-red-600">-{formatCurrency(breakdown.totalClosingCosts)}</span>
+                    </div>
                   </div>
 
                   <div className="border-t border-gray-300 pt-4 mt-4">
@@ -356,10 +582,11 @@ const NetSheetCalculator = () => {
 
                 <motion.button
                   onClick={downloadPDF}
-                  className="w-full cta-button primary flex items-center justify-center gap-2 min-h-[48px] text-base"
+                  className="w-full cta-button primary flex items-center justify-center gap-2 min-h-[48px] text-base focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   style={{ touchAction: 'manipulation' }}
+                  aria-label="Download net sheet calculator results as PDF"
                 >
                   <Download size={20} />
                   Download Official PDF Report

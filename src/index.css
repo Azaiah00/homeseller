@@ -23,23 +23,62 @@
     @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  /* Enhanced card styles for modern look */
+  .card-modern {
+    @apply bg-white rounded-xl shadow-lg;
+    @apply transition-all duration-300;
+    @apply hover:shadow-2xl hover:-translate-y-1;
+    @apply border border-gray-100;
+  }
+
+  /* Enhanced gradient backgrounds */
+  .gradient-section {
+    background: linear-gradient(135deg, rgba(249, 250, 251, 0.8) 0%, rgba(255, 255, 255, 1) 100%);
+  }
+
+  /* Better focus states for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-4 ring-primary/50 ring-offset-2;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced button hover states */
+  button:not(:disabled):hover {
+    transform: translateY(-1px);
+  }
+
+  button:not(:disabled):active {
+    transform: translateY(0);
+  }
+
   .section-title {
     @apply text-3xl sm:text-4xl lg:text-5xl font-bold text-navy text-center mb-4;
     @apply font-display;
+    @apply leading-tight;
+    letter-spacing: -0.02em;
   }
 
   .section-subtitle {
     @apply text-lg sm:text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto;
+    @apply leading-relaxed;
+    line-height: 1.7;
   }
 
   .cta-button {
     @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
     @apply transform hover:scale-105 active:scale-95;
     @apply shadow-lg hover:shadow-xl;
+    @apply focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2;
   }
 
   .cta-button.primary {
     @apply bg-gradient-to-r from-primary to-primary-light text-white;
+    @apply hover:from-primary-light hover:to-primary;
+    @apply shadow-lg hover:shadow-2xl;
   }
 
   .cta-button.secondary {
@@ -74,6 +113,17 @@
     text-align: center;
     padding: 4rem 2rem;
     overflow: hidden;
+  }
+
+  /* Enhanced navigation with better glassmorphism */
+  nav {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  nav.bg-white\/95 {
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
   }
 
   .hero::before {
@@ -141,15 +191,16 @@
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid rgba(201, 169, 97, 0.5);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 8px rgba(201, 169, 97, 0.1);
     margin: 0 auto 2rem;
     display: block;
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .hero-photo:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 40px rgba(201, 169, 97, 0.4);
+    transform: scale(1.08);
+    box-shadow: 0 16px 48px rgba(201, 169, 97, 0.5), 0 0 0 12px rgba(201, 169, 97, 0.15);
+    border-color: rgba(201, 169, 97, 0.7);
   }
 
   .hero-title {
