@@ -14,7 +14,16 @@ import {
   Instagram,
   Facebook,
   Linkedin,
-  Youtube
+  Youtube,
+  Wrench,
+  PartyPopper,
+  Heart,
+  Star,
+  Clock,
+  Target,
+  TrendingUp,
+  Home,
+  FileText
 } from 'lucide-react'
 import NetSheetCalculator from './components/NetSheetCalculator'
 import ROICalculator from './components/ROICalculator'
@@ -443,7 +452,7 @@ function App() {
               }}
             />
             <div className="hero-photo-placeholder" style={{display: 'none'}}>
-              <span>📸</span>
+              <Camera size={48} className="text-gray-400" />
               <p>Add Your Professional Photo Here</p>
             </div>
           </div>
@@ -1300,7 +1309,9 @@ function App() {
             viewport={{ once: true }}
           >
             <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/20">
-              <div className="text-5xl mb-4" aria-hidden="true">🔧</div>
+              <div className="flex justify-center mb-4" aria-hidden="true">
+                <Wrench size={48} className="text-primary" />
+              </div>
               <h3 className="text-xl font-bold text-navy mb-3">Your Vendor Source</h3>
               <p className="text-gray-700 leading-relaxed">
                 Need a great plumber, painter, or contractor? Our trusted vendor list is now your list. 
@@ -1309,7 +1320,9 @@ function App() {
             </motion.div>
 
             <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 sm:p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/20">
-              <div className="text-4xl sm:text-5xl mb-4" aria-hidden="true">🎉</div>
+              <div className="flex justify-center mb-4" aria-hidden="true">
+                <PartyPopper size={48} className="text-primary" />
+              </div>
               <h3 className="text-lg sm:text-xl font-bold text-navy mb-3">Fun Client Events</h3>
               <p className="text-gray-700 leading-relaxed">
                 You're invited! Get exclusive invitations to our annual Nats game, fall family fun day, 
@@ -1318,7 +1331,9 @@ function App() {
             </motion.div>
 
             <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 sm:p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/20">
-              <div className="text-4xl sm:text-5xl mb-4" aria-hidden="true">❤️</div>
+              <div className="flex justify-center mb-4" aria-hidden="true">
+                <Heart size={48} className="text-primary" />
+              </div>
               <h3 className="text-lg sm:text-xl font-bold text-navy mb-3">We Give Back Together</h3>
               <p className="text-gray-700 leading-relaxed">
                 We love the DMV. For every referral we receive, we donate $250 to charities like Habitat 
@@ -1363,7 +1378,11 @@ function App() {
                     e.target.style.display = 'none'
                     e.target.parentElement.innerHTML = `
                       <div class="p-8 text-center text-gray-500">
-                        <div class="text-4xl mb-4">⭐</div>
+                        <div class="flex justify-center mb-4">
+                          <svg class="w-12 h-12 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        </div>
                         <p>Add seller review image<br/>seller-review-${num}.png</p>
                       </div>
                     `
@@ -1413,31 +1432,31 @@ function App() {
               <h3 className="text-2xl font-bold mb-6 text-center">What's Included in Your Free Seller Consultation:</h3>
               <div className="grid md:grid-cols-2 gap-4 text-left">
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl flex-shrink-0">🎯</span>
+                  <Target size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
                   <span className="text-gray-200"><strong>Comprehensive Market Analysis</strong> - Get an accurate estimate of your home's value with a detailed CMA</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl flex-shrink-0">💰</span>
+                  <DollarSign size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
                   <span className="text-gray-200"><strong>Net Proceeds Calculation</strong> - Understand exactly how much you'll walk away with after closing</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl flex-shrink-0">📊</span>
+                  <BarChart3 size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
                   <span className="text-gray-200"><strong>DMV Market Insights</strong> - Learn current market conditions and pricing strategies</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl flex-shrink-0">🏠</span>
+                  <Home size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
                   <span className="text-gray-200"><strong>Home Preparation Plan</strong> - Get recommendations on repairs, staging, and improvements</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl flex-shrink-0">📈</span>
+                  <TrendingUp size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
                   <span className="text-gray-200"><strong>Marketing Strategy Review</strong> - See how we'll market your home to get top dollar</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl flex-shrink-0">⏱️</span>
+                  <Clock size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
                   <span className="text-gray-200"><strong>Timeline Planning</strong> - Understand the selling process and realistic timelines</span>
                 </div>
                 <div className="flex items-start gap-3 md:col-span-2">
-                  <span className="text-2xl flex-shrink-0">💬</span>
+                  <MessageCircle size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
                   <span className="text-gray-200"><strong>All Your Questions Answered</strong> - Get expert answers about selling, the DMV market, commissions, staging, and the entire process</span>
                 </div>
               </div>
