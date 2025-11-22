@@ -355,11 +355,11 @@ function App() {
         aria-label="Main navigation"
       >
         <div className="container py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center relative">
             {/* Center - Frederick Sales */}
             <button
               onClick={scrollToTop}
-              className={`text-xl md:text-2xl lg:text-3xl font-bold transition-colors mx-auto ${
+              className={`text-xl md:text-2xl lg:text-3xl font-bold transition-colors ${
                 isScrolled ? 'text-navy' : 'text-white'
               }`}
               aria-label="Frederick Sales - Return to top"
@@ -368,7 +368,7 @@ function App() {
             </button>
 
             {/* Right Side - CTA Button (Desktop) */}
-            <div className="hidden lg:flex items-center flex-shrink-0">
+            <div className="hidden lg:flex items-center absolute right-0">
               <button
                 onClick={() => scrollToSection('contact')}
                 className="cta-button primary text-sm px-4 py-2 whitespace-nowrap"
@@ -380,7 +380,7 @@ function App() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`lg:hidden p-2 transition-colors ${
+              className={`lg:hidden absolute right-0 p-2 transition-colors ${
                 isScrolled ? 'text-navy' : 'text-white'
               }`}
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
