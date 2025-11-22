@@ -120,7 +120,7 @@ function App() {
           "name": "How do you market my home?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Our Elite Marketing Plan includes professional HDR photography, floor plans, virtual staging, MLS listing, Coming Soon campaign to build buyer interest, open houses with aggressive follow-up, social media promotion, and our extensive network of buyer agents."
+            "text": "Our Proven Marketing Plan includes professional HDR photography, floor plans, virtual staging, MLS listing, Coming Soon campaign to build buyer interest, open houses with aggressive follow-up, social media promotion, and our extensive network of buyer agents."
           }
         },
         {
