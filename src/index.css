@@ -233,8 +233,8 @@
   }
 
   .trust-badge-icon {
-    font-size: 1rem;
     color: #c9a961;
+    flex-shrink: 0;
   }
 
   .hero-slogan {

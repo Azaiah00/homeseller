@@ -457,7 +457,7 @@ function App() {
             </div>
           </div>
           <div className="hero-trust-badge">
-            <span className="trust-badge-icon">✓</span>
+            <CheckCircle size={18} className="trust-badge-icon" />
             <span>Licensed in VA, DC & MD • 7+ Years Experience</span>
           </div>
           <h1 className="hero-title">Sell Your Home with Confidence</h1>
@@ -880,27 +880,27 @@ function App() {
                 </h5>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start gap-2">
-                    <span className="text-green-600 mt-1">✓</span>
+                    <CheckCircle size={20} className="text-green-600 mt-0.5 flex-shrink-0" />
                     <span><strong>Maximum Exposure:</strong> Your home appears on all major real estate websites automatically</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-green-600 mt-1">✓</span>
+                    <CheckCircle size={20} className="text-green-600 mt-0.5 flex-shrink-0" />
                     <span><strong>Access to All Buyers:</strong> Thousands of agents can see and show your property</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-green-600 mt-1">✓</span>
+                    <CheckCircle size={20} className="text-green-600 mt-0.5 flex-shrink-0" />
                     <span><strong>Competitive Bidding:</strong> More exposure often leads to multiple offers and higher sale prices</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-green-600 mt-1">✓</span>
+                    <CheckCircle size={20} className="text-green-600 mt-0.5 flex-shrink-0" />
                     <span><strong>Faster Sales:</strong> More visibility typically means quicker sales</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-green-600 mt-1">✓</span>
+                    <CheckCircle size={20} className="text-green-600 mt-0.5 flex-shrink-0" />
                     <span><strong>Market Data:</strong> Your listing contributes to and benefits from comprehensive market data</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-green-600 mt-1">✓</span>
+                    <CheckCircle size={20} className="text-green-600 mt-0.5 flex-shrink-0" />
                     <span><strong>Professional Network:</strong> Access to the entire real estate agent network in the DMV</span>
                   </li>
                 </ul>
@@ -1663,7 +1663,9 @@ function App() {
                 className="bg-white rounded-xl p-8 max-w-md w-full text-center shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="text-6xl mb-4" aria-hidden="true">✓</div>
+                <div className="flex justify-center mb-4" aria-hidden="true">
+                  <CheckCircle size={64} className="text-green-500" />
+                </div>
                 <h3 id="success-modal-title" className="text-2xl font-bold text-navy mb-4">Thank You!</h3>
                 <p className="text-gray-700 mb-6">
                   We've received your information and will be in touch soon to schedule your seller consultation.
