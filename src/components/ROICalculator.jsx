@@ -163,10 +163,10 @@ const ROICalculator = () => {
     doc.line(20, yPos, 190, yPos)
     
     yPos += 10
-    doc.setFontSize(14)
-    doc.setFont(undefined, 'bold')
-    doc.setTextColor(results.netGain >= 0 ? 34, 197, 94 : 239, 68, 68)
-    doc.text('Net Gain/Loss:', 20, yPos)
+      doc.setFontSize(14)
+      doc.setFont(undefined, 'bold')
+      doc.setTextColor(...(results.netGain >= 0 ? [34, 197, 94] : [239, 68, 68]))
+      doc.text('Net Gain/Loss:', 20, yPos)
     doc.setFontSize(16)
     doc.text(formatCurrency(results.netGain), 150, yPos, { align: 'right' })
     
