@@ -422,8 +422,8 @@ function App() {
             <span className="trust-badge-icon">✓</span>
             <span>Licensed in VA, DC & MD • 7+ Years Experience</span>
           </div>
-          <h1 className="hero-title">Sell Your Home for Top Dollar<br />With a Realtor Who Gets Results</h1>
-          <p className="hero-slogan">Expert home selling strategies that maximize your profit and minimize your stress in Washington DC, Virginia, and Maryland.</p>
+          <h1 className="hero-title">Selling Your Home in DC, VA & MD?<br />Let's Talk</h1>
+          <p className="hero-slogan">Expert guidance to help you sell your home with confidence in Washington DC, Virginia, and Maryland.</p>
           <p className="hero-intro">
             Hi, I'm Fred Sales! I grew up in Alexandria, VA and I currently live in Washington DC in the SW Waterfront neighborhood. Selling your home in the DMV area (Washington DC, Virginia, Maryland) is a huge decision, and as your realtor, I'm here to make it smarter, simpler, and way more profitable. 
             With 7+ years of experience helping home sellers in Northern Virginia, Washington DC, and Maryland, I've built a proven system to get your home sold for top dollar. Whether you're selling in Washington DC, Arlington, Alexandria, Bethesda, Fairfax, or anywhere in the DMV, I'll guide you through every step with expertise and care. <strong>Let's work together to maximize your home's value!</strong>
