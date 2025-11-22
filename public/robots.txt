@@ -8,3 +8,5 @@ Sitemap: https://homesellerinformation.netlify.app/sitemap.xml
 Disallow: /admin/
 Disallow: /private/
 
+
+

@@ -33,6 +33,7 @@ function App() {
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
   const [formErrors, setFormErrors] = useState({})
+  const [showPhotoModal, setShowPhotoModal] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -404,7 +405,8 @@ function App() {
             <img 
               src="/images/fred-professional1.jpg" 
               alt="Fred Sales - Real Estate Agent"
-              className="hero-photo"
+              className="hero-photo cursor-pointer hover:scale-105 transition-transform"
+              onClick={() => setShowPhotoModal(true)}
               onError={(e) => {
                 // Fallback to placeholder if image doesn't exist
                 e.target.style.display = 'none';
@@ -420,11 +422,11 @@ function App() {
             <span className="trust-badge-icon">✓</span>
             <span>Licensed in VA, DC & MD • 7+ Years Experience</span>
           </div>
-          <h1 className="hero-title">Maximize Your Home's Value<br />from Day One</h1>
-          <p className="hero-slogan">The modern roadmap to selling your home for top dollar with less stress.</p>
+          <h1 className="hero-title">Sell Your Home for Top Dollar<br />With a Realtor Who Gets Results</h1>
+          <p className="hero-slogan">Expert home selling strategies that maximize your profit and minimize your stress in Washington DC, Virginia, and Maryland.</p>
           <p className="hero-intro">
             Hi, I'm Fred Sales! I grew up in Alexandria, VA and I currently live in Washington DC in the SW Waterfront neighborhood. Selling your home in the DMV area (Washington DC, Virginia, Maryland) is a huge decision, and as your realtor, I'm here to make it smarter, simpler, and way more profitable. 
-            With 7+ years of experience helping home sellers in Northern Virginia, Washington DC, and Maryland, I've built a proven system to get your home sold for top dollar. Whether you're selling in Arlington, Alexandria, Bethesda, Fairfax, or anywhere in the DMV, I'll guide you through every step with expertise and care. <strong>Let's work together to maximize your home's value!</strong>
+            With 7+ years of experience helping home sellers in Northern Virginia, Washington DC, and Maryland, I've built a proven system to get your home sold for top dollar. Whether you're selling in Washington DC, Arlington, Alexandria, Bethesda, Fairfax, or anywhere in the DMV, I'll guide you through every step with expertise and care. <strong>Let's work together to maximize your home's value!</strong>
           </p>
           <motion.button
             onClick={() => scrollToSection('contact')}
@@ -502,7 +504,7 @@ function App() {
           >
             <h2 className="section-title">From Pre-Market to SOLD</h2>
             <p className="section-subtitle">
-              Your step-by-step roadmap to a successful home sale
+              Your step-by-step roadmap to a successful home sale in Washington DC, Virginia, and Maryland
             </p>
           </motion.div>
 
@@ -569,12 +571,19 @@ function App() {
               <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 3
               </div>
-              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border-2 border-primary/20">
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Pricing Strategy</h3>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed mb-3">
                   Positioning your home to attract the maximum pool of buyers. We analyze comparable sales 
                   and market conditions to price it right from day one.
                 </p>
+                <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
+                  <li>Comprehensive <span className="tooltip-trigger" data-tooltip="Comparative Market Analysis (CMA): A detailed report comparing your home to similar properties that have recently sold, are currently for sale, or were listed but didn't sell. This helps determine the optimal listing price.">CMA</span> analysis using recent sales data</li>
+                  <li>Strategic pricing to maximize buyer interest and final sale price</li>
+                  <li>Market positioning based on current DMV real estate trends</li>
+                  <li>Price adjustment strategy if market conditions change</li>
+                  <li>Competitive analysis of similar homes in your neighborhood</li>
+                </ul>
               </div>
             </motion.div>
 
@@ -586,12 +595,19 @@ function App() {
               <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 4
               </div>
-              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border-2 border-primary/20">
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">The "Coming Soon" Launch</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  Generating buzz before we even hit the MLS. We create anticipation and build a waiting list 
+                <p className="text-gray-700 leading-relaxed mb-3">
+                  Generating buzz before we even hit the <span className="tooltip-trigger" data-tooltip="Multiple Listing Service (MLS): A database used by real estate agents to share information about properties for sale. When your home is listed on the MLS, it becomes visible to all agents and appears on major real estate websites like Zillow, Realtor.com, and Redfin.">MLS</span>. We create anticipation and build a waiting list 
                   of qualified buyers before your home officially goes live.
                 </p>
+                <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
+                  <li>Exclusive preview to our network of buyer agents and qualified buyers</li>
+                  <li>Social media teaser campaign to build anticipation</li>
+                  <li>Email marketing to our database of active buyers</li>
+                  <li>Pre-listing showings for serious buyers</li>
+                  <li>Create competitive interest before official listing date</li>
+                </ul>
               </div>
             </motion.div>
 
@@ -603,12 +619,19 @@ function App() {
               <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 5
               </div>
-              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border-2 border-primary/20">
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Live on Market & Open Houses</h3>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed mb-3">
                   We don't just open doors; we collect critical feedback from every visitor to adjust our 
                   strategy in real-time. Every showing is an opportunity to refine and improve.
                 </p>
+                <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
+                  <li>Professional open house events with strategic scheduling</li>
+                  <li>Aggressive follow-up with every visitor within 24 hours</li>
+                  <li>Feedback collection and analysis to adjust strategy</li>
+                  <li>Private showings scheduled around your convenience</li>
+                  <li>Real-time market response tracking and price adjustments if needed</li>
+                </ul>
               </div>
             </motion.div>
 
@@ -620,12 +643,19 @@ function App() {
               <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 6
               </div>
-              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border-2 border-primary/20">
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Reviewing Offers & Negotiations</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  We negotiate terms, not just price. From closing dates to contingencies, we ensure every 
+                <p className="text-gray-700 leading-relaxed mb-3">
+                  We negotiate terms, not just price. From closing dates to <span className="tooltip-trigger" data-tooltip="Contingency: A condition in the purchase offer that must be met for the sale to proceed. Common contingencies include home inspection, appraisal, financing, and home sale contingencies.">contingencies</span>, we ensure every 
                   aspect of the deal works in your favor.
                 </p>
+                <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
+                  <li>Comprehensive offer analysis comparing price, terms, and buyer qualifications</li>
+                  <li>Strategic negotiation to maximize your net proceeds</li>
+                  <li>Counter-offer strategy to get the best possible terms</li>
+                  <li>Protection of your interests through careful contract review</li>
+                  <li>Coordination with buyer's agent to ensure smooth negotiations</li>
+                </ul>
               </div>
             </motion.div>
 
@@ -637,12 +667,20 @@ function App() {
               <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 7
               </div>
-              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border-2 border-primary/20">
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Escrow & Closing</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  Managing inspections, appraisals, and paperwork until you get paid. We handle every detail 
+                <p className="text-gray-700 leading-relaxed mb-3">
+                  Managing inspections, <span className="tooltip-trigger" data-tooltip="Appraisal: A professional assessment of your home's value by a licensed appraiser. Required by lenders to ensure the property is worth the loan amount. If the appraisal comes in lower than the sale price, we may need to renegotiate.">appraisals</span>, and paperwork until you get paid. We handle every detail 
                   so you can focus on your next chapter.
                 </p>
+                <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
+                  <li>Coordination of home inspection and addressing any issues</li>
+                  <li>Appraisal management and value protection strategies</li>
+                  <li>Title work and <span className="tooltip-trigger" data-tooltip="Escrow: A neutral third party that holds funds and documents during the transaction. The escrow company ensures all conditions are met before funds are released and ownership is transferred.">escrow</span> coordination</li>
+                  <li>Final walkthrough scheduling and completion</li>
+                  <li>Closing day coordination - you just show up and sign</li>
+                  <li>Post-closing support and key handoff</li>
+                </ul>
               </div>
             </motion.div>
           </motion.div>
@@ -658,7 +696,7 @@ function App() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="section-title">Elite Marketing Plan</h2>
+            <h2 className="section-title">Our Proven Marketing Plan</h2>
             <p className="section-subtitle">
               Our comprehensive marketing strategy designed to maximize your home's exposure and value
             </p>
@@ -848,38 +886,115 @@ function App() {
               </div>
             </div>
 
-            {/* FAQ Accordion */}
-            <div className="bg-gray-50 rounded-xl p-8">
-              <h4 className="text-2xl font-bold text-navy mb-6">Common Questions</h4>
-              <div className="space-y-4">
-                <div
-                  className="bg-white rounded-lg p-4 cursor-pointer hover:shadow-md transition-shadow"
-                  onClick={() => toggleFAQ(0)}
-                >
-                  <div className="flex items-center justify-between">
-                    <h5 className="font-bold text-navy">
-                      Why should I pay the buyer's closing costs?
+            {/* Buyer's Agent Compensation Section */}
+            <div className="bg-gradient-to-br from-navy/5 to-navy/10 rounded-xl p-8 border-2 border-navy/20">
+              <h4 className="text-2xl font-bold text-navy mb-6">Understanding Buyer's Agent Compensation</h4>
+              
+              <div className="space-y-6">
+                <div className="bg-white rounded-lg p-6">
+                  <h5 className="text-xl font-bold text-navy mb-4">The NAR Lawsuit Verdict & What It Means for You</h5>
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    Following the recent <span className="tooltip-trigger" data-tooltip="National Association of Realtors (NAR): The largest trade association for real estate professionals in the United States. The recent lawsuit settlement changed how buyer's agent commissions are handled.">NAR</span> lawsuit settlement, sellers now have more flexibility in how they structure compensation for buyer's agents. However, <strong>offering compensation to the buyer's agent remains the industry standard</strong> and is highly recommended for several strategic reasons.
+                  </p>
+                  <p className="text-gray-700 leading-relaxed">
+                    <strong>Important:</strong> You are NOT required to compensate the buyer's agent, but doing so significantly increases your chances of selling quickly and for top dollar. Here's why:
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="bg-green-50 rounded-lg p-6 border-2 border-green-200">
+                    <h5 className="text-lg font-bold text-navy mb-3 flex items-center gap-2">
+                      <CheckCircle className="text-green-600" size={24} />
+                      Pros of Compensating Buyer's Agent
                     </h5>
-                    <motion.div
-                      animate={{ rotate: activeFAQ === 0 ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <ArrowUp size={20} className="text-primary" />
-                    </motion.div>
+                    <ul className="space-y-2 text-gray-700">
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-600 mt-1">✓</span>
+                        <span><strong>Maximum Exposure:</strong> More buyer agents will show your home when they know they'll be compensated</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-600 mt-1">✓</span>
+                        <span><strong>Faster Sales:</strong> Your home gets shown more often, leading to quicker offers</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-600 mt-1">✓</span>
+                        <span><strong>Higher Sale Prices:</strong> More competition among buyers typically results in better offers</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-600 mt-1">✓</span>
+                        <span><strong>Industry Standard:</strong> Most buyers expect their agent to be compensated, making your home more attractive</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-600 mt-1">✓</span>
+                        <span><strong>Better Qualified Buyers:</strong> Buyer's agents typically work with pre-approved, serious buyers</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-600 mt-1">✓</span>
+                        <span><strong>Professional Representation:</strong> Buyer's agents help ensure smooth transactions and fewer issues</span>
+                      </li>
+                    </ul>
                   </div>
-                  {activeFAQ === 0 && (
-                    <motion.p
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="text-gray-700 mt-4 leading-relaxed"
-                    >
-                      It eliminates obstacles. You aren't 'paying' for them; you are strategically structuring 
-                      the deal to get your home sold. By offering concessions, we can often negotiate a higher 
-                      sale price that offsets the cost, while making your home more attractive to buyers. It's 
-                      about getting the best net result for you.
-                    </motion.p>
-                  )}
+
+                  <div className="bg-yellow-50 rounded-lg p-6 border-2 border-yellow-200">
+                    <h5 className="text-lg font-bold text-navy mb-3 flex items-center gap-2">
+                      <span className="text-yellow-600">⚠</span>
+                      Cons of NOT Compensating Buyer's Agent
+                    </h5>
+                    <ul className="space-y-2 text-gray-700">
+                      <li className="flex items-start gap-2">
+                        <span className="text-yellow-600 mt-1">✗</span>
+                        <span><strong>Limited Showings:</strong> Many buyer's agents may skip showing your home if they won't be compensated</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-yellow-600 mt-1">✗</span>
+                        <span><strong>Longer Time on Market:</strong> Fewer showings mean fewer offers and longer wait times</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-yellow-600 mt-1">✗</span>
+                        <span><strong>Lower Offers:</strong> Less competition can result in lower sale prices</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-yellow-600 mt-1">✗</span>
+                        <span><strong>Buyer Pays Commission:</strong> Buyers may need to pay their agent out of pocket, reducing their offer amount</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-yellow-600 mt-1">✗</span>
+                        <span><strong>Fewer Qualified Buyers:</strong> Some buyers may not be able to afford both the home and their agent's commission</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-yellow-600 mt-1">✗</span>
+                        <span><strong>Market Disadvantage:</strong> Your home competes against others that DO offer buyer's agent compensation</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="bg-primary/10 rounded-lg p-6 border-2 border-primary/30">
+                  <h5 className="text-xl font-bold text-navy mb-3">Our Recommendation</h5>
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    <strong>We strongly recommend offering buyer's agent compensation (typically 2.5-3% of the sale price)</strong> because:
+                  </p>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span>It's the industry standard in the DMV market and what most buyers and their agents expect</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span>The cost is typically offset by receiving higher offers and selling faster</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span>It maximizes your home's exposure to the largest pool of qualified buyers</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span>It makes your home more competitive against other listings</span>
+                    </li>
+                  </ul>
+                  <p className="text-gray-700 leading-relaxed mt-4">
+                    <strong>Remember:</strong> The goal is to maximize your NET proceeds. While compensating the buyer's agent is an expense, it typically results in a higher sale price and faster sale, which benefits you overall. We'll discuss the best compensation structure for your specific situation during our consultation.
+                  </p>
                 </div>
               </div>
             </div>
@@ -938,7 +1053,7 @@ function App() {
               },
               {
                 q: "How do you market my home?",
-                a: "Our Elite Marketing Plan includes professional HDR photography, floor plans, virtual staging, MLS listing, Coming Soon campaign to build buyer interest, open houses with aggressive follow-up, social media promotion, and our extensive network of buyer agents. We don't just list it - we create buzz and demand. Ask me more about our comprehensive marketing strategy."
+                a: "Our Proven Marketing Plan includes professional HDR photography, floor plans, virtual staging, MLS listing, Coming Soon campaign to build buyer interest, open houses with aggressive follow-up, social media promotion, and our extensive network of buyer agents. We don't just list it - we create buzz and demand. Ask me more about our comprehensive marketing strategy."
               },
               {
                 q: "What happens after I accept an offer?",
@@ -1354,6 +1469,88 @@ function App() {
         </div>
       </section>
 
+      {/* KS TEAM ADVANTAGE / TRUST SECTION - MOVED TO END */}
+      <section id="trust" className="py-20 bg-navy text-white">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="section-title text-white">Why Work With Me & The KS Team?</h2>
+            <p className="section-subtitle text-gray-300 mb-12">
+              When you work with me as your realtor, you're not just hiring Fred Sales; you're hiring the entire KS Team.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-2">5,275+</div>
+              <div className="text-xs sm:text-sm text-gray-300 font-semibold">Families Helped</div>
+            </motion.div>
+            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
+              <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-2">$5 BILLION+</div>
+              <div className="text-xs sm:text-sm text-gray-300 font-semibold">In Team Sales</div>
+            </motion.div>
+            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
+              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-2">TOP TEAM</div>
+              <div className="text-xs sm:text-sm text-gray-300 font-semibold">In the DMV Since 2008</div>
+            </motion.div>
+            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
+              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-2">7+ YEARS</div>
+              <div className="text-xs sm:text-sm text-gray-300 font-semibold">Experience</div>
+            </motion.div>
+          </motion.div>
+
+          <motion.p
+            className="text-center text-base sm:text-lg text-gray-200 max-w-3xl mx-auto px-4"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            We have the track record, the resources, and the market intel to ensure you get the best possible outcome for your home sale. 
+            <strong> Let's work together to maximize your home's value!</strong>
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Photo Modal */}
+      {showPhotoModal && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowPhotoModal(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="max-w-4xl w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img 
+              src="/images/fred-professional1.jpg" 
+              alt="Fred Sales - Real Estate Agent"
+              className="w-full h-auto rounded-lg shadow-2xl"
+            />
+            <button
+              onClick={() => setShowPhotoModal(false)}
+              className="absolute top-4 right-4 bg-white rounded-full p-2 hover:bg-gray-200 transition-colors"
+            >
+              <X size={24} className="text-navy" />
+            </button>
+          </motion.div>
+        </motion.div>
+      )}
+
       {/* FOOTER */}
       <footer className="bg-navy-dark text-white py-12">
         <div className="container">
@@ -1376,6 +1573,9 @@ function App() {
           whileTap={{ scale: 0.9 }}
         >
           <ArrowUp size={24} />
+
+
+
         </motion.button>
       )}
     </div>
