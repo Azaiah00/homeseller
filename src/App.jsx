@@ -35,6 +35,7 @@ function App() {
   const [showSuccessModal, setShowSuccessModal] = useState(false)
   const [formErrors, setFormErrors] = useState({})
   const [showPhotoModal, setShowPhotoModal] = useState(false)
+  const [activeChapter, setActiveChapter] = useState(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -179,7 +180,28 @@ function App() {
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
     setMobileMenuOpen(false)
+    setActiveChapter(sectionId)
   }
+
+  // Track active chapter based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['trust', 'roadmap', 'marketing', 'financials', 'calculator', 'testimonials', 'faq']
+      const scrollPosition = window.scrollY + 200
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i])
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveChapter(sections[i])
+          break
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Check on mount
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -279,8 +301,44 @@ function App() {
     }
   }
 
+  const chapters = [
+    { id: 'trust', number: 1, title: 'Why Us' },
+    { id: 'roadmap', number: 2, title: 'Process' },
+    { id: 'marketing', number: 3, title: 'Marketing' },
+    { id: 'financials', number: 4, title: 'Financials' },
+    { id: 'calculator', number: 5, title: 'Tools' },
+    { id: 'testimonials', number: 6, title: 'Reviews' },
+    { id: 'faq', number: 7, title: 'FAQ' }
+  ]
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white lg:pl-48">
+      {/* SIDEBAR NAVIGATION */}
+      <aside className="hidden lg:block fixed left-0 top-1/2 transform -translate-y-1/2 z-40 ml-6 xl:ml-8">
+        <nav className="bg-white/95 backdrop-blur-lg rounded-lg shadow-lg p-4 border border-gray-200 min-w-[180px]">
+          <div className="space-y-1">
+            {chapters.map((chapter) => (
+              <button
+                key={chapter.id}
+                onClick={() => scrollToSection(chapter.id)}
+                className={`block w-full text-left px-4 py-2.5 rounded-md transition-all duration-200 text-sm ${
+                  activeChapter === chapter.id
+                    ? 'bg-primary text-white shadow-md'
+                    : 'text-gray-700 hover:bg-primary/10 hover:text-primary'
+                }`}
+              >
+                <span className={`text-xs ${activeChapter === chapter.id ? 'opacity-90' : 'opacity-70'}`}>
+                  Chapter {chapter.number}
+                </span>
+                <div className={`font-semibold ${activeChapter === chapter.id ? 'text-white' : ''}`}>
+                  {chapter.title}
+                </div>
+              </button>
+            ))}
+          </div>
+        </nav>
+      </aside>
+
       {/* STICKY NAVIGATION */}
       <nav 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -290,71 +348,11 @@ function App() {
         aria-label="Main navigation"
       >
         <div className="container py-4">
-          <div className="flex items-center justify-between relative">
-            {/* Left Side - Chapter Navigation */}
-            <div className="hidden lg:flex flex-col items-start space-y-1 flex-shrink-0">
-              <button
-                onClick={() => scrollToSection('trust')}
-                className={`text-xs font-medium transition-colors text-left ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
-                }`}
-              >
-                Chapter 1: Why Us
-              </button>
-              <button
-                onClick={() => scrollToSection('roadmap')}
-                className={`text-xs font-medium transition-colors text-left ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
-                }`}
-              >
-                Chapter 2: Process
-              </button>
-              <button
-                onClick={() => scrollToSection('marketing')}
-                className={`text-xs font-medium transition-colors text-left ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
-                }`}
-              >
-                Chapter 3: Marketing
-              </button>
-              <button
-                onClick={() => scrollToSection('financials')}
-                className={`text-xs font-medium transition-colors text-left ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
-                }`}
-              >
-                Chapter 4: Financials
-              </button>
-              <button
-                onClick={() => scrollToSection('calculator')}
-                className={`text-xs font-medium transition-colors text-left ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
-                }`}
-              >
-                Chapter 5: Tools
-              </button>
-              <button
-                onClick={() => scrollToSection('testimonials')}
-                className={`text-xs font-medium transition-colors text-left ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
-                }`}
-              >
-                Chapter 6: Reviews
-              </button>
-              <button
-                onClick={() => scrollToSection('faq')}
-                className={`text-xs font-medium transition-colors text-left ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
-                }`}
-              >
-                Chapter 7: FAQ
-              </button>
-            </div>
-
+          <div className="flex items-center justify-between">
             {/* Center - Fred Sales */}
             <button
               onClick={scrollToTop}
-              className={`absolute left-1/2 transform -translate-x-1/2 text-xl md:text-2xl lg:text-3xl font-bold transition-colors ${
+              className={`text-xl md:text-2xl lg:text-3xl font-bold transition-colors mx-auto ${
                 isScrolled ? 'text-navy' : 'text-white'
               }`}
               aria-label="Fred Sales - Return to top"
@@ -362,26 +360,13 @@ function App() {
               Fred Sales
             </button>
 
-            {/* Right Side - CTA Button */}
+            {/* Right Side - CTA Button (Desktop) */}
             <div className="hidden lg:flex items-center flex-shrink-0">
               <button
                 onClick={() => scrollToSection('contact')}
                 className="cta-button primary text-sm px-4 py-2 whitespace-nowrap"
               >
                 Get Started
-              </button>
-            </div>
-
-            {/* Mobile/Tablet Navigation */}
-            <div className="lg:hidden flex items-center gap-4">
-              <button
-                onClick={scrollToTop}
-                className={`text-lg md:text-xl font-bold transition-colors ${
-                  isScrolled ? 'text-navy' : 'text-white'
-                }`}
-                aria-label="Fred Sales - Return to top"
-              >
-                Fred Sales
               </button>
             </div>
 
@@ -410,48 +395,19 @@ function App() {
               role="navigation"
               aria-label="Mobile navigation"
             >
-              <button
-                onClick={() => scrollToSection('trust')}
-                className="block w-full text-left font-semibold text-navy py-2"
-              >
-                Why Us
-              </button>
-              <button
-                onClick={() => scrollToSection('roadmap')}
-                className="block w-full text-left font-semibold text-navy py-2"
-              >
-                Process
-              </button>
-              <button
-                onClick={() => scrollToSection('marketing')}
-                className="block w-full text-left font-semibold text-navy py-2"
-              >
-                Marketing
-              </button>
-              <button
-                onClick={() => scrollToSection('financials')}
-                className="block w-full text-left font-semibold text-navy py-2"
-              >
-                Financials
-              </button>
-              <button
-                onClick={() => scrollToSection('calculator')}
-                className="block w-full text-left font-semibold text-navy py-2"
-              >
-                Calculator
-              </button>
-              <button
-                onClick={() => scrollToSection('testimonials')}
-                className="block w-full text-left font-semibold text-navy py-2"
-              >
-                Reviews
-              </button>
-              <button
-                onClick={() => scrollToSection('faq')}
-                className="block w-full text-left font-semibold text-navy py-2"
-              >
-                FAQ
-              </button>
+              {chapters.map((chapter) => (
+                <button
+                  key={chapter.id}
+                  onClick={() => scrollToSection(chapter.id)}
+                  className={`block w-full text-left font-semibold py-2 px-2 rounded-md transition-colors ${
+                    activeChapter === chapter.id
+                      ? 'text-primary bg-primary/10'
+                      : 'text-navy hover:text-primary'
+                  }`}
+                >
+                  Chapter {chapter.number}: {chapter.title}
+                </button>
+              ))}
               <button
                 onClick={() => scrollToSection('contact')}
                 className="cta-button primary w-full"
