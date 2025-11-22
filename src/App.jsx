@@ -420,19 +420,19 @@ function App() {
             <span className="trust-badge-icon">✓</span>
             <span>Licensed in VA, DC & MD • 7+ Years Experience</span>
           </div>
-          <h1 className="hero-title">Free Seller Net Sheet Calculator<br />Maximize Your Home's Value in DC, VA & MD</h1>
-          <p className="hero-slogan">Calculate your net proceeds when selling your home in Washington DC, Virginia, or Maryland. Expert real estate agent with 7+ years experience helping 5,275+ families.</p>
+          <h1 className="hero-title">Maximize Your Home's Value<br />from Day One</h1>
+          <p className="hero-slogan">The modern roadmap to selling your home for top dollar with less stress.</p>
           <p className="hero-intro">
             Hi, I'm Fred Sales! I grew up in Alexandria, VA and I currently live in Washington DC in the SW Waterfront neighborhood. Selling your home in the DMV area (Washington DC, Virginia, Maryland) is a huge decision, and as your realtor, I'm here to make it smarter, simpler, and way more profitable. 
-            With 7+ years of experience helping home sellers in Northern Virginia, Washington DC, and Maryland, I've built a proven system to get your home sold for top dollar. Whether you're selling in Arlington, Alexandria, Bethesda, Fairfax, or anywhere in the DMV, I'll guide you through every step with expertise and care. <strong>Use our free seller net sheet calculator to see exactly how much you'll walk away with after closing!</strong>
+            With 7+ years of experience helping home sellers in Northern Virginia, Washington DC, and Maryland, I've built a proven system to get your home sold for top dollar. Whether you're selling in Arlington, Alexandria, Bethesda, Fairfax, or anywhere in the DMV, I'll guide you through every step with expertise and care. <strong>Let's work together to maximize your home's value!</strong>
           </p>
           <motion.button
-            onClick={() => scrollToSection('calculator')}
+            onClick={() => scrollToSection('contact')}
             className="cta-button primary"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Calculate My Net Proceeds
+            Schedule My Free Seller Consultation
           </motion.button>
         </div>
       </section>
