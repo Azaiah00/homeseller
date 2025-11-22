@@ -182,9 +182,9 @@ const NetSheetCalculator = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Calculate Your Net Proceeds</h2>
+          <h2 className="section-title">Free Seller Net Sheet Calculator</h2>
           <p className="section-subtitle">
-            Get an estimate of how much you'll walk away with after closing. Fill in your details below.
+            Calculate your net proceeds when selling your home in Washington DC, Virginia, or Maryland. Get an accurate estimate of how much you'll walk away with after closing costs, commissions, and mortgage payoff. Fill in your details below to use our free seller net sheet calculator.
           </p>
         </motion.div>
 

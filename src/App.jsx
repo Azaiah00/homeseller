@@ -44,6 +44,114 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Add FAQPage Schema for SEO
+  useEffect(() => {
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does it take to sell a home?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Typically, the home selling process takes 30-90 days from listing to closing, depending on market conditions, pricing strategy, and buyer financing. On average, homes in the DMV sell in 21-30 days when priced correctly and marketed effectively."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are your commission fees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Commission fees are typically 5-6% of the sale price, split between the listing and buyer's agent. This is negotiable and discussed during our initial consultation. What's important is the NET amount you walk away with."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to stage my home?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Virtual staging is included with every listing and is often more effective than traditional staging. It's cost-effective, allows multiple design styles, and attracts online clicks without the hassle of moving furniture in and out."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if my home doesn't sell?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This is rare when priced correctly and marketed effectively. However, if your home doesn't sell within the expected timeframe, we'll analyze the feedback, adjust our strategy, and potentially recommend pricing adjustments or improvements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you determine the listing price?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We conduct a comprehensive Comparative Market Analysis (CMA) that looks at recent sales, active listings, and market trends in your area. We also consider your home's unique features, condition, and current market conditions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What repairs do I need to make before listing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We'll walk through your home together and identify any necessary repairs vs. cosmetic improvements. Major issues (roof, HVAC, foundation) should typically be addressed, while minor cosmetic items can often be handled during negotiations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sell my home while buying another?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely! We can coordinate both transactions using strategies like post-settlement occupancy (rent-back), bridge financing, or contingency clauses. Many sellers do this successfully."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are closing costs for sellers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Seller closing costs typically include commission fees (5-6%), transfer taxes, title insurance, prorated property taxes, and any negotiated repairs or concessions. These typically range from 8-10% of the sale price total."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you market my home?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our Elite Marketing Plan includes professional HDR photography, floor plans, virtual staging, MLS listing, Coming Soon campaign to build buyer interest, open houses with aggressive follow-up, social media promotion, and our extensive network of buyer agents."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens after I accept an offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "After acceptance, we manage the entire process: inspections, appraisals, negotiations, paperwork, and coordination with title company and lenders until closing. Our average closing time is 30 days."
+          }
+        }
+      ]
+    }
+
+    // Remove existing FAQ schema if any
+    const existingSchema = document.getElementById('faq-schema')
+    if (existingSchema) {
+      existingSchema.remove()
+    }
+
+    // Add FAQ schema
+    const script = document.createElement('script')
+    script.id = 'faq-schema'
+    script.type = 'application/ld+json'
+    script.textContent = JSON.stringify(faqSchema)
+    document.head.appendChild(script)
+
+    return () => {
+      const schema = document.getElementById('faq-schema')
+      if (schema) schema.remove()
+    }
+  }, [])
+
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
     setMobileMenuOpen(false)
@@ -312,11 +420,11 @@ function App() {
             <span className="trust-badge-icon">✓</span>
             <span>Licensed in VA, DC & MD • 7+ Years Experience</span>
           </div>
-          <h1 className="hero-title">Maximize Your Home's Value<br />from Day One</h1>
-          <p className="hero-slogan">The modern roadmap to selling your home for top dollar with less stress.</p>
+          <h1 className="hero-title">Free Seller Net Sheet Calculator<br />Maximize Your Home's Value in DC, VA & MD</h1>
+          <p className="hero-slogan">Calculate your net proceeds when selling your home in Washington DC, Virginia, or Maryland. Expert real estate agent with 7+ years experience helping 5,275+ families.</p>
           <p className="hero-intro">
-            Hi, I'm Fred Sales! I grew up in Alexandria, VA and I currently live in Washington DC in the SW Waterfront neighborhood. Selling your home is a huge decision, and as your realtor, I'm here to make it smarter, simpler, and way more profitable. 
-            With 7+ years of experience in VA, DC, and MD, I've built a proven system to get your home sold for top dollar. Whether you're downsizing, relocating, or just ready for your next chapter, I'll guide you through every step with expertise and care. <strong>Let's work together to maximize your home's value!</strong>
+            Hi, I'm Fred Sales! I grew up in Alexandria, VA and I currently live in Washington DC in the SW Waterfront neighborhood. Selling your home in the DMV area (Washington DC, Virginia, Maryland) is a huge decision, and as your realtor, I'm here to make it smarter, simpler, and way more profitable. 
+            With 7+ years of experience helping home sellers in Northern Virginia, Washington DC, and Maryland, I've built a proven system to get your home sold for top dollar. Whether you're selling in Arlington, Alexandria, Bethesda, Fairfax, or anywhere in the DMV, I'll guide you through every step with expertise and care. <strong>Use our free seller net sheet calculator to see exactly how much you'll walk away with after closing!</strong>
           </p>
           <motion.button
             onClick={() => scrollToSection('calculator')}
