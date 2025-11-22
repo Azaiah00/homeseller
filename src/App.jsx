@@ -315,29 +315,29 @@ function App() {
     <div className="min-h-screen bg-white">
       {/* SIDEBAR NAVIGATION */}
       <aside className="hidden lg:block fixed left-0 top-24 bottom-0 z-40 flex items-start pt-8 ml-6 xl:ml-8">
-        <nav className="bg-white/90 backdrop-blur-2xl rounded-r-2xl shadow-xl p-6 border-r border-gray-200/50 min-w-[180px]">
-          <div className="space-y-1">
+        <nav className="bg-gradient-to-b from-white/95 to-white/85 backdrop-blur-2xl rounded-r-2xl shadow-lg p-5 border-r border-gray-200/30 min-w-[170px]">
+          <div className="space-y-0.5">
             {chapters.map((chapter, index) => (
               <div key={chapter.id}>
                 <button
                   onClick={() => scrollToSection(chapter.id)}
-                  className={`w-full text-left px-5 py-4 rounded-xl transition-all duration-300 group ${
+                  className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 group ${
                     activeChapter === chapter.id
-                      ? 'bg-gradient-to-r from-primary to-primary-light text-white shadow-lg transform scale-105'
-                      : 'text-gray-700 hover:bg-gray-50 hover:text-primary'
+                      ? 'bg-gradient-to-r from-primary/95 to-primary-light/95 text-white shadow-md'
+                      : 'text-gray-700 hover:bg-primary/5 hover:text-primary'
                   }`}
                 >
-                  <div className={`font-semibold text-base tracking-wide transition-colors ${
-                    activeChapter === chapter.id ? 'text-white' : 'text-gray-800 group-hover:text-primary'
+                  <div className={`font-medium text-sm tracking-wide transition-colors ${
+                    activeChapter === chapter.id ? 'text-white' : 'text-gray-700 group-hover:text-primary'
                   }`}>
                     {chapter.title}
                   </div>
                 </button>
                 {index < chapters.length - 1 && (
-                  <div className={`h-px mx-2 my-2 transition-colors ${
+                  <div className={`h-px mx-3 my-1.5 transition-colors ${
                     activeChapter === chapter.id || activeChapter === chapters[index + 1]?.id
-                      ? 'bg-primary/20'
-                      : 'bg-gray-100'
+                      ? 'bg-primary/15'
+                      : 'bg-gray-100/50'
                   }`} />
                 )}
               </div>
