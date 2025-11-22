@@ -294,7 +294,7 @@ function App() {
         <div className="hero-content">
           <div className="hero-image-wrapper">
             <img 
-              src="/images/fred-headshot.jpg" 
+              src="/images/fred-professional1.jpg" 
               alt="Fred Sales - Real Estate Agent"
               className="hero-photo"
               onError={(e) => {
