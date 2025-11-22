@@ -328,7 +328,7 @@ function App() {
                   <div className={`font-semibold text-sm tracking-wide transition-all duration-300 relative z-10 ${
                     activeChapter === chapter.id 
                       ? 'text-white' 
-                      : 'text-gray-700 group-hover:text-primary'
+                      : 'text-gray-200 group-hover:text-primary-light'
                   }`}>
                     {chapter.title}
                   </div>
