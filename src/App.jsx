@@ -290,10 +290,71 @@ function App() {
         aria-label="Main navigation"
       >
         <div className="container py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between relative">
+            {/* Left Side - Chapter Navigation */}
+            <div className="hidden lg:flex flex-col items-start space-y-1 flex-shrink-0">
+              <button
+                onClick={() => scrollToSection('trust')}
+                className={`text-xs font-medium transition-colors text-left ${
+                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
+                }`}
+              >
+                Chapter 1: Why Us
+              </button>
+              <button
+                onClick={() => scrollToSection('roadmap')}
+                className={`text-xs font-medium transition-colors text-left ${
+                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
+                }`}
+              >
+                Chapter 2: Process
+              </button>
+              <button
+                onClick={() => scrollToSection('marketing')}
+                className={`text-xs font-medium transition-colors text-left ${
+                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
+                }`}
+              >
+                Chapter 3: Marketing
+              </button>
+              <button
+                onClick={() => scrollToSection('financials')}
+                className={`text-xs font-medium transition-colors text-left ${
+                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
+                }`}
+              >
+                Chapter 4: Financials
+              </button>
+              <button
+                onClick={() => scrollToSection('calculator')}
+                className={`text-xs font-medium transition-colors text-left ${
+                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
+                }`}
+              >
+                Chapter 5: Tools
+              </button>
+              <button
+                onClick={() => scrollToSection('testimonials')}
+                className={`text-xs font-medium transition-colors text-left ${
+                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
+                }`}
+              >
+                Chapter 6: Reviews
+              </button>
+              <button
+                onClick={() => scrollToSection('faq')}
+                className={`text-xs font-medium transition-colors text-left ${
+                  isScrolled ? 'text-navy hover:text-primary' : 'text-white/80 hover:text-primary-light'
+                }`}
+              >
+                Chapter 7: FAQ
+              </button>
+            </div>
+
+            {/* Center - Fred Sales */}
             <button
               onClick={scrollToTop}
-              className={`text-xl md:text-2xl font-bold transition-colors flex-shrink-0 ${
+              className={`absolute left-1/2 transform -translate-x-1/2 text-xl md:text-2xl lg:text-3xl font-bold transition-colors ${
                 isScrolled ? 'text-navy' : 'text-white'
               }`}
               aria-label="Fred Sales - Return to top"
@@ -301,64 +362,8 @@ function App() {
               Fred Sales
             </button>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center justify-between flex-1 ml-8 lg:ml-12">
-              <button
-                onClick={() => scrollToSection('trust')}
-                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
-                }`}
-              >
-                Why Us
-              </button>
-              <button
-                onClick={() => scrollToSection('roadmap')}
-                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
-                }`}
-              >
-                Process
-              </button>
-              <button
-                onClick={() => scrollToSection('marketing')}
-                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
-                }`}
-              >
-                Marketing
-              </button>
-              <button
-                onClick={() => scrollToSection('financials')}
-                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
-                }`}
-              >
-                Financials
-              </button>
-              <button
-                onClick={() => scrollToSection('calculator')}
-                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
-                }`}
-              >
-                Calculator
-              </button>
-              <button
-                onClick={() => scrollToSection('testimonials')}
-                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
-                }`}
-              >
-                Reviews
-              </button>
-              <button
-                onClick={() => scrollToSection('faq')}
-                className={`font-semibold transition-colors text-sm lg:text-base whitespace-nowrap ${
-                  isScrolled ? 'text-navy hover:text-primary' : 'text-white hover:text-primary-light'
-                }`}
-              >
-                FAQ
-              </button>
+            {/* Right Side - CTA Button */}
+            <div className="hidden lg:flex items-center flex-shrink-0">
               <button
                 onClick={() => scrollToSection('contact')}
                 className="cta-button primary text-sm px-4 py-2 whitespace-nowrap"
@@ -367,10 +372,23 @@ function App() {
               </button>
             </div>
 
+            {/* Mobile/Tablet Navigation */}
+            <div className="lg:hidden flex items-center gap-4">
+              <button
+                onClick={scrollToTop}
+                className={`text-lg md:text-xl font-bold transition-colors ${
+                  isScrolled ? 'text-navy' : 'text-white'
+                }`}
+                aria-label="Fred Sales - Return to top"
+              >
+                Fred Sales
+              </button>
+            </div>
+
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`md:hidden p-2 transition-colors ${
+              className={`lg:hidden p-2 transition-colors ${
                 isScrolled ? 'text-navy' : 'text-white'
               }`}
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
@@ -543,7 +561,7 @@ function App() {
               <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 2
               </div>
-              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
+              <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border border-primary/20">
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Property Prep & Staging</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Decluttering, repairs, and leveraging our "Virtual Staging Advantage" (more on this later). 
@@ -567,7 +585,7 @@ function App() {
               <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 3
               </div>
-              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border-2 border-primary/20">
+              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Pricing Strategy</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Positioning your home to attract the maximum pool of buyers. We analyze comparable sales 
@@ -591,7 +609,7 @@ function App() {
               <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 4
               </div>
-              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border-2 border-primary/20">
+              <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border border-primary/20">
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">The "Coming Soon" Launch</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Generating buzz before we even hit the <span className="tooltip-trigger" data-tooltip="Multiple Listing Service (MLS): A database used by real estate agents to share information about properties for sale. When your home is listed on the MLS, it becomes visible to all agents and appears on major real estate websites like Zillow, Realtor.com, and Redfin.">MLS</span>. We create anticipation and build a waiting list 
@@ -615,7 +633,7 @@ function App() {
               <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 5
               </div>
-              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border-2 border-primary/20">
+              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Live on Market & Open Houses</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   We don't just open doors; we collect critical feedback from every visitor to adjust our 
@@ -639,7 +657,7 @@ function App() {
               <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 6
               </div>
-              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border-2 border-primary/20">
+              <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border border-primary/20">
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Reviewing Offers & Negotiations</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   We negotiate terms, not just price. From closing dates to <span className="tooltip-trigger" data-tooltip="Contingency: A condition in the purchase offer that must be met for the sale to proceed. Common contingencies include home inspection, appraisal, financing, and home sale contingencies.">contingencies</span>, we ensure every 
@@ -663,7 +681,7 @@ function App() {
               <div className="absolute -left-4 sm:-left-6 top-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                 7
               </div>
-              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4 border-2 border-primary/20">
+              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 ml-2 sm:ml-4">
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Escrow & Closing</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Managing inspections, <span className="tooltip-trigger" data-tooltip="Appraisal: A professional assessment of your home's value by a licensed appraiser. Required by lenders to ensure the property is worth the loan amount. If the appraisal comes in lower than the sale price, we may need to renegotiate.">appraisals</span>, and paperwork until you get paid. We handle every detail 
@@ -1800,3 +1818,4 @@ function App() {
 }
 
 export default App
+
