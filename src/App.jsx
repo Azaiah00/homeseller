@@ -315,29 +315,29 @@ function App() {
     <div className="min-h-screen bg-white">
       {/* SIDEBAR NAVIGATION */}
       <aside className="hidden lg:block fixed left-0 top-24 bottom-0 z-40 flex items-start pt-8 ml-6 xl:ml-8">
-        <nav className="bg-gradient-to-b from-white/95 to-white/85 backdrop-blur-2xl rounded-r-2xl shadow-lg p-5 border-r border-gray-200/30 min-w-[170px]">
-          <div className="space-y-0.5">
+        <nav className="sidebar-nav rounded-r-2xl p-6 min-w-[180px]">
+          <div className="space-y-1">
             {chapters.map((chapter, index) => (
               <div key={chapter.id}>
                 <button
                   onClick={() => scrollToSection(chapter.id)}
-                  className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 group ${
-                    activeChapter === chapter.id
-                      ? 'bg-gradient-to-r from-primary/95 to-primary-light/95 text-white shadow-md'
-                      : 'text-gray-700 hover:bg-primary/5 hover:text-primary'
+                  className={`sidebar-button w-full text-left px-5 py-3.5 rounded-xl group ${
+                    activeChapter === chapter.id ? 'active' : ''
                   }`}
                 >
-                  <div className={`font-medium text-sm tracking-wide transition-colors ${
-                    activeChapter === chapter.id ? 'text-white' : 'text-gray-700 group-hover:text-primary'
+                  <div className={`font-semibold text-sm tracking-wide transition-all duration-300 relative z-10 ${
+                    activeChapter === chapter.id 
+                      ? 'text-white' 
+                      : 'text-gray-700 group-hover:text-primary'
                   }`}>
                     {chapter.title}
                   </div>
                 </button>
                 {index < chapters.length - 1 && (
-                  <div className={`h-px mx-3 my-1.5 transition-colors ${
+                  <div className={`sidebar-divider mx-4 my-2 ${
                     activeChapter === chapter.id || activeChapter === chapters[index + 1]?.id
-                      ? 'bg-primary/15'
-                      : 'bg-gray-100/50'
+                      ? 'active'
+                      : ''
                   }`} />
                 )}
               </div>
