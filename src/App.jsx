@@ -440,59 +440,6 @@ function App() {
         </div>
       </section>
 
-      {/* KS TEAM ADVANTAGE / TRUST SECTION */}
-      <section id="trust" className="py-20 bg-navy text-white">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="section-title text-white">Why Work With Me & The KS Team?</h2>
-            <p className="section-subtitle text-gray-300 mb-12">
-              When you work with me as your realtor, you're not just hiring Fred Sales; you're hiring the entire KS Team.
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-2">5,275+</div>
-              <div className="text-xs sm:text-sm text-gray-300 font-semibold">Families Helped</div>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
-              <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-2">$5 BILLION+</div>
-              <div className="text-xs sm:text-sm text-gray-300 font-semibold">In Team Sales</div>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
-              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-2">TOP TEAM</div>
-              <div className="text-xs sm:text-sm text-gray-300 font-semibold">In the DMV Since 2008</div>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="bg-white/10 backdrop-blur-lg rounded-xl p-4 sm:p-6 text-center">
-              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary mb-2">7+ YEARS</div>
-              <div className="text-xs sm:text-sm text-gray-300 font-semibold">Experience</div>
-            </motion.div>
-          </motion.div>
-
-          <motion.p
-            className="text-center text-lg text-gray-200 max-w-3xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            We have the track record, the resources, and the market intel to ensure you get the best possible outcome for your home sale. 
-            <strong> Let's work together to maximize your home's value!</strong>
-          </motion.p>
-        </div>
-      </section>
-
       {/* ROADMAP SECTION */}
       <section id="roadmap" className="py-20 bg-white">
         <div className="container">
@@ -821,6 +768,187 @@ function App() {
               Our Virtual Staging is the smarter, modern choice that saves you money while maximizing your home's appeal.
             </p>
           </motion.div>
+
+          {/* MLS vs Off-Market Listing Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="max-w-5xl mx-auto mt-16"
+          >
+            <h3 className="text-3xl font-bold text-center text-navy mb-8">
+              MLS Listing vs. Off-Market: Which is Right for You?
+            </h3>
+
+            <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 mb-8">
+              <h4 className="text-2xl font-bold text-navy mb-4">Listing on the MLS: Maximum Exposure</h4>
+              <p className="text-gray-700 text-lg leading-relaxed mb-6">
+                When you list your property on the <span className="tooltip-trigger" data-tooltip="Multiple Listing Service (MLS): A database used by real estate agents to share information about properties for sale. When your home is listed on the MLS, it becomes visible to all agents and appears on major real estate websites.">MLS</span> through me as your realtor, your home gets <strong>maximum exposure</strong> to potential buyers. Here's how it works:
+              </p>
+              
+              <div className="bg-white rounded-lg p-6 mb-6">
+                <h5 className="text-xl font-bold text-navy mb-4">How MLS Distribution Works</h5>
+                <p className="text-gray-700 mb-4">
+                  Once your home is listed on the MLS, it automatically appears on all major real estate websites that pull listing data from the MLS, including:
+                </p>
+                <ul className="grid md:grid-cols-2 gap-3 text-gray-700 mb-4">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="text-primary flex-shrink-0" size={20} />
+                    <span><strong>Zillow</strong> - The most visited real estate website</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="text-primary flex-shrink-0" size={20} />
+                    <span><strong>Realtor.com</strong> - Official NAR website</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="text-primary flex-shrink-0" size={20} />
+                    <span><strong>Trulia</strong> - Popular search platform</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="text-primary flex-shrink-0" size={20} />
+                    <span><strong>Redfin</strong> - Tech-enabled brokerage</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="text-primary flex-shrink-0" size={20} />
+                    <span><strong>Homes.com</strong> - Comprehensive listings</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="text-primary flex-shrink-0" size={20} />
+                    <span><strong>Homesnap</strong> - Mobile-first platform</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="text-primary flex-shrink-0" size={20} />
+                    <span><strong>Movoto</strong> - Real estate search</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="text-primary flex-shrink-0" size={20} />
+                    <span><strong>Homes & Land</strong> - Property listings</span>
+                  </li>
+                </ul>
+                <p className="text-gray-700">
+                  Plus, your listing is visible to <strong>thousands of real estate agents</strong> in the DMV area who actively search the MLS for properties matching their clients' criteria. This means your home reaches buyers who are actively looking and ready to purchase.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              {/* MLS Pros */}
+              <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
+                <h5 className="text-xl font-bold text-navy mb-4 flex items-center gap-2">
+                  <CheckCircle className="text-green-600" size={24} />
+                  Benefits of MLS Listing
+                </h5>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 mt-1">✓</span>
+                    <span><strong>Maximum Exposure:</strong> Your home appears on all major real estate websites automatically</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 mt-1">✓</span>
+                    <span><strong>Access to All Buyers:</strong> Thousands of agents can see and show your property</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 mt-1">✓</span>
+                    <span><strong>Competitive Bidding:</strong> More exposure often leads to multiple offers and higher sale prices</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 mt-1">✓</span>
+                    <span><strong>Faster Sales:</strong> More visibility typically means quicker sales</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 mt-1">✓</span>
+                    <span><strong>Market Data:</strong> Your listing contributes to and benefits from comprehensive market data</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-green-600 mt-1">✓</span>
+                    <span><strong>Professional Network:</strong> Access to the entire real estate agent network in the DMV</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Off-Market Info */}
+              <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
+                <h5 className="text-xl font-bold text-navy mb-4 flex items-center gap-2">
+                  <span className="text-blue-600">ℹ</span>
+                  Off-Market Listing Option
+                </h5>
+                <p className="text-gray-700 mb-4">
+                  An off-market listing (also called a "pocket listing" or "quiet listing") means your home is not listed on the MLS and is marketed privately through our network.
+                </p>
+                <div className="space-y-4">
+                  <div>
+                    <h6 className="font-bold text-navy mb-2">Pros of Off-Market:</h6>
+                    <ul className="space-y-1 text-gray-700 text-sm">
+                      <li>• Privacy - fewer public showings</li>
+                      <li>• Less disruption if you're still living in the home</li>
+                      <li>• Can test the market before going public</li>
+                      <li>• Exclusivity appeal for high-end properties</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h6 className="font-bold text-navy mb-2">Cons of Off-Market:</h6>
+                    <ul className="space-y-1 text-gray-700 text-sm">
+                      <li>• Limited exposure - only our network sees it</li>
+                      <li>• Longer time on market typically</li>
+                      <li>• May receive lower offers due to less competition</li>
+                      <li>• Miss out on buyers actively searching online</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white border-2 border-primary/30 rounded-xl p-8">
+              <h5 className="text-xl font-bold text-navy mb-4">Factors to Consider When Deciding</h5>
+              <p className="text-gray-700 mb-4">
+                Every seller has different goals and circumstances. Here are key factors to discuss when deciding between MLS and off-market listing:
+              </p>
+              <div className="grid md:grid-cols-2 gap-4">
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span><strong>Timeline:</strong> How quickly do you need to sell?</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span><strong>Living Situation:</strong> Are you still living in the home?</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span><strong>Privacy Needs:</strong> Do you need maximum privacy?</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span><strong>Property Type:</strong> Is it a unique or high-end property?</span>
+                  </li>
+                </ul>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span><strong>Market Conditions:</strong> Is it a hot market or slower market?</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span><strong>Price Goals:</strong> Are you prioritizing speed or maximum price?</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span><strong>Flexibility:</strong> Can you accommodate showings easily?</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span><strong>Network Access:</strong> Do you have a specific buyer in mind?</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="mt-6 bg-primary/10 rounded-lg p-6 border-2 border-primary/20">
+                <p className="text-gray-700 leading-relaxed">
+                  <strong>Our Recommendation:</strong> For most sellers, listing on the MLS provides the best opportunity to maximize your sale price and sell quickly. The automatic distribution to all major real estate websites means your home reaches the largest pool of qualified buyers. However, we understand every situation is unique. <strong>During our consultation, we'll discuss your specific goals and circumstances to determine the best marketing strategy for your home.</strong>
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -894,7 +1022,19 @@ function App() {
                 <div className="bg-white rounded-lg p-6">
                   <h5 className="text-xl font-bold text-navy mb-4">The NAR Lawsuit Verdict & What It Means for You</h5>
                   <p className="text-gray-700 leading-relaxed mb-4">
-                    Following the recent <span className="tooltip-trigger" data-tooltip="National Association of Realtors (NAR): The largest trade association for real estate professionals in the United States. The recent lawsuit settlement changed how buyer's agent commissions are handled.">NAR</span> lawsuit settlement, sellers now have more flexibility in how they structure compensation for buyer's agents. However, <strong>offering compensation to the buyer's agent remains the industry standard</strong> and is highly recommended for several strategic reasons.
+                    Following the recent <span className="tooltip-trigger" data-tooltip="National Association of Realtors (NAR): The largest trade association for real estate professionals in the United States. The recent lawsuit settlement changed how buyer's agent commissions are handled.">NAR</span> lawsuit settlement, sellers now have more flexibility in how they structure compensation for buyer's agents. 
+                  </p>
+                  <div className="bg-gray-50 rounded-lg p-6 mb-4">
+                    <h6 className="font-bold text-navy mb-3">Understanding the Lawsuit</h6>
+                    <p className="text-gray-700 leading-relaxed mb-3">
+                      The NAR lawsuit was filed by home sellers who claimed that the traditional practice of sellers paying both the listing agent and buyer's agent commission was anti-competitive and kept commission rates artificially high. The lawsuit alleged that the requirement to offer buyer's agent compensation (which was previously mandatory in many MLS systems) limited sellers' ability to negotiate commission structures.
+                    </p>
+                    <p className="text-gray-700 leading-relaxed">
+                      As part of the settlement, the NAR agreed to change its rules, making it clear that <strong>sellers are no longer required to offer compensation to buyer's agents</strong>. This gives sellers more flexibility, but it's important to understand the implications of this change.
+                    </p>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">
+                    However, <strong>offering compensation to the buyer's agent remains the industry standard</strong> and is highly recommended for several strategic reasons.
                   </p>
                   <p className="text-gray-700 leading-relaxed">
                     <strong>Important:</strong> You are NOT required to compensate the buyer's agent, but doing so significantly increases your chances of selling quickly and for top dollar. Here's why:
@@ -1533,7 +1673,7 @@ function App() {
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="max-w-4xl w-full"
+            className="max-w-md w-full relative"
             onClick={(e) => e.stopPropagation()}
           >
             <img 
