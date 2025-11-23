@@ -313,13 +313,13 @@ function App() {
   }
 
   const chapters = [
-    { id: 'trust', number: 1, title: 'Why Us' },
-    { id: 'roadmap', number: 2, title: 'Process' },
-    { id: 'marketing', number: 3, title: 'Marketing' },
-    { id: 'financials', number: 4, title: 'Financials' },
-    { id: 'calculator', number: 5, title: 'Tools' },
-    { id: 'testimonials', number: 6, title: 'Reviews' },
-    { id: 'faq', number: 7, title: 'FAQ' }
+    { id: 'roadmap', number: 1, title: 'Process' },
+    { id: 'marketing', number: 2, title: 'Marketing' },
+    { id: 'financials', number: 3, title: 'Financials' },
+    { id: 'calculator', number: 4, title: 'Tools' },
+    { id: 'testimonials', number: 5, title: 'Reviews' },
+    { id: 'faq', number: 6, title: 'FAQ' },
+    { id: 'trust', number: 7, title: 'Why Us' }
   ]
 
   return (
@@ -1183,6 +1183,289 @@ function App() {
       {/* ROI CALCULATOR */}
       <ROICalculator />
 
+      {/* CONTACT SECTION */}
+      <section id="contact" className="py-20 bg-gradient-to-br from-navy to-navy-dark text-white">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Ready to Start Your Home Sale?</h2>
+            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-4">
+              "All we ask from you is your loyalty. In return, you get our 100% commitment and expertise."
+            </p>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+              Let's work together! Set up a 30-minute, no-obligation seller consultation with me, your realtor. 
+              No pressure, just a great conversation about your goals and how we can maximize your home's value.
+            </p>
+          </motion.div>
+
+          {/* What's Included Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="max-w-4xl mx-auto mb-12"
+          >
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8">
+              <h3 className="text-2xl font-bold mb-6 text-center">What's Included in Your Free Seller Consultation:</h3>
+              <div className="grid md:grid-cols-2 gap-4 text-left">
+                <div className="flex items-start gap-3">
+                  <Target size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-200"><strong>Comprehensive Market Analysis</strong> - Get an accurate estimate of your home's value with a detailed CMA</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <DollarSign size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-200"><strong>Net Proceeds Calculation</strong> - Understand exactly how much you'll walk away with after closing</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <BarChart3 size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-200"><strong>DMV Market Insights</strong> - Learn current market conditions and pricing strategies</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Home size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-200"><strong>Home Preparation Plan</strong> - Get recommendations on repairs, staging, and improvements</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <TrendingUp size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-200"><strong>Marketing Strategy Review</strong> - See how we'll market your home to get top dollar</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Clock size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-200"><strong>Timeline Planning</strong> - Understand the selling process and realistic timelines</span>
+                </div>
+                <div className="flex items-start gap-3 md:col-span-2">
+                  <MessageCircle size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
+                  <span className="text-gray-200"><strong>All Your Questions Answered</strong> - Get expert answers about selling, the DMV market, commissions, staging, and the entire process</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="max-w-2xl mx-auto"
+          >
+            <div className="bg-white rounded-xl shadow-2xl p-6 sm:p-8 md:p-12">
+              <form
+                name="seller-contact"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                className="space-y-6"
+                onSubmit={handleSubmit}
+              >
+                <input type="hidden" name="form-name" value="seller-contact" />
+                <p style={{ display: 'none' }}>
+                  <label>
+                    Don't fill this out if you're human: <input name="bot-field" />
+                  </label>
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-semibold text-navy mb-2">
+                      Your Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
+                        formErrors.name ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      placeholder="John Smith"
+                      style={{ fontSize: '16px' }}
+                    />
+                    {formErrors.name && <span className="text-red-500 text-sm mt-1 block">{formErrors.name}</span>}
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold text-navy mb-2">
+                      Your Email *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
+                        formErrors.email ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      placeholder="john@example.com"
+                      style={{ fontSize: '16px' }}
+                    />
+                    {formErrors.email && <span className="text-red-500 text-sm mt-1 block">{formErrors.email}</span>}
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-semibold text-navy mb-2">
+                      Your Phone *
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
+                        formErrors.phone ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      placeholder="(703) 555-1234"
+                      style={{ fontSize: '16px' }}
+                    />
+                    {formErrors.phone && <span className="text-red-500 text-sm mt-1 block">{formErrors.phone}</span>}
+                  </div>
+
+                  <div>
+                    <label htmlFor="timeline" className="block text-sm font-semibold text-navy mb-2">
+                      When are you thinking of selling? *
+                    </label>
+                    <select
+                      id="timeline"
+                      name="timeline"
+                      value={formData.timeline}
+                      onChange={handleInputChange}
+                      required
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
+                        formErrors.timeline ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      style={{ fontSize: '16px' }}
+                    >
+                      <option value="">Select timeline</option>
+                      <option value="asap">ASAP</option>
+                      <option value="1-3">1-3 Months</option>
+                      <option value="3-6">3-6 Months</option>
+                      <option value="6-12">6-12 Months</option>
+                      <option value="exploring">Just Exploring</option>
+                    </select>
+                    {formErrors.timeline && <span className="text-red-500 text-sm mt-1 block">{formErrors.timeline}</span>}
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="propertyAddress" className="block text-sm font-semibold text-navy mb-2">
+                    Property Address (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    id="propertyAddress"
+                    name="propertyAddress"
+                    value={formData.propertyAddress}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px]"
+                    placeholder="123 Main St, City, State"
+                    style={{ fontSize: '16px' }}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className={`w-full cta-button primary text-lg py-4 min-h-[48px] focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2 ${
+                    formSubmitted ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+                  disabled={formSubmitted}
+                  style={{ touchAction: 'manipulation' }}
+                  aria-label="Submit seller consultation form"
+                >
+                  {formSubmitted ? 'Submitting...' : 'Schedule My Free Seller Consultation'}
+                </button>
+
+                <p className="text-sm text-gray-600 text-center">
+                  We respect your privacy. Your information will never be shared.
+                </p>
+              </form>
+
+              {/* Alternative Contact */}
+              <div className="mt-8 pt-8 border-t border-gray-200">
+                <p className="text-center text-gray-600 mb-4">Or contact us directly:</p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                  <a href="mailto:fred@kerishullteam.com" className="flex items-center gap-2 text-navy hover:text-primary transition-colors">
+                    <Mail size={20} />
+                    <span>fred@kerishullteam.com</span>
+                  </a>
+                  <a href="tel:7033994394" className="flex items-center gap-2 text-navy hover:text-primary transition-colors">
+                    <Phone size={20} />
+                    <span>(703) 399-4394</span>
+                  </a>
+                </div>
+                
+                <div className="pt-6 border-t border-gray-200 mt-6">
+                  <p className="text-center text-gray-600 mb-4">Connect with us</p>
+                  <div className="flex justify-center gap-4">
+                    <a href="#" className="text-gray-600 hover:text-primary transition-colors">
+                      <Instagram size={24} />
+                    </a>
+                    <a href="#" className="text-gray-600 hover:text-primary transition-colors">
+                      <Facebook size={24} />
+                    </a>
+                    <a href="#" className="text-gray-600 hover:text-primary transition-colors">
+                      <Linkedin size={24} />
+                    </a>
+                    <a href="#" className="text-gray-600 hover:text-primary transition-colors">
+                      <Youtube size={24} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Success Modal */}
+          {showSuccessModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+              onClick={closeSuccessModal}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="success-modal-title"
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="bg-white rounded-xl p-8 max-w-md w-full text-center shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex justify-center mb-4" aria-hidden="true">
+                  <CheckCircle size={64} className="text-green-500" />
+                </div>
+                <h3 id="success-modal-title" className="text-2xl font-bold text-navy mb-4">Thank You!</h3>
+                <p className="text-gray-700 mb-6">
+                  We've received your information and will be in touch soon to schedule your seller consultation.
+                </p>
+                <button
+                  onClick={closeSuccessModal}
+                  className="cta-button primary w-full focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
+                  aria-label="Close success message"
+                >
+                  Got It!
+                </button>
+              </motion.div>
+            </motion.div>
+          )}
+        </div>
+      </section>
+
       {/* COMPREHENSIVE FAQ SECTION */}
       <section id="faq" className="py-20 bg-gray-50">
         <div className="container">
@@ -1393,289 +1676,6 @@ function App() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CONTACT SECTION */}
-      <section id="contact" className="py-20 bg-gradient-to-br from-navy to-navy-dark text-white">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Ready to Start Your Home Sale?</h2>
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-4">
-              "All we ask from you is your loyalty. In return, you get our 100% commitment and expertise."
-            </p>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              Let's work together! Set up a 30-minute, no-obligation seller consultation with me, your realtor. 
-              No pressure, just a great conversation about your goals and how we can maximize your home's value.
-            </p>
-          </motion.div>
-
-          {/* What's Included Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-4xl mx-auto mb-12"
-          >
-            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8">
-              <h3 className="text-2xl font-bold mb-6 text-center">What's Included in Your Free Seller Consultation:</h3>
-              <div className="grid md:grid-cols-2 gap-4 text-left">
-                <div className="flex items-start gap-3">
-                  <Target size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-200"><strong>Comprehensive Market Analysis</strong> - Get an accurate estimate of your home's value with a detailed CMA</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <DollarSign size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-200"><strong>Net Proceeds Calculation</strong> - Understand exactly how much you'll walk away with after closing</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <BarChart3 size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-200"><strong>DMV Market Insights</strong> - Learn current market conditions and pricing strategies</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Home size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-200"><strong>Home Preparation Plan</strong> - Get recommendations on repairs, staging, and improvements</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <TrendingUp size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-200"><strong>Marketing Strategy Review</strong> - See how we'll market your home to get top dollar</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Clock size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-200"><strong>Timeline Planning</strong> - Understand the selling process and realistic timelines</span>
-                </div>
-                <div className="flex items-start gap-3 md:col-span-2">
-                  <MessageCircle size={24} className="text-primary-light flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-200"><strong>All Your Questions Answered</strong> - Get expert answers about selling, the DMV market, commissions, staging, and the entire process</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="max-w-2xl mx-auto"
-          >
-            <div className="bg-white rounded-xl shadow-2xl p-6 sm:p-8 md:p-12">
-              <form
-                name="seller-contact"
-                method="POST"
-                data-netlify="true"
-                netlify-honeypot="bot-field"
-                className="space-y-6"
-                onSubmit={handleSubmit}
-              >
-                <input type="hidden" name="form-name" value="seller-contact" />
-                <p style={{ display: 'none' }}>
-                  <label>
-                    Don't fill this out if you're human: <input name="bot-field" />
-                  </label>
-                </p>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-navy mb-2">
-                      Your Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
-                        formErrors.name ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                      placeholder="John Smith"
-                      style={{ fontSize: '16px' }}
-                    />
-                    {formErrors.name && <span className="text-red-500 text-sm mt-1 block">{formErrors.name}</span>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-navy mb-2">
-                      Your Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
-                        formErrors.email ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                      placeholder="john@example.com"
-                      style={{ fontSize: '16px' }}
-                    />
-                    {formErrors.email && <span className="text-red-500 text-sm mt-1 block">{formErrors.email}</span>}
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-semibold text-navy mb-2">
-                      Your Phone *
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      required
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
-                        formErrors.phone ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                      placeholder="(703) 555-1234"
-                      style={{ fontSize: '16px' }}
-                    />
-                    {formErrors.phone && <span className="text-red-500 text-sm mt-1 block">{formErrors.phone}</span>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="timeline" className="block text-sm font-semibold text-navy mb-2">
-                      When are you thinking of selling? *
-                    </label>
-                    <select
-                      id="timeline"
-                      name="timeline"
-                      value={formData.timeline}
-                      onChange={handleInputChange}
-                      required
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
-                        formErrors.timeline ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                      style={{ fontSize: '16px' }}
-                    >
-                      <option value="">Select timeline</option>
-                      <option value="asap">ASAP</option>
-                      <option value="1-3">1-3 Months</option>
-                      <option value="3-6">3-6 Months</option>
-                      <option value="6-12">6-12 Months</option>
-                      <option value="exploring">Just Exploring</option>
-                    </select>
-                    {formErrors.timeline && <span className="text-red-500 text-sm mt-1 block">{formErrors.timeline}</span>}
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="propertyAddress" className="block text-sm font-semibold text-navy mb-2">
-                    Property Address (Optional)
-                  </label>
-                    <input
-                      type="text"
-                      id="propertyAddress"
-                      name="propertyAddress"
-                      value={formData.propertyAddress}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px]"
-                      placeholder="123 Main St, City, State"
-                      style={{ fontSize: '16px' }}
-                    />
-                </div>
-
-                <button
-                  type="submit"
-                  className={`w-full cta-button primary text-lg py-4 min-h-[48px] focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2 ${
-                    formSubmitted ? 'opacity-50 cursor-not-allowed' : ''
-                  }`}
-                  disabled={formSubmitted}
-                  style={{ touchAction: 'manipulation' }}
-                  aria-label="Submit seller consultation form"
-                >
-                  {formSubmitted ? 'Submitting...' : 'Schedule My Free Seller Consultation'}
-                </button>
-
-                <p className="text-sm text-gray-600 text-center">
-                  We respect your privacy. Your information will never be shared.
-                </p>
-              </form>
-
-              {/* Alternative Contact */}
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <p className="text-center text-gray-600 mb-4">Or contact us directly:</p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                  <a href="mailto:fred@kerishullteam.com" className="flex items-center gap-2 text-navy hover:text-primary transition-colors">
-                    <Mail size={20} />
-                    <span>fred@kerishullteam.com</span>
-                  </a>
-                  <a href="tel:7033994394" className="flex items-center gap-2 text-navy hover:text-primary transition-colors">
-                    <Phone size={20} />
-                    <span>(703) 399-4394</span>
-                  </a>
-                </div>
-                
-                <div className="pt-6 border-t border-gray-200 mt-6">
-                  <p className="text-center text-gray-600 mb-4">Connect with us</p>
-                  <div className="flex justify-center gap-4">
-                    <a href="#" className="text-gray-600 hover:text-primary transition-colors">
-                      <Instagram size={24} />
-                    </a>
-                    <a href="#" className="text-gray-600 hover:text-primary transition-colors">
-                      <Facebook size={24} />
-                    </a>
-                    <a href="#" className="text-gray-600 hover:text-primary transition-colors">
-                      <Linkedin size={24} />
-                    </a>
-                    <a href="#" className="text-gray-600 hover:text-primary transition-colors">
-                      <Youtube size={24} />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Success Modal */}
-          {showSuccessModal && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-              onClick={closeSuccessModal}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="success-modal-title"
-            >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white rounded-xl p-8 max-w-md w-full text-center shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="flex justify-center mb-4" aria-hidden="true">
-                  <CheckCircle size={64} className="text-green-500" />
-                </div>
-                <h3 id="success-modal-title" className="text-2xl font-bold text-navy mb-4">Thank You!</h3>
-                <p className="text-gray-700 mb-6">
-                  We've received your information and will be in touch soon to schedule your seller consultation.
-                </p>
-                <button
-                  onClick={closeSuccessModal}
-                  className="cta-button primary w-full focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
-                  aria-label="Close success message"
-                >
-                  Got It!
-                </button>
-              </motion.div>
-            </motion.div>
-          )}
         </div>
       </section>
 
