@@ -1769,14 +1769,14 @@ function App() {
       {showBackToTop && (
         <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-8 left-8 w-12 h-12 bg-primary rounded-full shadow-lg flex items-center justify-center text-white hover:bg-primary-light transition-colors z-50 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
+          className="fixed bottom-8 left-8 bg-transparent border-none shadow-lg flex items-center justify-center text-primary hover:text-primary-light transition-colors z-50 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2 p-0"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
           aria-label="Scroll to top"
         >
-          <ArrowUp size={24} />
+          <ArrowUp size={48} strokeWidth={2.5} />
         </motion.button>
       )}
     </div>

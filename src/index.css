@@ -816,7 +816,7 @@
   .floating-cta {
     position: fixed;
     bottom: 2rem;
-    left: 2rem;
+    right: 2rem;
     z-index: 999;
     background: linear-gradient(135deg, #c9a961, #d4af37);
     color: white;
@@ -854,8 +854,8 @@
 
   @media (max-width: 768px) {
     .floating-cta {
-      bottom: 5.5rem;
-      left: 1.5rem;
+      bottom: 1.5rem;
+      right: 1.5rem;
       padding: 1rem 1.5rem;
       font-size: 0.9rem;
       max-width: calc(100vw - 3rem);
