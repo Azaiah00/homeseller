@@ -29,6 +29,7 @@ import {
 } from 'lucide-react'
 import NetSheetCalculator from './components/NetSheetCalculator'
 import ROICalculator from './components/ROICalculator'
+import Glossary from './components/Glossary'
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -47,6 +48,7 @@ function App() {
   const [formErrors, setFormErrors] = useState({})
   const [showPhotoModal, setShowPhotoModal] = useState(false)
   const [activeChapter, setActiveChapter] = useState(null)
+  const [showGlossary, setShowGlossary] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
