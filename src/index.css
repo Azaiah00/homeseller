@@ -345,6 +345,12 @@
     animation: fadeInUp 1s ease-out;
   }
 
+  @media (max-width: 768px) {
+    .hero-content {
+      padding-top: 5.5rem;
+    }
+  }
+
   .hero-image-wrapper {
     margin-bottom: 2rem;
     display: flex;
@@ -466,8 +472,8 @@
   @media (max-width: 768px) {
     .hero {
       min-height: 80vh;
-      padding: 3rem 1.5rem;
-      padding-top: 6rem;
+      padding: 0;
+      padding-top: 0;
       background-attachment: scroll; /* Better performance on mobile */
     }
 

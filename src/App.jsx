@@ -359,7 +359,7 @@ function App() {
 
       {/* STICKY NAVIGATION */}
       <nav 
-        className={`sticky-nav ${isScrolled ? 'scrolled' : ''}`}
+        className={`sticky-nav ${isScrolled || mobileMenuOpen ? 'scrolled' : ''}`}
         role="navigation"
         aria-label="Main navigation"
       >
