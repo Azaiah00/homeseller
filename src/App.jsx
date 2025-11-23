@@ -316,9 +316,8 @@ function App() {
     { id: 'roadmap', number: 1, title: 'Process' },
     { id: 'marketing', number: 2, title: 'Marketing' },
     { id: 'financials', number: 3, title: 'Financials' },
-    { id: 'calculator', number: 4, title: 'Tools' },
-    { id: 'testimonials', number: 5, title: 'Reviews' },
-    { id: 'faq', number: 6, title: 'FAQ' },
+    { id: 'calculator', number: 4, title: 'Seller Tools' },
+    { id: 'faq', number: 5, title: 'FAQ' },
     { id: 'trust', number: 7, title: 'Why Us' }
   ]
 
@@ -509,7 +508,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Strategic Consultation</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   We start by reviewing your goals, timeline, and conducting a comprehensive market analysis. 
-                  This foundation sets the stage for everything that follows. <strong>Ask me more about how our strategic consultation helps maximize your home's value.</strong>
+                  This foundation sets the stage for everything that follows.
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>In-depth conversation about your goals and timeline</li>
@@ -533,7 +532,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Property Prep & Staging</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Decluttering, repairs, and leveraging our "Virtual Staging Advantage" (more on this later). 
-                  We transform your home into a buyer's dream before they even step foot inside. <strong>Ask me more about our virtual staging advantage and how it helps sell your home faster.</strong>
+                  We transform your home into a buyer's dream before they even step foot inside.
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>Home walkthrough to identify necessary repairs vs. cosmetic improvements</li>
@@ -557,7 +556,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Pricing Strategy</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Positioning your home to attract the maximum pool of buyers. We analyze comparable sales 
-                  and market conditions to price it right from day one. <strong>Ask me more about our pricing strategy and how we maximize your sale price.</strong>
+                  and market conditions to price it right from day one.
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>Comprehensive <span className="tooltip-trigger" data-tooltip="Comparative Market Analysis (CMA): A detailed report comparing your home to similar properties that have recently sold, are currently for sale, or were listed but didn't sell. This helps determine the optimal listing price.">CMA</span> analysis using recent sales data</li>
@@ -581,7 +580,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">The "Coming Soon" Launch</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Generating buzz before we even hit the <span className="tooltip-trigger" data-tooltip="Multiple Listing Service (MLS): A database used by real estate agents to share information about properties for sale. When your home is listed on the MLS, it becomes visible to all agents and appears on major real estate websites like Zillow, Realtor.com, and Redfin.">MLS</span>. We create anticipation and build a waiting list 
-                  of qualified buyers before your home officially goes live. <strong>Ask me more about our "Coming Soon" strategy and how it creates competitive interest.</strong>
+                  of qualified buyers before your home officially goes live.
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>Exclusive preview to our network of buyer agents and qualified buyers</li>
@@ -605,7 +604,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Live on Market & Open Houses</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   We don't just open doors; we collect critical feedback from every visitor to adjust our 
-                  strategy in real-time. Every showing is an opportunity to refine and improve. <strong>Ask me more about our open house strategy and how we maximize buyer interest.</strong>
+                  strategy in real-time. Every showing is an opportunity to refine and improve.
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>Professional open house events with strategic scheduling</li>
@@ -629,7 +628,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Reviewing Offers & Negotiations</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   We negotiate terms, not just price. From closing dates to <span className="tooltip-trigger" data-tooltip="Contingency: A condition in the purchase offer that must be met for the sale to proceed. Common contingencies include home inspection, appraisal, financing, and home sale contingencies.">contingencies</span>, we ensure every 
-                  aspect of the deal works in your favor. <strong>Ask me more about our negotiation strategies and how we maximize your net proceeds.</strong>
+                  aspect of the deal works in your favor.
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>Comprehensive offer analysis comparing price, terms, and buyer qualifications</li>
@@ -653,7 +652,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Escrow & Closing</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Managing inspections, <span className="tooltip-trigger" data-tooltip="Appraisal: A professional assessment of your home's value by a licensed appraiser. Required by lenders to ensure the property is worth the loan amount. If the appraisal comes in lower than the sale price, we may need to renegotiate.">appraisals</span>, and paperwork until you get paid. We handle every detail 
-                  so you can focus on your next chapter. <strong>Ask me more about the closing process and how we ensure a smooth transaction.</strong>
+                  so you can focus on your next chapter.
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>Coordination of home inspection and addressing any issues</li>
