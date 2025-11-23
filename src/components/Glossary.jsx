@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowLeft, BookOpen, Search } from 'lucide-react'
+import { ArrowLeft, BookOpen, Search, X } from 'lucide-react'
 
 const Glossary = ({ onBack }) => {
   const [searchTerm, setSearchTerm] = useState('')
