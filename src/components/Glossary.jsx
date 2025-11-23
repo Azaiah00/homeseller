@@ -335,23 +335,54 @@ const Glossary = ({ onBack }) => {
                 type="text"
                 placeholder="Search for a term..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value)
+                  // Scroll to top when searching
+                  if (e.target.value) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }
+                }}
                 className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none text-gray-700"
               />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm('')}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  aria-label="Clear search"
+                >
+                  <X size={20} />
+                </button>
+              )}
             </div>
           </div>
 
           {/* Quick Jump Navigation */}
           <div className="mb-8 flex flex-wrap justify-center gap-2">
-            {terms.map((section) => (
-              <a
-                key={section.letter}
-                href={`#letter-${section.letter}`}
-                className="w-10 h-10 flex items-center justify-center bg-primary/10 hover:bg-primary hover:text-white text-primary font-bold rounded-lg transition-colors"
-              >
-                {section.letter}
-              </a>
-            ))}
+            {terms
+              .map((section) => ({
+                ...section,
+                items: section.items.filter((item) =>
+                  item.term.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                  item.definition.toLowerCase().includes(searchTerm.toLowerCase())
+                )
+              }))
+              .filter((section) => section.items.length > 0)
+              .map((section) => (
+                <a
+                  key={section.letter}
+                  href={`#letter-${section.letter}`}
+                  className="w-10 h-10 flex items-center justify-center bg-primary/10 hover:bg-primary hover:text-white text-primary font-bold rounded-lg transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    const element = document.getElementById(`letter-${section.letter}`)
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }
+                  }}
+                >
+                  {section.letter}
+                </a>
+              ))}
           </div>
 
           <div className="space-y-12">
