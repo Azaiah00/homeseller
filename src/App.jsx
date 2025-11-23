@@ -453,7 +453,7 @@ function App() {
             </div>
           </div>
           <div className="hero-trust-badge">
-            <CheckCircle size={18} className="trust-badge-icon" />
+            <span className="trust-badge-icon">✓</span>
             <span>Licensed in VA, DC & MD • 7+ Years Experience</span>
           </div>
           <h1 className="hero-title">Sell Your Home with Confidence</h1>
