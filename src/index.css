@@ -702,6 +702,8 @@
     border-right: 1px solid rgba(201, 169, 97, 0.15);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0.95;
+    position: absolute;
+    left: 0;
   }
 
   .sidebar-nav:hover {

@@ -323,7 +323,7 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-white lg:pl-[180px]">
+    <div className="min-h-screen bg-white">
       {/* SIDEBAR NAVIGATION */}
       <aside className="hidden lg:block fixed left-0 top-1/2 -translate-y-1/2 z-40 flex items-center">
         <nav className="sidebar-nav rounded-r-2xl p-4 min-w-[140px]">
