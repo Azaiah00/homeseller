@@ -326,26 +326,26 @@ function App() {
     <div className="min-h-screen bg-white">
       {/* SIDEBAR NAVIGATION */}
       <aside className="hidden lg:block fixed left-0 top-24 bottom-0 z-40 flex items-start pt-8">
-        <nav className="sidebar-nav rounded-r-2xl p-6 min-w-[180px] ml-4">
+        <nav className="sidebar-nav rounded-r-2xl p-4 min-w-[140px]">
           <div className="space-y-1">
             {chapters.map((chapter, index) => (
               <div key={chapter.id}>
-                <button
+            <button
                   onClick={() => scrollToSection(chapter.id)}
-                  className={`sidebar-button w-full text-left px-5 py-3.5 rounded-xl group ${
+                  className={`sidebar-button w-full text-left px-3 py-2.5 rounded-xl group ${
                     activeChapter === chapter.id ? 'active' : ''
                   }`}
                 >
-                  <div className={`font-semibold text-sm tracking-wide transition-all duration-300 relative z-10 ${
+                  <div className={`font-semibold text-xs tracking-wide transition-all duration-300 relative z-10 ${
                     activeChapter === chapter.id 
                       ? 'text-white' 
                       : 'text-gray-200 group-hover:text-primary-light'
                   }`}>
                     {chapter.title}
                   </div>
-                </button>
+            </button>
                 {index < chapters.length - 1 && (
-                  <div className={`sidebar-divider mx-4 my-2 ${
+                  <div className={`sidebar-divider mx-2 my-1.5 ${
                     activeChapter === chapter.id || activeChapter === chapters[index + 1]?.id
                       ? 'active'
                       : ''
@@ -368,7 +368,7 @@ function App() {
         <div className="container py-4">
           <div className="flex items-center justify-center relative">
             {/* Center - Frederick Sales */}
-            <button
+              <button
               onClick={scrollToTop}
               className={`text-xl md:text-2xl lg:text-3xl font-bold transition-colors ${
                 isScrolled ? 'text-navy' : 'text-white'
@@ -376,7 +376,7 @@ function App() {
               aria-label="Frederick Sales - Return to top"
             >
               Frederick Sales
-            </button>
+              </button>
 
             {/* Right Side - CTA Button (Desktop) */}
             <div className="hidden lg:flex items-center absolute right-0">
