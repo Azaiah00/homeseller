@@ -1486,6 +1486,64 @@ function App() {
         </div>
       </section>
 
+      {/* WELCOME TO THE FAMILY SECTION */}
+      <section className="py-20 bg-white">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="section-title">Our Relationship Doesn't End at Closing</h2>
+            <p className="section-subtitle">
+              When you work with us, you become part of our real estate family.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/20">
+              <div className="flex justify-center mb-4" aria-hidden="true">
+                <Wrench size={48} className="text-primary" />
+              </div>
+              <h3 className="text-xl font-bold text-navy mb-3">Your Vendor Source</h3>
+              <p className="text-gray-700 leading-relaxed">
+                Need a great plumber, painter, or contractor? Our trusted vendor list is now your list. 
+                We've vetted the best service providers in the DMV area.
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 sm:p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/20">
+              <div className="flex justify-center mb-4" aria-hidden="true">
+                <PartyPopper size={48} className="text-primary" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-navy mb-3">Fun Client Events</h3>
+              <p className="text-gray-700 leading-relaxed">
+                You're invited! Get exclusive invitations to our annual Nats game, fall family fun day, 
+                brunch with Santa, and more. Build lasting relationships with other homeowners.
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 sm:p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/20">
+              <div className="flex justify-center mb-4" aria-hidden="true">
+                <Heart size={48} className="text-primary" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-navy mb-3">We Give Back Together</h3>
+              <p className="text-gray-700 leading-relaxed">
+                We love the DMV. For every referral we receive, we donate $250 to charities like Habitat 
+                for Humanity, St. Jude's, and Meals on Wheels.
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* COMPREHENSIVE FAQ SECTION */}
       <section id="faq" className="py-20 bg-gray-50">
         <div className="container">
@@ -1585,114 +1643,6 @@ function App() {
                     {faq.a}
                   </motion.p>
                 )}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* WELCOME TO THE FAMILY SECTION */}
-      <section className="py-20 bg-white">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="section-title">Our Relationship Doesn't End at Closing</h2>
-            <p className="section-subtitle">
-              When you work with us, you become part of our real estate family.
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/20">
-              <div className="flex justify-center mb-4" aria-hidden="true">
-                <Wrench size={48} className="text-primary" />
-              </div>
-              <h3 className="text-xl font-bold text-navy mb-3">Your Vendor Source</h3>
-              <p className="text-gray-700 leading-relaxed">
-                Need a great plumber, painter, or contractor? Our trusted vendor list is now your list. 
-                We've vetted the best service providers in the DMV area.
-              </p>
-            </motion.div>
-
-            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 sm:p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/20">
-              <div className="flex justify-center mb-4" aria-hidden="true">
-                <PartyPopper size={48} className="text-primary" />
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-navy mb-3">Fun Client Events</h3>
-              <p className="text-gray-700 leading-relaxed">
-                You're invited! Get exclusive invitations to our annual Nats game, fall family fun day, 
-                brunch with Santa, and more. Build lasting relationships with other homeowners.
-              </p>
-            </motion.div>
-
-            <motion.div variants={fadeInUp} className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-6 sm:p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-primary/20">
-              <div className="flex justify-center mb-4" aria-hidden="true">
-                <Heart size={48} className="text-primary" />
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-navy mb-3">We Give Back Together</h3>
-              <p className="text-gray-700 leading-relaxed">
-                We love the DMV. For every referral we receive, we donate $250 to charities like Habitat 
-                for Humanity, St. Jude's, and Meals on Wheels.
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS SECTION */}
-      <section id="testimonials" className="py-20 bg-gray-50">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="section-title">What Our Sellers Say</h2>
-            <p className="section-subtitle">
-              Real reviews from real clients who sold their homes with us
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {[1, 2, 3, 4].map((num) => (
-              <motion.div
-                key={num}
-                className="bg-white rounded-xl shadow-lg overflow-hidden"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: num * 0.1 }}
-              >
-                <img
-                  src={`/images/seller-review-${num}.png`}
-                  alt={`Seller Review ${num}`}
-                  className="w-full h-auto"
-                  loading="lazy"
-                  onError={(e) => {
-                    e.target.style.display = 'none'
-                    e.target.parentElement.innerHTML = `
-                      <div class="p-8 text-center text-gray-500">
-                        <div class="flex justify-center mb-4">
-                          <svg class="w-12 h-12 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        </div>
-                        <p>Add seller review image<br/>seller-review-${num}.png</p>
-                      </div>
-                    `
-                  }}
-                />
               </motion.div>
             ))}
           </div>
