@@ -325,7 +325,7 @@ function App() {
   return (
     <div className="min-h-screen bg-white">
       {/* SIDEBAR NAVIGATION */}
-      <aside className="hidden lg:block fixed left-0 top-[80px] bottom-0 z-40 flex items-start pt-4">
+      <aside className="hidden lg:block fixed left-0 top-[120px] bottom-0 z-40 flex items-start pt-4">
         <nav className="sidebar-nav rounded-r-2xl p-4 min-w-[140px]">
           <div className="space-y-1">
             {chapters.map((chapter, index) => (
