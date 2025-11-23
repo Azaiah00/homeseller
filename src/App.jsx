@@ -1177,6 +1177,12 @@ function App() {
         </div>
       </section>
 
+      {/* NET SHEET CALCULATOR */}
+      <NetSheetCalculator />
+
+      {/* ROI CALCULATOR */}
+      <ROICalculator />
+
       {/* COMPREHENSIVE FAQ SECTION */}
       <section id="faq" className="py-20 bg-gray-50">
         <div className="container">
@@ -1389,12 +1395,6 @@ function App() {
           </div>
         </div>
       </section>
-
-      {/* NET SHEET CALCULATOR */}
-      <NetSheetCalculator />
-
-      {/* ROI CALCULATOR */}
-      <ROICalculator />
 
       {/* CONTACT SECTION */}
       <section id="contact" className="py-20 bg-gradient-to-br from-navy to-navy-dark text-white">
