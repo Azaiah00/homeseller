@@ -326,7 +326,11 @@ function App() {
 
   // Show glossary page if toggled
   if (showGlossary) {
-    return <Glossary onBack={() => setShowGlossary(false)} />
+    console.log('Showing glossary')
+    return <Glossary onBack={() => {
+      console.log('Back button clicked')
+      setShowGlossary(false)
+    }} />
   }
 
   return (
@@ -1671,7 +1675,11 @@ function App() {
                 Explore our comprehensive glossary to educate yourself on common terms you'll encounter during your home selling journey.
               </p>
               <button
-                onClick={() => setShowGlossary(true)}
+                type="button"
+                onClick={() => {
+                  console.log('Glossary button clicked')
+                  setShowGlossary(true)
+                }}
                 className="cta-button primary"
               >
                 View Real Estate Glossary
