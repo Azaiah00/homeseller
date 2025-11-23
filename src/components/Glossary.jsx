@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowLeft, BookOpen } from 'lucide-react'
+import { ArrowLeft, BookOpen, Search } from 'lucide-react'
 
 const Glossary = ({ onBack }) => {
+  const [searchTerm, setSearchTerm] = useState('')
+  
   const terms = [
     {
       letter: 'A',
@@ -319,29 +322,92 @@ const Glossary = ({ onBack }) => {
             Use this glossary to educate yourself on common terms you'll encounter during your home selling journey.
           </p>
 
-          <div className="space-y-12">
-            {terms.map((section, sectionIndex) => (
-              <motion.div
+          {/* Search Bar */}
+          <div className="mb-8">
+            <div className="relative max-w-md mx-auto">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <input
+                type="text"
+                placeholder="Search for a term..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none text-gray-700"
+              />
+            </div>
+          </div>
+
+          {/* Quick Jump Navigation */}
+          <div className="mb-8 flex flex-wrap justify-center gap-2">
+            {terms.map((section) => (
+              <a
                 key={section.letter}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: sectionIndex * 0.1 }}
-                className="bg-white rounded-xl shadow-lg p-8 border border-gray-100"
+                href={`#letter-${section.letter}`}
+                className="w-10 h-10 flex items-center justify-center bg-primary/10 hover:bg-primary hover:text-white text-primary font-bold rounded-lg transition-colors"
               >
-                <h2 className="text-4xl font-bold text-primary mb-6 pb-4 border-b-2 border-primary/20">
-                  {section.letter}
-                </h2>
-                <div className="space-y-6">
-                  {section.items.map((item, index) => (
-                    <div key={index} className="border-l-4 border-primary/30 pl-6 py-2">
-                      <h3 className="text-xl font-bold text-navy mb-2">{item.term}</h3>
-                      <p className="text-gray-700 leading-relaxed">{item.definition}</p>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
+                {section.letter}
+              </a>
             ))}
           </div>
+
+          <div className="space-y-12">
+            {terms
+              .map((section) => ({
+                ...section,
+                items: section.items.filter((item) =>
+                  item.term.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                  item.definition.toLowerCase().includes(searchTerm.toLowerCase())
+                )
+              }))
+              .filter((section) => section.items.length > 0)
+              .map((section, sectionIndex) => (
+                <motion.div
+                  key={section.letter}
+                  id={`letter-${section.letter}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: sectionIndex * 0.05 }}
+                  className="bg-white rounded-xl shadow-lg p-8 border border-gray-100 scroll-mt-8"
+                >
+                  <h2 className="text-4xl font-bold text-primary mb-6 pb-4 border-b-2 border-primary/20">
+                    {section.letter}
+                  </h2>
+                  <div className="space-y-6">
+                    {section.items.map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.05 }}
+                        className="border-l-4 border-primary/30 pl-6 py-3 hover:bg-gray-50 rounded-r-lg transition-colors"
+                      >
+                        <h3 className="text-xl font-bold text-navy mb-2">{item.term}</h3>
+                        <p className="text-gray-700 leading-relaxed">{item.definition}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+          </div>
+          
+          {terms
+            .map((section) => ({
+              ...section,
+              items: section.items.filter((item) =>
+                item.term.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.definition.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+            }))
+            .filter((section) => section.items.length > 0).length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">No terms found matching "{searchTerm}"</p>
+              <button
+                onClick={() => setSearchTerm('')}
+                className="mt-4 text-primary hover:underline"
+              >
+                Clear search
+              </button>
+            </div>
+          )}
 
           <motion.div
             initial={{ opacity: 0 }}
