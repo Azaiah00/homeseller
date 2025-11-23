@@ -199,6 +199,8 @@ function App() {
   const handleOpenGlossary = () => {
     console.log('Opening glossary')
     setShowGlossary(true)
+    // Scroll to top when glossary opens
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const handleCloseGlossary = () => {

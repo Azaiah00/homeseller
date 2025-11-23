@@ -1,9 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowLeft, BookOpen, Search } from 'lucide-react'
 
 const Glossary = ({ onBack }) => {
   const [searchTerm, setSearchTerm] = useState('')
+  
+  // Scroll to top when glossary opens
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
   
   const terms = [
     {
