@@ -196,6 +196,16 @@ function App() {
     setActiveChapter(sectionId)
   }
 
+  const handleOpenGlossary = () => {
+    console.log('Opening glossary')
+    setShowGlossary(true)
+  }
+
+  const handleCloseGlossary = () => {
+    console.log('Closing glossary')
+    setShowGlossary(false)
+  }
+
   // Track active chapter based on scroll position
   useEffect(() => {
     const handleScroll = () => {
@@ -326,11 +336,8 @@ function App() {
 
   // Show glossary page if toggled
   if (showGlossary) {
-    console.log('Showing glossary')
-    return <Glossary onBack={() => {
-      console.log('Back button clicked')
-      setShowGlossary(false)
-    }} />
+    console.log('Rendering glossary, showGlossary:', showGlossary)
+    return <Glossary onBack={handleCloseGlossary} />
   }
 
   return (
@@ -1676,11 +1683,9 @@ function App() {
               </p>
               <button
                 type="button"
-                onClick={() => {
-                  console.log('Glossary button clicked')
-                  setShowGlossary(true)
-                }}
+                onClick={handleOpenGlossary}
                 className="cta-button primary"
+                style={{ cursor: 'pointer' }}
               >
                 View Real Estate Glossary
               </button>
