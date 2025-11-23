@@ -126,6 +126,169 @@
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
   }
 
+  /* Sticky Navigation - Matching Buyer Consultation */
+  .sticky-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(0px);
+    transition: all 0.3s ease;
+    padding: 1rem 0;
+  }
+
+  .sticky-nav.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem 1rem;
+    position: relative;
+  }
+
+  @media (min-width: 640px) {
+    .nav-container {
+      padding: 1rem 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .nav-container {
+      padding: 1rem 2rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .nav-container {
+      padding: 1rem 3rem;
+    }
+  }
+
+  .nav-center-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+  }
+
+  .nav-cta-desktop {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @media (max-width: 1023px) {
+    .nav-cta-desktop {
+      display: none;
+    }
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #1a202c;
+    transition: color 0.3s ease;
+    letter-spacing: -1px;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+    line-height: 1.15;
+  }
+
+  .nav-logo sup {
+    font-size: 0.6em;
+    vertical-align: super;
+    font-weight: 400;
+    margin-left: 2px;
+  }
+
+  .nav-logo.scrolled {
+    color: #1a202c;
+  }
+
+  @media (min-width: 768px) {
+    .nav-logo {
+      font-size: 1.75rem;
+      letter-spacing: -1px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .nav-logo {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+  }
+
+  .sticky-nav:not(.scrolled) .nav-logo {
+    color: white;
+  }
+
+  .sticky-nav:not(.scrolled) .nav-logo:hover {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .nav-logo:hover {
+    color: #c9a961;
+  }
+
+  .nav-cta {
+    background: linear-gradient(135deg, #c9a961, #d4af37) !important;
+    color: white !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    white-space: nowrap !important;
+  }
+
+  .nav-cta:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(201, 169, 97, 0.4) !important;
+  }
+
+  .mobile-menu-toggle {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #2d3748;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .sticky-nav:not(.scrolled) .mobile-menu-toggle {
+    color: white;
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-menu-toggle {
+      display: none;
+    }
+  }
+
+  .mobile-menu-toggle:hover {
+    color: #c9a961;
+  }
+
   .hero::before {
     content: '';
     position: absolute;
@@ -354,9 +517,23 @@
       touch-action: manipulation; /* Prevents double-tap zoom */
     }
 
-    /* Mobile navigation improvements */
+    /* Mobile navigation improvements - matching buyer consultation */
+    .sticky-nav {
+      padding: 0.5rem 0;
+    }
+
+    .nav-container {
+      padding: 0 1rem;
+    }
+
     .nav-logo {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
+    }
+
+    .nav-cta {
+      padding: 0.75rem 1.5rem !important;
+      font-size: 1rem !important;
+      min-height: 44px;
     }
 
     /* Section spacing on mobile */

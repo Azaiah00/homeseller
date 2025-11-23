@@ -359,30 +359,26 @@ function App() {
 
       {/* STICKY NAVIGATION */}
       <nav 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-lg shadow-lg' : 'bg-transparent'
-        }`}
+        className={`sticky-nav ${isScrolled ? 'scrolled' : ''}`}
         role="navigation"
         aria-label="Main navigation"
       >
-        <div className="container py-4">
-          <div className="flex items-center justify-center relative">
+        <div className="nav-container">
+          <div className="nav-center-wrapper">
             {/* Center - Frederick Sales */}
-              <button
+            <button
               onClick={scrollToTop}
-              className={`text-xl md:text-2xl lg:text-3xl font-bold transition-colors ${
-                isScrolled ? 'text-navy' : 'text-white'
-              }`}
+              className={`nav-logo ${isScrolled ? 'scrolled' : ''}`}
               aria-label="Frederick Sales - Return to top"
             >
-              Frederick Sales
-              </button>
+              Frederick Sales<sup>®</sup>
+            </button>
 
             {/* Right Side - CTA Button (Desktop) */}
-            <div className="hidden lg:flex items-center absolute right-0">
+            <div className="nav-cta-desktop">
               <button
                 onClick={() => scrollToSection('contact')}
-                className="cta-button primary text-sm px-4 py-2 whitespace-nowrap"
+                className="nav-cta"
               >
                 Get Started
               </button>
@@ -391,9 +387,7 @@ function App() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`lg:hidden absolute right-0 p-2 transition-colors ${
-                isScrolled ? 'text-navy' : 'text-white'
-              }`}
+              className={`mobile-menu-toggle ${isScrolled ? 'scrolled' : ''}`}
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
