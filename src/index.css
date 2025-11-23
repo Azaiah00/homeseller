@@ -845,9 +845,10 @@
   @media (max-width: 768px) {
     .floating-cta {
       bottom: 1.5rem;
-      right: 1.5rem;
+      left: 1.5rem;
       padding: 1rem 1.5rem;
       font-size: 0.9rem;
+      max-width: calc(100vw - 3rem);
     }
   }
 

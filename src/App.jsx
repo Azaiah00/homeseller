@@ -197,7 +197,8 @@ function App() {
   // Track active chapter based on scroll position
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['trust', 'roadmap', 'marketing', 'financials', 'calculator', 'testimonials', 'faq']
+      // Sections in order as they appear on the page
+      const sections = ['roadmap', 'marketing', 'financials', 'calculator', 'contact', 'relationship', 'faq', 'trust']
       const scrollPosition = window.scrollY + 200
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -313,16 +314,16 @@ function App() {
   }
 
   const chapters = [
-    { id: 'roadmap', number: 1, title: 'Process' },
-    { id: 'marketing', number: 2, title: 'Marketing' },
-    { id: 'financials', number: 3, title: 'Financials' },
-    { id: 'calculator', number: 4, title: 'Seller Tools' },
-    { id: 'faq', number: 5, title: 'FAQ' },
-    { id: 'trust', number: 7, title: 'Why Us' }
+    { id: 'roadmap', title: 'Process' },
+    { id: 'marketing', title: 'Marketing' },
+    { id: 'financials', title: 'Financials' },
+    { id: 'calculator', title: 'Seller Tools' },
+    { id: 'faq', title: 'FAQ' },
+    { id: 'trust', title: 'Why Us' }
   ]
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white lg:pl-[180px]">
       {/* SIDEBAR NAVIGATION */}
       <aside className="hidden lg:block fixed left-0 top-1/2 -translate-y-1/2 z-40 flex items-center">
         <nav className="sidebar-nav rounded-r-2xl p-4 min-w-[140px]">
@@ -365,13 +366,13 @@ function App() {
         <div className="nav-container">
           <div className="nav-center-wrapper">
             {/* Center - Frederick Sales */}
-            <button
+              <button
               onClick={scrollToTop}
               className={`nav-logo ${isScrolled ? 'scrolled' : ''}`}
               aria-label="Frederick Sales - Return to top"
             >
               Frederick Sales<sup>®</sup>
-            </button>
+              </button>
 
             {/* Right Side - CTA Button (Desktop) */}
             <div className="nav-cta-desktop">
@@ -416,7 +417,7 @@ function App() {
                       : 'text-navy hover:text-primary'
                   }`}
                 >
-                  {chapter.number}. {chapter.title}
+                  {chapter.title}
               </button>
               ))}
               <button
@@ -1166,8 +1167,8 @@ function App() {
                     who might be cash-constrained but income-strong.
                   </p>
                 </div>
-              </div>
-            </div>
+          </div>
+        </div>
 
             <div className="bg-white border-2 border-primary/20 rounded-xl p-8">
               <h4 className="text-2xl font-bold text-navy mb-4">The Benefit</h4>
@@ -1180,21 +1181,21 @@ function App() {
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
                 <h4 className="text-xl font-bold text-navy mb-3">Buyer's Market</h4>
-                <p className="text-gray-700">
+              <p className="text-gray-700">
                   Stand out against the competition. Concessions make your home more attractive when buyers have 
                   multiple options to choose from.
-                </p>
+              </p>
               </div>
 
               <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6">
                 <h4 className="text-xl font-bold text-navy mb-3">Seller's Market</h4>
-                <p className="text-gray-700">
+              <p className="text-gray-700">
                   Attract the highest quality offers, not just the highest price. Concessions help you get the 
                   most qualified buyers.
                 </p>
-              </div>
-            </div>
-          </motion.div>
+        </div>
+                      </div>
+              </motion.div>
         </div>
       </section>
 
@@ -1384,16 +1385,16 @@ function App() {
                   <label htmlFor="propertyAddress" className="block text-sm font-semibold text-navy mb-2">
                     Property Address (Optional)
                   </label>
-                  <input
-                    type="text"
-                    id="propertyAddress"
-                    name="propertyAddress"
-                    value={formData.propertyAddress}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px]"
-                    placeholder="123 Main St, City, State"
-                    style={{ fontSize: '16px' }}
-                  />
+                    <input
+                      type="text"
+                      id="propertyAddress"
+                      name="propertyAddress"
+                      value={formData.propertyAddress}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px]"
+                      placeholder="123 Main St, City, State"
+                      style={{ fontSize: '16px' }}
+                    />
                 </div>
 
                 <button
@@ -1488,7 +1489,7 @@ function App() {
       </section>
 
       {/* WELCOME TO THE FAMILY SECTION */}
-      <section className="py-20 bg-white">
+      <section id="relationship" className="py-20 bg-white">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1768,7 +1769,7 @@ function App() {
       {showBackToTop && (
         <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-12 h-12 bg-primary rounded-full shadow-lg flex items-center justify-center text-white hover:bg-primary-light transition-colors z-40 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
+          className="fixed bottom-8 left-8 w-12 h-12 bg-primary rounded-full shadow-lg flex items-center justify-center text-white hover:bg-primary-light transition-colors z-50 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           whileHover={{ scale: 1.1 }}
