@@ -324,6 +324,11 @@ function App() {
     { id: 'trust', title: 'Why Us' }
   ]
 
+  // Show glossary page if toggled
+  if (showGlossary) {
+    return <Glossary onBack={() => setShowGlossary(false)} />
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* SIDEBAR NAVIGATION */}
