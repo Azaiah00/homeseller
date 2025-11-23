@@ -1017,9 +1017,6 @@ function App() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="section-title">Strategic Financials</h2>
-            <h3 className="text-3xl font-bold text-center text-navy mb-6">
-              The Power of Concessions: Winning Strategies in Any Market
-            </h3>
           </motion.div>
 
           <motion.div
@@ -1029,46 +1026,6 @@ function App() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8">
-              <div className="flex items-start gap-4 mb-6">
-                <DollarSign className="text-primary mt-1 flex-shrink-0" size={32} />
-                <div>
-                  <h4 className="text-2xl font-bold text-navy mb-4">What Are Buyer Concessions?</h4>
-                  <p className="text-gray-700 text-lg leading-relaxed mb-4">
-                    A Buyer Concession is a credit you provide at closing to cover buyer costs (rate buydowns, 
-                    closing fees). Why do this? It lowers the barrier to entry, attracting a larger pool of buyers 
-                    who might be cash-constrained but income-strong.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white border-2 border-primary/20 rounded-xl p-8">
-              <h4 className="text-2xl font-bold text-navy mb-4">The Benefit</h4>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                By helping with upfront costs, we can often maintain a higher sale price, netting you the same 
-                (or more) money while selling faster. It's a strategic move that benefits everyone.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
-                <h4 className="text-xl font-bold text-navy mb-3">Buyer's Market</h4>
-                <p className="text-gray-700">
-                  Stand out against the competition. Concessions make your home more attractive when buyers have 
-                  multiple options to choose from.
-                </p>
-              </div>
-
-              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6">
-                <h4 className="text-xl font-bold text-navy mb-3">Seller's Market</h4>
-                <p className="text-gray-700">
-                  Attract the highest quality offers, not just the highest price. Concessions help you get the 
-                  most qualified buyers.
-                </p>
-              </div>
-            </div>
-
             {/* Buyer's Agent Compensation Section */}
             <div className="bg-gradient-to-br from-navy/5 to-navy/10 rounded-xl p-8 border-2 border-navy/20">
               <h4 className="text-2xl font-bold text-navy mb-6">Understanding Buyer's Agent Compensation</h4>
@@ -1191,6 +1148,50 @@ function App() {
                     <strong>Remember:</strong> The goal is to maximize your NET proceeds. While compensating the buyer's agent is an expense, it typically results in a higher sale price and faster sale, which benefits you overall. We'll discuss the best compensation structure for your specific situation during our consultation. <strong>Ask me more about buyer's agent compensation and how it affects your sale.</strong>
                   </p>
                 </div>
+              </div>
+            </div>
+
+            <h3 className="text-3xl font-bold text-center text-navy mb-6 mt-12">
+              The Power of Concessions: Winning Strategies in Any Market
+            </h3>
+
+            <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8">
+              <div className="flex items-start gap-4 mb-6">
+                <DollarSign className="text-primary mt-1 flex-shrink-0" size={32} />
+                <div>
+                  <h4 className="text-2xl font-bold text-navy mb-4">What Are Buyer Concessions?</h4>
+                  <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                    A Buyer Concession is a credit you provide at closing to cover buyer costs (rate buydowns, 
+                    closing fees). Why do this? It lowers the barrier to entry, attracting a larger pool of buyers 
+                    who might be cash-constrained but income-strong.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white border-2 border-primary/20 rounded-xl p-8">
+              <h4 className="text-2xl font-bold text-navy mb-4">The Benefit</h4>
+              <p className="text-gray-700 text-lg leading-relaxed">
+                By helping with upfront costs, we can often maintain a higher sale price, netting you the same 
+                (or more) money while selling faster. It's a strategic move that benefits everyone.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
+                <h4 className="text-xl font-bold text-navy mb-3">Buyer's Market</h4>
+                <p className="text-gray-700">
+                  Stand out against the competition. Concessions make your home more attractive when buyers have 
+                  multiple options to choose from.
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6">
+                <h4 className="text-xl font-bold text-navy mb-3">Seller's Market</h4>
+                <p className="text-gray-700">
+                  Attract the highest quality offers, not just the highest price. Concessions help you get the 
+                  most qualified buyers.
+                </p>
               </div>
             </div>
           </motion.div>
