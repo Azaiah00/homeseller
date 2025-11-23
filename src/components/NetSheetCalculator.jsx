@@ -598,6 +598,31 @@ const NetSheetCalculator = () => {
               </div>
             </div>
           </div>
+
+          {/* Calculator CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-12 text-center"
+          >
+            <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 border-2 border-primary/20 max-w-3xl mx-auto">
+              <p className="text-lg text-gray-700 mb-6">
+                Want a personalized estimate for your home? As your realtor, I'll help you understand every line item and calculate your exact net proceeds. <strong>Ask me more about closing costs and how we can maximize your net proceeds.</strong>
+              </p>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                }}
+                className="cta-button primary inline-block"
+              >
+                Get Your Personalized Estimate
+              </a>
+            </div>
+          </motion.div>
         </div>
       </div>
     </motion.section>

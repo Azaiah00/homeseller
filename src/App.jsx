@@ -509,7 +509,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Strategic Consultation</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   We start by reviewing your goals, timeline, and conducting a comprehensive market analysis. 
-                  This foundation sets the stage for everything that follows.
+                  This foundation sets the stage for everything that follows. <strong>Ask me more about how our strategic consultation helps maximize your home's value.</strong>
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>In-depth conversation about your goals and timeline</li>
@@ -533,7 +533,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Property Prep & Staging</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Decluttering, repairs, and leveraging our "Virtual Staging Advantage" (more on this later). 
-                  We transform your home into a buyer's dream before they even step foot inside.
+                  We transform your home into a buyer's dream before they even step foot inside. <strong>Ask me more about our virtual staging advantage and how it helps sell your home faster.</strong>
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>Home walkthrough to identify necessary repairs vs. cosmetic improvements</li>
@@ -557,7 +557,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Pricing Strategy</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Positioning your home to attract the maximum pool of buyers. We analyze comparable sales 
-                  and market conditions to price it right from day one.
+                  and market conditions to price it right from day one. <strong>Ask me more about our pricing strategy and how we maximize your sale price.</strong>
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>Comprehensive <span className="tooltip-trigger" data-tooltip="Comparative Market Analysis (CMA): A detailed report comparing your home to similar properties that have recently sold, are currently for sale, or were listed but didn't sell. This helps determine the optimal listing price.">CMA</span> analysis using recent sales data</li>
@@ -581,7 +581,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">The "Coming Soon" Launch</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Generating buzz before we even hit the <span className="tooltip-trigger" data-tooltip="Multiple Listing Service (MLS): A database used by real estate agents to share information about properties for sale. When your home is listed on the MLS, it becomes visible to all agents and appears on major real estate websites like Zillow, Realtor.com, and Redfin.">MLS</span>. We create anticipation and build a waiting list 
-                  of qualified buyers before your home officially goes live.
+                  of qualified buyers before your home officially goes live. <strong>Ask me more about our "Coming Soon" strategy and how it creates competitive interest.</strong>
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>Exclusive preview to our network of buyer agents and qualified buyers</li>
@@ -605,7 +605,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Live on Market & Open Houses</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   We don't just open doors; we collect critical feedback from every visitor to adjust our 
-                  strategy in real-time. Every showing is an opportunity to refine and improve.
+                  strategy in real-time. Every showing is an opportunity to refine and improve. <strong>Ask me more about our open house strategy and how we maximize buyer interest.</strong>
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>Professional open house events with strategic scheduling</li>
@@ -629,7 +629,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Reviewing Offers & Negotiations</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   We negotiate terms, not just price. From closing dates to <span className="tooltip-trigger" data-tooltip="Contingency: A condition in the purchase offer that must be met for the sale to proceed. Common contingencies include home inspection, appraisal, financing, and home sale contingencies.">contingencies</span>, we ensure every 
-                  aspect of the deal works in your favor.
+                  aspect of the deal works in your favor. <strong>Ask me more about our negotiation strategies and how we maximize your net proceeds.</strong>
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>Comprehensive offer analysis comparing price, terms, and buyer qualifications</li>
@@ -653,7 +653,7 @@ function App() {
                 <h3 className="text-xl sm:text-2xl font-bold text-navy mb-3">Escrow & Closing</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Managing inspections, <span className="tooltip-trigger" data-tooltip="Appraisal: A professional assessment of your home's value by a licensed appraiser. Required by lenders to ensure the property is worth the loan amount. If the appraisal comes in lower than the sale price, we may need to renegotiate.">appraisals</span>, and paperwork until you get paid. We handle every detail 
-                  so you can focus on your next chapter.
+                  so you can focus on your next chapter. <strong>Ask me more about the closing process and how we ensure a smooth transaction.</strong>
                 </p>
                 <ul className="list-disc list-inside text-gray-600 space-y-1 text-sm">
                   <li>Coordination of home inspection and addressing any issues</li>
@@ -862,7 +862,7 @@ function App() {
                   </li>
                 </ul>
                 <p className="text-gray-700">
-                  Plus, your listing is visible to <strong>thousands of real estate agents</strong> in the DMV area who actively search the MLS for properties matching their clients' criteria. This means your home reaches buyers who are actively looking and ready to purchase.
+                  Plus, your listing is visible to <strong>thousands of real estate agents</strong> in the DMV area who actively search the MLS for properties matching their clients' criteria. This means your home reaches buyers who are actively looking and ready to purchase. <strong>Ask me more about our comprehensive marketing strategy and how we maximize your home's exposure.</strong>
                 </p>
               </div>
             </div>
@@ -982,6 +982,27 @@ function App() {
                   <strong>Our Recommendation:</strong> For most sellers, listing on the MLS provides the best opportunity to maximize your sale price and sell quickly. The automatic distribution to all major real estate websites means your home reaches the largest pool of qualified buyers. However, we understand every situation is unique. <strong>During our consultation, we'll discuss your specific goals and circumstances to determine the best marketing strategy for your home.</strong>
                 </p>
               </div>
+            </div>
+          </motion.div>
+
+          {/* Marketing CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-12 text-center"
+          >
+            <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 border-2 border-primary/20 max-w-3xl mx-auto">
+              <p className="text-lg text-gray-700 mb-6">
+                Want to see how we'll market your home? As your realtor, let's discuss our proven marketing plan and how it will help you sell for top dollar.
+              </p>
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="cta-button primary"
+              >
+                Schedule My Free Seller Consultation
+              </button>
             </div>
           </motion.div>
         </div>
@@ -1168,7 +1189,7 @@ function App() {
                     </li>
                   </ul>
                   <p className="text-gray-700 leading-relaxed mt-4">
-                    <strong>Remember:</strong> The goal is to maximize your NET proceeds. While compensating the buyer's agent is an expense, it typically results in a higher sale price and faster sale, which benefits you overall. We'll discuss the best compensation structure for your specific situation during our consultation.
+                    <strong>Remember:</strong> The goal is to maximize your NET proceeds. While compensating the buyer's agent is an expense, it typically results in a higher sale price and faster sale, which benefits you overall. We'll discuss the best compensation structure for your specific situation during our consultation. <strong>Ask me more about buyer's agent compensation and how it affects your sale.</strong>
                   </p>
                 </div>
               </div>
@@ -1778,6 +1799,20 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* FLOATING CTA BUTTON */}
+      {isScrolled && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          onClick={() => scrollToSection('contact')}
+          className="floating-cta"
+          aria-label="Get Your Free Consultation"
+        >
+          <span>Get Your Free Consultation</span>
+        </motion.button>
+      )}
 
       {/* BACK TO TOP BUTTON */}
       {showBackToTop && (

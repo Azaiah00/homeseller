@@ -768,6 +768,55 @@
     color: #b8964a;
   }
 
+  /* Floating CTA Button */
+  .floating-cta {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    background: linear-gradient(135deg, #c9a961, #d4af37);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 1.2rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(201, 169, 97, 0.4), 0 4px 16px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: float 3s ease-in-out infinite;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .floating-cta:hover {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 16px 48px rgba(201, 169, 97, 0.5), 0 8px 24px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #b8964a, #c9a961);
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .floating-cta {
+      bottom: 1.5rem;
+      right: 1.5rem;
+      padding: 1rem 1.5rem;
+      font-size: 0.9rem;
+    }
+  }
+
   .tooltip-trigger::after {
     content: attr(data-tooltip);
     position: absolute;
