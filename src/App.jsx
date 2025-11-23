@@ -1650,6 +1650,29 @@ function App() {
               </motion.div>
             ))}
           </div>
+
+          {/* Glossary CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-12 text-center"
+          >
+            <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 border-2 border-primary/20 max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold text-navy mb-4">Want to Learn More?</h3>
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                Understanding real estate terminology is key to making informed decisions. 
+                Explore our comprehensive glossary to educate yourself on common terms you'll encounter during your home selling journey.
+              </p>
+              <button
+                onClick={() => setShowGlossary(true)}
+                className="cta-button primary"
+              >
+                View Real Estate Glossary
+              </button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
