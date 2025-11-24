@@ -925,3 +925,58 @@
   }
 }
 
+/* Print Styles for Net Sheet Calculator */
+@media print {
+  /* Hide navigation, sidebars, and other non-essential elements */
+  nav,
+  .sticky-nav,
+  .sidebar-nav,
+  .floating-cta,
+  .mobile-menu-toggle,
+  button:not(.print-keep),
+  .cta-button:not(.print-keep) {
+    display: none !important;
+  }
+
+  /* Ensure calculator section is visible and properly formatted */
+  #calculator {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Optimize calculator layout for printing */
+  .bg-white.rounded-2xl {
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb !important;
+  }
+
+  /* Ensure text is black for printing */
+  * {
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  /* Keep gradients visible but simplified */
+  .bg-gradient-to-br {
+    background: #f9fafb !important;
+    border: 1px solid #e5e7eb !important;
+  }
+
+  /* Ensure proper page breaks */
+  .space-y-6 > * {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Print-friendly font sizes */
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  h2, h3, h4 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+}
+

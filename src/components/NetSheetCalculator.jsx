@@ -1,7 +1,40 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Download } from 'lucide-react'
+import { Download, Printer } from 'lucide-react'
 import jsPDF from 'jspdf'
+
+// Title company fees (DMV average)
+const titleCompanyFees = {
+  closingFee: 475,
+  ronESigningFee: 150,
+  processingFee: 495,
+  releaseServiceFee: 110,
+  deedPreparation: 195,
+  total: 1425
+}
+
+// Calculate transfer and recording taxes based on location
+const calculateTransferAndRecordingTaxes = (listingPrice, location) => {
+  const price = parseFloat(listingPrice.toString().replace(/,/g, '')) || 0
+  let transferTax = 0
+  let recordingTax = 0
+
+  if (location === 'DC') {
+    // DC: 1.1% transfer tax (seller typically pays 0.55% or negotiates split)
+    transferTax = price * 0.0055 // Seller's portion (0.55%)
+    recordingTax = 50 // Typical recording fee in DC
+  } else if (location === 'VA') {
+    // Virginia: Varies by county, average 0.1-0.5%, using 0.3% as average
+    transferTax = price * 0.003 // 0.3% average
+    recordingTax = 33 // Typical recording fee in VA
+  } else if (location === 'MD') {
+    // Maryland: 0.5% transfer tax
+    transferTax = price * 0.005 // 0.5%
+    recordingTax = 50 // Typical recording fee in MD
+  }
+
+  return { transferTax: Math.round(transferTax), recordingTax }
+}
 
 const NetSheetCalculator = () => {
   const [formData, setFormData] = useState({
@@ -10,13 +43,16 @@ const NetSheetCalculator = () => {
     propertyTaxes: '',
     closingDate: '',
     commissionFees: 6, // Default 6% total commission
+    propertyLocation: 'DC', // DC, VA, or MD
     transferTax: '',
+    recordingTax: '',
     titleInsurance: '',
     escrowFees: '',
     hoaFees: '',
     homeWarranty: '',
     repairsConcessions: '',
-    miscClosingCosts: ''
+    miscClosingCosts: '',
+    useAutoCalculateTaxes: true // Auto-calculate transfer/recording taxes
   })
   const [showDetailedCosts, setShowDetailedCosts] = useState(false)
 
@@ -27,6 +63,8 @@ const NetSheetCalculator = () => {
     proratedTaxes: 0,
     commission: 0,
     transferTax: 0,
+    recordingTax: 0,
+    titleFees: 0,
     titleInsurance: 0,
     escrowFees: 0,
     hoaFees: 0,
@@ -36,6 +74,7 @@ const NetSheetCalculator = () => {
     totalClosingCosts: 0,
     netAmount: 0
   })
+
 
   // Calculate prorated taxes based on closing date
   const calculateProratedTaxes = (yearlyTaxes, closingDate) => {
@@ -56,7 +95,22 @@ const NetSheetCalculator = () => {
     const mortgagePayoff = parseFloat(formData.mortgagePayoff.toString().replace(/,/g, '')) || 0
     const yearlyTaxes = parseFloat(formData.propertyTaxes.toString().replace(/,/g, '')) || 0
     const commissionPercent = parseFloat(formData.commissionFees) || 0
-    const transferTax = parseFloat(formData.transferTax.toString().replace(/,/g, '')) || 0
+    
+    // Calculate transfer and recording taxes
+    let transferTax = 0
+    let recordingTax = 0
+    if (formData.useAutoCalculateTaxes && listingPrice > 0) {
+      const calculated = calculateTransferAndRecordingTaxes(listingPrice, formData.propertyLocation)
+      transferTax = calculated.transferTax
+      recordingTax = calculated.recordingTax
+    } else {
+      transferTax = parseFloat(formData.transferTax.toString().replace(/,/g, '')) || 0
+      recordingTax = parseFloat(formData.recordingTax.toString().replace(/,/g, '')) || 0
+    }
+
+    // Title company fees (always included)
+    const titleFees = titleCompanyFees.total
+    
     const titleInsurance = parseFloat(formData.titleInsurance.toString().replace(/,/g, '')) || 0
     const escrowFees = parseFloat(formData.escrowFees.toString().replace(/,/g, '')) || 0
     const hoaFees = parseFloat(formData.hoaFees.toString().replace(/,/g, '')) || 0
@@ -66,7 +120,10 @@ const NetSheetCalculator = () => {
 
     const proratedTaxes = calculateProratedTaxes(yearlyTaxes, formData.closingDate)
     const commission = (listingPrice * commissionPercent) / 100
-    const totalClosingCosts = transferTax + titleInsurance + escrowFees + hoaFees + homeWarranty + repairsConcessions + miscCosts
+    
+    // Calculate taxes on closing costs (some jurisdictions tax certain fees)
+    // For DMV area, typically no additional taxes on closing costs, but included for completeness
+    const totalClosingCosts = transferTax + recordingTax + titleFees + titleInsurance + escrowFees + hoaFees + homeWarranty + repairsConcessions + miscCosts
 
     const netAmount = listingPrice - mortgagePayoff - proratedTaxes - commission - totalClosingCosts
 
@@ -76,6 +133,8 @@ const NetSheetCalculator = () => {
       proratedTaxes,
       commission,
       transferTax,
+      recordingTax,
+      titleFees,
       titleInsurance,
       escrowFees,
       hoaFees,
@@ -93,7 +152,7 @@ const NetSheetCalculator = () => {
     const { name, value } = e.target
 
     if (name === 'listingPrice' || name === 'mortgagePayoff' || name === 'propertyTaxes' || 
-        name === 'transferTax' || name === 'titleInsurance' || name === 'escrowFees' || 
+        name === 'transferTax' || name === 'recordingTax' || name === 'titleInsurance' || name === 'escrowFees' || 
         name === 'hoaFees' || name === 'homeWarranty' || name === 'repairsConcessions' || 
         name === 'miscClosingCosts') {
       // Format with commas for display
@@ -114,6 +173,10 @@ const NetSheetCalculator = () => {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     }).format(amount)
+  }
+
+  const handlePrint = () => {
+    window.print()
   }
 
   const downloadPDF = () => {
@@ -170,6 +233,18 @@ const NetSheetCalculator = () => {
     doc.text('Less: Transfer Tax', 20, yPos)
     doc.setFont(undefined, 'normal')
     doc.text(`-${formatCurrency(breakdown.transferTax)}`, 150, yPos, { align: 'right' })
+    
+    yPos += 10
+    doc.setFont(undefined, 'bold')
+    doc.text('Less: Recording Tax', 20, yPos)
+    doc.setFont(undefined, 'normal')
+    doc.text(`-${formatCurrency(breakdown.recordingTax)}`, 150, yPos, { align: 'right' })
+    
+    yPos += 10
+    doc.setFont(undefined, 'bold')
+    doc.text('Less: Title Company Fees', 20, yPos)
+    doc.setFont(undefined, 'normal')
+    doc.text(`-${formatCurrency(breakdown.titleFees)}`, 150, yPos, { align: 'right' })
     
     yPos += 10
     doc.setFont(undefined, 'bold')
@@ -333,6 +408,24 @@ const NetSheetCalculator = () => {
                 </div>
 
                 <div>
+                  <label htmlFor="propertyLocation" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Property Location
+                  </label>
+                  <select
+                    id="propertyLocation"
+                    name="propertyLocation"
+                    value={formData.propertyLocation}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                    style={{ fontSize: '16px' }}
+                  >
+                    <option value="DC">Washington DC</option>
+                    <option value="VA">Virginia</option>
+                    <option value="MD">Maryland</option>
+                  </select>
+                </div>
+
+                <div>
                   <label htmlFor="commissionFees" className="block text-sm font-semibold text-gray-700 mb-2">
                     Commission Fees (Total %)
                   </label>
@@ -366,9 +459,23 @@ const NetSheetCalculator = () => {
 
                 {showDetailedCosts && (
                   <div className="space-y-4 pt-4 border-t border-gray-200">
+                    <div className="bg-blue-50 p-4 rounded-lg mb-4">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={formData.useAutoCalculateTaxes}
+                          onChange={(e) => setFormData(prev => ({ ...prev, useAutoCalculateTaxes: e.target.checked }))}
+                          className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                        />
+                        <span className="text-sm font-semibold text-gray-700">
+                          Auto-calculate Transfer & Recording Taxes (based on location)
+                        </span>
+                      </label>
+                    </div>
+
                     <div>
                       <label htmlFor="transferTax" className="block text-sm font-semibold text-gray-700 mb-2">
-                        Transfer Tax ($)
+                        Transfer Tax ($) {formData.useAutoCalculateTaxes && <span className="text-xs text-gray-500">(Auto-calculated)</span>}
                       </label>
                       <div className="relative">
                         <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
@@ -379,9 +486,66 @@ const NetSheetCalculator = () => {
                           value={formData.transferTax}
                           onChange={handleInputChange}
                           placeholder="2,000"
-                          className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                          disabled={formData.useAutoCalculateTaxes}
+                          className={`w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base ${
+                            formData.useAutoCalculateTaxes ? 'bg-gray-100 cursor-not-allowed' : ''
+                          }`}
                           style={{ fontSize: '16px' }}
                         />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="recordingTax" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Recording Tax ($) {formData.useAutoCalculateTaxes && <span className="text-xs text-gray-500">(Auto-calculated)</span>}
+                      </label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                        <input
+                          type="text"
+                          id="recordingTax"
+                          name="recordingTax"
+                          value={formData.recordingTax}
+                          onChange={handleInputChange}
+                          placeholder="50"
+                          disabled={formData.useAutoCalculateTaxes}
+                          className={`w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base ${
+                            formData.useAutoCalculateTaxes ? 'bg-gray-100 cursor-not-allowed' : ''
+                          }`}
+                          style={{ fontSize: '16px' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Title Company Fees (DMV Average)
+                      </label>
+                      <div className="space-y-2 text-sm text-gray-600">
+                        <div className="flex justify-between">
+                          <span>Closing Fee:</span>
+                          <span className="font-semibold">{formatCurrency(titleCompanyFees.closingFee)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>RON e-Signing Fee:</span>
+                          <span className="font-semibold">{formatCurrency(titleCompanyFees.ronESigningFee)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Processing Fee:</span>
+                          <span className="font-semibold">{formatCurrency(titleCompanyFees.processingFee)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Release Service Fee:</span>
+                          <span className="font-semibold">{formatCurrency(titleCompanyFees.releaseServiceFee)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Deed Preparation:</span>
+                          <span className="font-semibold">{formatCurrency(titleCompanyFees.deedPreparation)}</span>
+                        </div>
+                        <div className="flex justify-between pt-2 border-t border-gray-300 font-semibold text-gray-800">
+                          <span>Total Title Fees:</span>
+                          <span>{formatCurrency(titleCompanyFees.total)}</span>
+                        </div>
                       </div>
                     </div>
 
@@ -477,27 +641,27 @@ const NetSheetCalculator = () => {
                           className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
                           style={{ fontSize: '16px' }}
                         />
-                      </div>
-                    </div>
+                  </div>
+                </div>
 
-                    <div>
-                      <label htmlFor="miscClosingCosts" className="block text-sm font-semibold text-gray-700 mb-2">
+                <div>
+                  <label htmlFor="miscClosingCosts" className="block text-sm font-semibold text-gray-700 mb-2">
                         Other Closing Costs ($)
-                      </label>
-                      <div className="relative">
-                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
-                        <input
-                          type="text"
-                          id="miscClosingCosts"
-                          name="miscClosingCosts"
-                          value={formData.miscClosingCosts}
-                          onChange={handleInputChange}
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                    <input
+                      type="text"
+                      id="miscClosingCosts"
+                      name="miscClosingCosts"
+                      value={formData.miscClosingCosts}
+                      onChange={handleInputChange}
                           placeholder="500"
-                          className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
-                          style={{ fontSize: '16px' }}
-                        />
-                      </div>
-                    </div>
+                      className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+                      style={{ fontSize: '16px' }}
+                    />
+                  </div>
+                </div>
                   </div>
                 )}
               </div>
@@ -543,6 +707,14 @@ const NetSheetCalculator = () => {
                       <span className="font-semibold text-red-600">-{formatCurrency(breakdown.transferTax)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">- Recording Tax:</span>
+                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.recordingTax)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">- Title Company Fees:</span>
+                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.titleFees)}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
                       <span className="text-gray-600">- Title Insurance:</span>
                       <span className="font-semibold text-red-600">-{formatCurrency(breakdown.titleInsurance)}</span>
                     </div>
@@ -562,7 +734,7 @@ const NetSheetCalculator = () => {
                       <span className="text-gray-600">- Repairs/Concessions:</span>
                       <span className="font-semibold text-red-600">-{formatCurrency(breakdown.repairsConcessions)}</span>
                     </div>
-                    <div className="flex justify-between text-sm">
+                  <div className="flex justify-between text-sm">
                       <span className="text-gray-600">- Other Costs:</span>
                       <span className="font-semibold text-red-600">-{formatCurrency(breakdown.miscClosingCosts)}</span>
                     </div>
@@ -580,17 +752,30 @@ const NetSheetCalculator = () => {
                   </div>
                 </div>
 
-                <motion.button
-                  onClick={downloadPDF}
-                  className="w-full cta-button primary flex items-center justify-center gap-2 min-h-[48px] text-base focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  style={{ touchAction: 'manipulation' }}
-                  aria-label="Download net sheet calculator results as PDF"
-                >
-                  <Download size={20} />
-                  Download Official PDF Report
-                </motion.button>
+                <div className="grid grid-cols-2 gap-3">
+                  <motion.button
+                    onClick={downloadPDF}
+                    className="w-full cta-button primary flex items-center justify-center gap-2 min-h-[48px] text-base focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    style={{ touchAction: 'manipulation' }}
+                    aria-label="Download net sheet calculator results as PDF"
+                  >
+                    <Download size={20} />
+                    Download PDF
+                  </motion.button>
+                  <motion.button
+                    onClick={handlePrint}
+                    className="w-full cta-button secondary flex items-center justify-center gap-2 min-h-[48px] text-base focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2 border-2 border-primary text-primary hover:bg-primary hover:text-white"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    style={{ touchAction: 'manipulation' }}
+                    aria-label="Print net sheet calculator results"
+                  >
+                    <Printer size={20} />
+                    Print
+                  </motion.button>
+                </div>
 
                 <p className="text-xs text-gray-500 text-center">
                   * This is an estimate only. Actual proceeds may vary based on final closing costs, prorations, and adjustments.

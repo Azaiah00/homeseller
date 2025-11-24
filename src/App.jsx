@@ -261,6 +261,7 @@ function App() {
       errors.phone = 'Please enter a valid phone number'
     }
     if (!formData.timeline) errors.timeline = 'Please select a timeline'
+    if (!formData.propertyAddress.trim()) errors.propertyAddress = 'Property address is required'
     setFormErrors(errors)
     return Object.keys(errors).length === 0
   }
@@ -1173,7 +1174,7 @@ function App() {
             </div>
 
             <h3 className="text-3xl font-bold text-center text-navy mb-6 mt-12">
-              The Power of Concessions: Winning Strategies in Any Market
+              Understanding Buyer Concessions: What to Expect in Your Offer
             </h3>
 
             <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8">
@@ -1182,39 +1183,54 @@ function App() {
                 <div>
                   <h4 className="text-2xl font-bold text-navy mb-4">What Are Buyer Concessions?</h4>
                   <p className="text-gray-700 text-lg leading-relaxed mb-4">
-                    A Buyer Concession is a credit you provide at closing to cover buyer costs (rate buydowns, 
-                    closing fees). Why do this? It lowers the barrier to entry, attracting a larger pool of buyers 
-                    who might be cash-constrained but income-strong.
+                    Buyer concessions are credits or financial contributions that a buyer may request from you, the seller, 
+                    as part of their offer. These concessions help buyers cover closing costs, prepaid expenses, or other 
+                    transaction-related fees. It's important to understand that buyers may request concessions in their offer, 
+                    and this is a common practice in real estate transactions.
                   </p>
                 </div>
           </div>
         </div>
 
-            <div className="bg-white border-2 border-primary/20 rounded-xl p-8">
-              <h4 className="text-2xl font-bold text-navy mb-4">The Benefit</h4>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                By helping with upfront costs, we can often maintain a higher sale price, netting you the same 
-                (or more) money while selling faster. It's a strategic move that benefits everyone.
+            <div className="bg-white border-2 border-primary/20 rounded-xl p-8 mb-6">
+              <h4 className="text-2xl font-bold text-navy mb-4">Why Buyers Request Concessions</h4>
+              <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                Buyers may request concessions for several reasons:
               </p>
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex items-start gap-3">
+                  <span className="text-primary mt-1 font-bold">•</span>
+                  <span><strong>Limited Cash Reserves:</strong> Many buyers, especially first-time homebuyers, may have enough for a down payment but need help covering closing costs, which can range from 2-5% of the purchase price.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-primary mt-1 font-bold">•</span>
+                  <span><strong>Rate Buydowns:</strong> Buyers may request concessions to buy down their mortgage interest rate, making their monthly payments more affordable.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-primary mt-1 font-bold">•</span>
+                  <span><strong>Prepaid Expenses:</strong> Buyers often need to prepay property taxes, homeowners insurance, and HOA fees at closing, which can add up to thousands of dollars.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-primary mt-1 font-bold">•</span>
+                  <span><strong>Repairs or Improvements:</strong> After a home inspection, buyers may request concessions to cover necessary repairs or desired improvements rather than asking you to complete the work.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-primary mt-1 font-bold">•</span>
+                  <span><strong>Competitive Market Strategy:</strong> In competitive markets, buyers may use concessions as a way to make their offer more attractive while still getting financial assistance.</span>
+                </li>
+              </ul>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
-                <h4 className="text-xl font-bold text-navy mb-3">Buyer's Market</h4>
-              <p className="text-gray-700">
-                  Stand out against the competition. Concessions make your home more attractive when buyers have 
-                  multiple options to choose from.
+            <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-8">
+              <h4 className="text-2xl font-bold text-navy mb-4">What This Means for You as a Seller</h4>
+              <p className="text-gray-700 text-lg leading-relaxed">
+                When a buyer requests concessions, it's typically negotiated as part of the offer. The concession amount 
+                is usually deducted from your net proceeds at closing. It's important to evaluate each offer holistically - 
+                sometimes an offer with concessions may still result in a better net outcome than an offer without them, 
+                especially if the purchase price is higher. We'll help you analyze each offer to determine what works best 
+                for your situation.
               </p>
-              </div>
-
-              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6">
-                <h4 className="text-xl font-bold text-navy mb-3">Seller's Market</h4>
-              <p className="text-gray-700">
-                  Attract the highest quality offers, not just the highest price. Concessions help you get the 
-                  most qualified buyers.
-                </p>
-        </div>
-                      </div>
+            </div>
               </motion.div>
         </div>
       </section>
@@ -1403,7 +1419,7 @@ function App() {
 
                 <div>
                   <label htmlFor="propertyAddress" className="block text-sm font-semibold text-navy mb-2">
-                    Property Address (Optional)
+                    Property Address <span className="text-red-500">*</span>
                   </label>
                     <input
                       type="text"
@@ -1411,10 +1427,14 @@ function App() {
                       name="propertyAddress"
                       value={formData.propertyAddress}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px]"
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-navy text-base min-h-[48px] ${
+                        formErrors.propertyAddress ? 'border-red-500' : 'border-gray-300'
+                      }`}
                       placeholder="123 Main St, City, State"
                       style={{ fontSize: '16px' }}
+                      required
                     />
+                    {formErrors.propertyAddress && <span className="text-red-500 text-sm mt-1 block">{formErrors.propertyAddress}</span>}
                 </div>
 
                 <button
