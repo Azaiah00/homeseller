@@ -31,6 +31,139 @@ import NetSheetCalculator from './components/NetSheetCalculator'
 import ROICalculator from './components/ROICalculator'
 import Glossary from './components/Glossary'
 
+// Virtual Staging Before/After Slider Component
+const VirtualStagingSlider = () => {
+  const [sliderPosition, setSliderPosition] = useState(50)
+  const [isDragging, setIsDragging] = useState(false)
+
+  const handleMouseDown = (e) => {
+    e.preventDefault()
+    setIsDragging(true)
+  }
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return
+    
+    const container = e.currentTarget.closest('.slider-container') || 
+                     document.querySelector('.slider-container')
+    if (!container) return
+    
+    const rect = container.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+    setSliderPosition(percentage)
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  const handleTouchMove = (e) => {
+    const container = e.currentTarget.closest('.slider-container') || 
+                     document.querySelector('.slider-container')
+    if (!container) return
+    
+    const rect = container.getBoundingClientRect()
+    const touch = e.touches[0]
+    const x = touch.clientX - rect.left
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+    setSliderPosition(percentage)
+  }
+
+  useEffect(() => {
+    if (isDragging) {
+      const handleGlobalMouseMove = (e) => handleMouseMove(e)
+      const handleGlobalMouseUp = () => handleMouseUp()
+      const handleGlobalTouchMove = (e) => handleTouchMove(e)
+      
+      document.addEventListener('mousemove', handleGlobalMouseMove)
+      document.addEventListener('mouseup', handleGlobalMouseUp)
+      document.addEventListener('touchmove', handleGlobalTouchMove, { passive: false })
+      
+      return () => {
+        document.removeEventListener('mousemove', handleGlobalMouseMove)
+        document.removeEventListener('mouseup', handleGlobalMouseUp)
+        document.removeEventListener('touchmove', handleGlobalTouchMove)
+      }
+    }
+  }, [isDragging])
+
+  const handleContainerClick = (e) => {
+    if (e.target.closest('.slider-handle')) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+    setSliderPosition(percentage)
+  }
+
+  return (
+    <div 
+      className="slider-container relative w-full h-[500px] md:h-[600px] cursor-col-resize select-none"
+      onClick={handleContainerClick}
+      onTouchStart={(e) => {
+        const touch = e.touches[0]
+        const rect = e.currentTarget.getBoundingClientRect()
+        const x = touch.clientX - rect.left
+        const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+        setSliderPosition(percentage)
+      }}
+    >
+      {/* Before Image (Background) */}
+      <div className="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1200&h=800&fit=crop"
+          alt="Empty room before virtual staging"
+          className="w-full h-full object-cover"
+          draggable={false}
+          loading="lazy"
+        />
+        <div className="absolute top-4 left-4 bg-black/70 text-white px-4 py-2 rounded-lg font-semibold backdrop-blur-sm">
+          Before
+        </div>
+      </div>
+
+      {/* After Image (Clipped) */}
+      <div
+        className="absolute inset-0 overflow-hidden"
+        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+      >
+        <img
+          src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=800&fit=crop"
+          alt="Room after virtual staging"
+          className="w-full h-full object-cover"
+          draggable={false}
+          loading="lazy"
+        />
+        <div className="absolute top-4 right-4 bg-primary/90 text-white px-4 py-2 rounded-lg font-semibold backdrop-blur-sm">
+          After
+        </div>
+      </div>
+
+      {/* Slider Line */}
+      <div
+        className="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-2xl z-10 cursor-col-resize"
+        style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
+        onMouseDown={handleMouseDown}
+        onTouchStart={handleMouseDown}
+      >
+        {/* Slider Handle */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center border-4 border-primary hover:scale-110 transition-transform">
+          <div className="flex gap-1">
+            <div className="w-1 h-4 bg-primary rounded-full"></div>
+            <div className="w-1 h-4 bg-primary rounded-full"></div>
+            <div className="w-1 h-4 bg-primary rounded-full"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Instructions */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-lg text-sm backdrop-blur-sm">
+        ← Drag to compare →
+      </div>
+    </div>
+  )
+}
+
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [showBackToTop, setShowBackToTop] = useState(false)
@@ -822,6 +955,30 @@ function App() {
 
             <p className="text-center text-gray-600 mt-6 italic">
               Our Virtual Staging is the smarter, modern choice that saves you money while maximizing your home's appeal.
+            </p>
+          </motion.div>
+
+          {/* Virtual Staging Before/After Slider */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="max-w-5xl mx-auto mt-12"
+          >
+            <h3 className="text-3xl font-bold text-center text-navy mb-4">
+              See Virtual Staging in Action
+            </h3>
+            <p className="text-center text-gray-600 mb-8">
+              Drag the slider to see how we transform empty spaces into inviting, buyer-ready rooms
+            </p>
+            
+            <div className="bg-white rounded-xl shadow-xl overflow-hidden">
+              <VirtualStagingSlider />
+            </div>
+            
+            <p className="text-center text-gray-600 mt-6 text-sm">
+              <strong>Note:</strong> These are examples of our virtual staging work. We can create multiple design styles to match your target buyer's preferences.
             </p>
           </motion.div>
 

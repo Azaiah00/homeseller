@@ -15,20 +15,12 @@ const Glossary = ({ onBack }) => {
       letter: 'A',
       items: [
         {
-          term: 'Appraisal',
-          definition: 'A professional assessment of a property\'s value, typically conducted by a licensed appraiser. Lenders require appraisals to ensure the property is worth the loan amount.'
-        },
-        {
-          term: 'As-Is',
-          definition: 'A property sold in its current condition, with no repairs or improvements made by the seller. Buyers accept the property with all existing defects.'
+          term: 'As-Is Sale',
+          definition: 'Selling your property in its current condition without making repairs or improvements. Buyers accept the property with all existing defects, which can save you money but may reduce the sale price.'
         },
         {
           term: 'Assessed Value',
-          definition: 'The value assigned to a property by a tax assessor for the purpose of calculating property taxes. This may differ from the market value.'
-        },
-        {
-          term: 'Assumable Mortgage',
-          definition: 'A mortgage that can be transferred from the seller to the buyer, allowing the buyer to take over the existing loan terms.'
+          definition: 'The value assigned to your property by a tax assessor for calculating property taxes. This may differ from your home\'s market value and affects your property tax bill.'
         }
       ]
     },
@@ -37,19 +29,19 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'Backup Offer',
-          definition: 'A secondary offer on a property that becomes active if the primary offer falls through. It provides security for sellers.'
+          definition: 'A secondary offer on your property that becomes active if the primary offer falls through. Having backup offers provides security and ensures you have other buyers ready.'
         },
         {
           term: 'Bridge Loan',
-          definition: 'A short-term loan that helps homeowners purchase a new home before selling their current one. It bridges the gap between transactions.'
+          definition: 'A short-term loan that helps you purchase a new home before selling your current one. It bridges the financial gap between transactions, allowing you to buy first and sell later.'
         },
         {
           term: 'Buyer\'s Agent',
-          definition: 'A real estate agent who represents the buyer\'s interests in a transaction. The buyer\'s agent helps find properties, negotiate offers, and guide the buyer through the process.'
+          definition: 'The real estate agent who represents the buyer in your transaction. You typically pay a commission to the buyer\'s agent (usually 2.5-3%) as part of the total commission split.'
         },
         {
           term: 'Buyer\'s Market',
-          definition: 'A market condition where there are more homes for sale than buyers, giving buyers more negotiating power and often leading to lower prices.'
+          definition: 'A market condition where there are more homes for sale than buyers. In this market, you may need to price competitively and be more flexible with negotiations.'
         }
       ]
     },
@@ -58,27 +50,27 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'Closing',
-          definition: 'The final step in a real estate transaction where ownership is transferred from seller to buyer. All documents are signed, funds are exchanged, and keys are handed over.'
+          definition: 'The final step where you transfer ownership to the buyer. You\'ll sign documents, receive your net proceeds, and hand over the keys. This is when you officially sell your home.'
         },
         {
-          term: 'Closing Costs',
-          definition: 'Fees and expenses paid at closing, including loan origination fees, title insurance, escrow fees, property taxes, and recording fees. Typically 2-5% of the home price for buyers, 8-10% for sellers.'
+          term: 'Closing Costs (Seller)',
+          definition: 'Fees and expenses you pay at closing, including real estate commissions (5-6%), transfer taxes, title company fees, recording fees, prorated property taxes, and any negotiated repairs or concessions. Typically 8-10% of the sale price.'
         },
         {
           term: 'CMA (Comparative Market Analysis)',
-          definition: 'A report prepared by a real estate agent that compares your home to similar properties that have recently sold, are currently for sale, or were listed but didn\'t sell. Used to determine a competitive listing price.'
+          definition: 'A report your agent prepares comparing your home to similar properties that recently sold, are currently listed, or didn\'t sell. This helps determine the best listing price to maximize your sale.'
         },
         {
           term: 'Commission',
-          definition: 'The fee paid to real estate agents for their services, typically a percentage of the sale price (usually 5-6% total, split between listing and buyer\'s agents).'
+          definition: 'The fee you pay to real estate agents, typically 5-6% of the sale price. This is split between your listing agent (2.5-3%) and the buyer\'s agent (2.5-3%). This is your largest closing cost.'
         },
         {
           term: 'Contingency',
-          definition: 'A condition that must be met for a real estate contract to be binding. Common contingencies include home inspection, appraisal, financing, and sale of buyer\'s current home.'
+          definition: 'Conditions in the buyer\'s offer that must be met for the sale to proceed. Common contingencies include home inspection, appraisal, and financing. You can negotiate which contingencies to accept.'
         },
         {
           term: 'Counter Offer',
-          definition: 'A response to an initial offer that proposes different terms, such as a different price, closing date, or conditions. The negotiation process continues until both parties agree.'
+          definition: 'Your response to a buyer\'s offer proposing different terms (price, closing date, conditions). This is part of the negotiation process to reach an agreement that works for you.'
         }
       ]
     },
@@ -87,19 +79,15 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'Days on Market (DOM)',
-          definition: 'The number of days a property has been listed for sale. A high DOM may indicate overpricing or other issues.'
+          definition: 'The number of days your property has been listed for sale. A high DOM may indicate overpricing. Your agent will monitor this and may suggest price adjustments if needed.'
         },
         {
           term: 'Deed',
-          definition: 'The legal document that transfers ownership of a property from seller to buyer. It must be recorded with the local government.'
+          definition: 'The legal document you sign that transfers ownership of your property to the buyer. It must be recorded with the local government to complete the sale.'
         },
         {
           term: 'Deposit (Earnest Money)',
-          definition: 'Money put down by the buyer to show serious intent to purchase. Typically 1-3% of the purchase price, held in escrow and applied to closing costs or down payment.'
-        },
-        {
-          term: 'Down Payment',
-          definition: 'The initial payment made by the buyer toward the purchase price. Typically 3-20% of the home price, with the remainder financed through a mortgage.'
+          definition: 'Money the buyer puts down to show serious intent to purchase (typically 1-3% of purchase price). This is held in escrow and protects you if the buyer backs out without cause.'
         }
       ]
     },
@@ -108,15 +96,15 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'Equity',
-          definition: 'The difference between your home\'s market value and the amount you owe on your mortgage. As you pay down your mortgage and property values increase, your equity grows.'
+          definition: 'The difference between your home\'s market value and what you owe on your mortgage. This is the amount you\'ll receive (minus closing costs) when you sell. Building equity increases your net proceeds.'
         },
         {
           term: 'Escrow',
-          definition: 'A neutral third party that holds funds and documents during a real estate transaction, ensuring all conditions are met before closing.'
+          definition: 'A neutral third party (title company or attorney) that holds funds and documents during the transaction, ensuring all conditions are met before closing. They handle the money transfer.'
         },
         {
           term: 'Exclusive Listing',
-          definition: 'A listing agreement where only one real estate agent has the right to sell the property for a specified period.'
+          definition: 'A listing agreement where only one real estate agent (your listing agent) has the right to sell your property for a specified period. This is the standard type of listing agreement.'
         }
       ]
     },
@@ -125,11 +113,11 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'FSBO (For Sale By Owner)',
-          definition: 'A property sold directly by the owner without a real estate agent. Sellers handle all aspects of the sale themselves.'
+          definition: 'Selling your property without a real estate agent. While you save on commission, you handle all marketing, negotiations, paperwork, and legal requirements yourself.'
         },
         {
           term: 'Fair Market Value',
-          definition: 'The price a property would sell for in an open market with a willing buyer and seller, both having reasonable knowledge of the property.'
+          definition: 'The price your home would sell for in an open market with a willing buyer and seller. Your agent uses a CMA to determine this value for pricing your listing.'
         }
       ]
     },
@@ -138,15 +126,15 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'Home Inspection',
-          definition: 'A thorough examination of a property\'s condition, including structural elements, systems (HVAC, plumbing, electrical), and potential issues. Buyers typically have the right to inspect and negotiate repairs.'
+          definition: 'A thorough examination of your property\'s condition that the buyer typically requests. They may negotiate repairs or credits based on findings. You can choose to fix issues, offer credits, or decline (risking the sale).'
         },
         {
           term: 'Home Warranty',
-          definition: 'A service contract that covers repairs or replacement of major home systems and appliances for a specified period, typically one year.'
+          definition: 'A service contract you may offer to buyers that covers repairs or replacement of major home systems and appliances (typically for one year). This can make your property more attractive and reduce post-sale liability.'
         },
         {
           term: 'HOA (Homeowners Association)',
-          definition: 'An organization that manages and enforces rules for a community or condominium complex. Homeowners pay monthly or annual fees for maintenance and amenities.'
+          definition: 'An organization that manages your community or condominium complex. You must provide HOA documents to buyers and may need to pay prorated HOA fees at closing.'
         }
       ]
     },
@@ -155,15 +143,15 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'Listing Agent',
-          definition: 'The real estate agent who represents the seller and lists the property for sale. Also called the seller\'s agent.'
+          definition: 'Your real estate agent who represents you and lists your property for sale. Also called the seller\'s agent. They handle marketing, negotiations, and guide you through the selling process.'
         },
         {
           term: 'Listing Price',
-          definition: 'The asking price for a property set by the seller and listing agent. This is the starting point for negotiations.'
+          definition: 'The asking price you set for your property with your agent. This is the starting point for negotiations. Pricing correctly is crucial - too high and it sits, too low and you leave money on the table.'
         },
         {
           term: 'Lockbox',
-          definition: 'A secure device attached to a property that holds the key, allowing authorized agents to show the home when the owner isn\'t present.'
+          definition: 'A secure device attached to your property that holds the key, allowing authorized agents to show your home when you\'re not present. This maximizes showing opportunities.'
         }
       ]
     },
@@ -172,11 +160,11 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'MLS (Multiple Listing Service)',
-          definition: 'A database used by real estate agents to share property listings with other agents. Most homes sold through agents are listed on the MLS.'
+          definition: 'A database where your agent lists your property, making it visible to all real estate agents and major websites (Zillow, Realtor.com, etc.). This maximizes exposure to potential buyers.'
         },
         {
-          term: 'Mortgage',
-          definition: 'A loan used to purchase real estate, where the property serves as collateral. The borrower makes monthly payments of principal and interest.'
+          term: 'Mortgage Payoff',
+          definition: 'The amount you owe on your mortgage that must be paid off at closing. This is deducted from your sale proceeds along with closing costs to determine your net proceeds.'
         }
       ]
     },
@@ -185,11 +173,11 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'Net Proceeds',
-          definition: 'The amount of money a seller receives after all closing costs, commissions, and mortgage payoffs are deducted from the sale price.'
+          definition: 'The actual amount of money you receive after all closing costs, commissions, mortgage payoff, and other deductions are subtracted from the sale price. This is your "walk-away" amount.'
         },
         {
           term: 'Negotiation',
-          definition: 'The process of discussing and agreeing on terms of a real estate transaction, including price, closing date, repairs, and contingencies.'
+          definition: 'The process of discussing and agreeing on terms with buyers, including price, closing date, repairs, concessions, and contingencies. Your agent handles this on your behalf.'
         }
       ]
     },
@@ -198,11 +186,11 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'Offer',
-          definition: 'A formal proposal to purchase a property at a specific price and under certain conditions. The seller can accept, reject, or counter the offer.'
+          definition: 'A formal proposal from a buyer to purchase your property at a specific price and under certain conditions. You can accept, reject, or make a counter offer.'
         },
         {
           term: 'Open House',
-          definition: 'A scheduled time when a property is open for public viewing without an appointment. Used to generate interest and attract potential buyers.'
+          definition: 'A scheduled time when your property is open for public viewing without appointments. This generates interest and attracts potential buyers, increasing your chances of receiving offers.'
         }
       ]
     },
@@ -210,16 +198,8 @@ const Glossary = ({ onBack }) => {
       letter: 'P',
       items: [
         {
-          term: 'Pre-Approval',
-          definition: 'A lender\'s commitment to loan a specific amount to a buyer, based on credit check and financial verification. Stronger than pre-qualification.'
-        },
-        {
-          term: 'Pre-Qualification',
-          definition: 'A preliminary assessment of a buyer\'s borrowing capacity based on basic financial information. Less formal than pre-approval.'
-        },
-        {
-          term: 'Property Tax',
-          definition: 'Taxes assessed by local governments based on the property\'s assessed value. Used to fund schools, roads, and other public services.'
+          term: 'Property Tax (Prorated)',
+          definition: 'Property taxes you owe for the portion of the year you owned the home. These are prorated at closing, meaning you pay taxes up to the closing date, and the buyer pays from that date forward.'
         }
       ]
     },
@@ -227,16 +207,12 @@ const Glossary = ({ onBack }) => {
       letter: 'R',
       items: [
         {
-          term: 'Real Estate Agent',
-          definition: 'A licensed professional who represents buyers or sellers in real estate transactions. Agents must complete education and pass a licensing exam.'
+          term: 'Recording Fee',
+          definition: 'A fee paid to the local government to record the deed and other documents that transfer ownership. This is typically a small fixed fee (usually $30-50) that you pay at closing.'
         },
         {
-          term: 'Realtor®',
-          definition: 'A real estate agent who is a member of the National Association of Realtors (NAR) and adheres to a strict code of ethics.'
-        },
-        {
-          term: 'ROI (Return on Investment)',
-          definition: 'A measure of the profitability of an investment, calculated as the percentage of profit relative to the cost. Used to evaluate home improvements.'
+          term: 'Repairs/Concessions',
+          definition: 'Money you agree to pay for repairs or give as credits to the buyer. This can include fixing issues found during inspection or offering credits instead of making repairs. These reduce your net proceeds.'
         }
       ]
     },
@@ -245,19 +221,19 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'Seller\'s Agent',
-          definition: 'A real estate agent who represents the seller\'s interests. Also called the listing agent.'
+          definition: 'Your real estate agent who represents your interests throughout the selling process. Also called the listing agent. They work to get you the best price and terms.'
         },
         {
           term: 'Seller\'s Market',
-          definition: 'A market condition where there are more buyers than available homes, giving sellers more negotiating power and often leading to higher prices and faster sales.'
+          definition: 'A market condition where there are more buyers than available homes. This gives you more negotiating power, often leading to higher prices, faster sales, and multiple offers.'
         },
         {
           term: 'Settlement',
-          definition: 'Another term for closing, the final step where ownership transfers and all documents are signed.'
+          definition: 'Another term for closing - the final step where you transfer ownership, sign all documents, receive your net proceeds, and hand over the keys to the buyer.'
         },
         {
           term: 'Staging',
-          definition: 'The process of preparing a home for sale by arranging furniture, decor, and removing personal items to make the property more appealing to buyers.'
+          definition: 'The process of preparing your home for sale by arranging furniture, decor, and removing personal items. Virtual staging (digital) is cost-effective and allows multiple design styles without moving furniture.'
         }
       ]
     },
@@ -266,15 +242,15 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'Title',
-          definition: 'Legal ownership of a property. A clear title means there are no claims or liens against the property.'
+          definition: 'Legal ownership of your property. A clear title (free of liens, claims, or disputes) is required for sale. Your agent and title company ensure the title is clear before closing.'
         },
         {
-          term: 'Title Insurance',
-          definition: 'Insurance that protects buyers and lenders from defects in the title, such as liens, encumbrances, or ownership disputes.'
+          term: 'Title Company Fees',
+          definition: 'Fees paid to the title company for handling the closing process, including closing fees, processing fees, deed preparation, and recording services. These are standard closing costs you pay as the seller.'
         },
         {
           term: 'Transfer Tax',
-          definition: 'A tax paid when property ownership is transferred, typically based on the sale price. Varies by location.'
+          definition: 'A tax you pay when transferring ownership of your property, typically based on the sale price. Rates vary by location (DC: 1.1%, VA: varies by county, MD: 0.5%). This is a significant closing cost.'
         }
       ]
     },
@@ -283,7 +259,7 @@ const Glossary = ({ onBack }) => {
       items: [
         {
           term: 'Under Contract',
-          definition: 'A status indicating that a seller has accepted an offer and the property is in the process of closing. The sale is pending but not yet final.'
+          definition: 'A status indicating you\'ve accepted an offer and your property is in the process of closing. The sale is pending but not yet final - contingencies must be satisfied before closing.'
         }
       ]
     }

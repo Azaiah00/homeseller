@@ -46,8 +46,6 @@ const NetSheetCalculator = () => {
     propertyLocation: 'DC', // DC, VA, or MD
     transferTax: '',
     recordingTax: '',
-    titleInsurance: '',
-    escrowFees: '',
     hoaFees: '',
     homeWarranty: '',
     repairsConcessions: '',
@@ -65,8 +63,6 @@ const NetSheetCalculator = () => {
     transferTax: 0,
     recordingTax: 0,
     titleFees: 0,
-    titleInsurance: 0,
-    escrowFees: 0,
     hoaFees: 0,
     homeWarranty: 0,
     repairsConcessions: 0,
@@ -111,8 +107,6 @@ const NetSheetCalculator = () => {
     // Title company fees (always included)
     const titleFees = titleCompanyFees.total
     
-    const titleInsurance = parseFloat(formData.titleInsurance.toString().replace(/,/g, '')) || 0
-    const escrowFees = parseFloat(formData.escrowFees.toString().replace(/,/g, '')) || 0
     const hoaFees = parseFloat(formData.hoaFees.toString().replace(/,/g, '')) || 0
     const homeWarranty = parseFloat(formData.homeWarranty.toString().replace(/,/g, '')) || 0
     const repairsConcessions = parseFloat(formData.repairsConcessions.toString().replace(/,/g, '')) || 0
@@ -123,7 +117,7 @@ const NetSheetCalculator = () => {
     
     // Calculate taxes on closing costs (some jurisdictions tax certain fees)
     // For DMV area, typically no additional taxes on closing costs, but included for completeness
-    const totalClosingCosts = transferTax + recordingTax + titleFees + titleInsurance + escrowFees + hoaFees + homeWarranty + repairsConcessions + miscCosts
+    const totalClosingCosts = transferTax + recordingTax + titleFees + hoaFees + homeWarranty + repairsConcessions + miscCosts
 
     const netAmount = listingPrice - mortgagePayoff - proratedTaxes - commission - totalClosingCosts
 
@@ -135,8 +129,6 @@ const NetSheetCalculator = () => {
       transferTax,
       recordingTax,
       titleFees,
-      titleInsurance,
-      escrowFees,
       hoaFees,
       homeWarranty,
       repairsConcessions,
@@ -152,7 +144,7 @@ const NetSheetCalculator = () => {
     const { name, value } = e.target
 
     if (name === 'listingPrice' || name === 'mortgagePayoff' || name === 'propertyTaxes' || 
-        name === 'transferTax' || name === 'recordingTax' || name === 'titleInsurance' || name === 'escrowFees' || 
+        name === 'transferTax' || name === 'recordingTax' || 
         name === 'hoaFees' || name === 'homeWarranty' || name === 'repairsConcessions' || 
         name === 'miscClosingCosts') {
       // Format with commas for display
@@ -245,18 +237,6 @@ const NetSheetCalculator = () => {
     doc.text('Less: Title Company Fees', 20, yPos)
     doc.setFont(undefined, 'normal')
     doc.text(`-${formatCurrency(breakdown.titleFees)}`, 150, yPos, { align: 'right' })
-    
-    yPos += 10
-    doc.setFont(undefined, 'bold')
-    doc.text('Less: Title Insurance', 20, yPos)
-    doc.setFont(undefined, 'normal')
-    doc.text(`-${formatCurrency(breakdown.titleInsurance)}`, 150, yPos, { align: 'right' })
-    
-    yPos += 10
-    doc.setFont(undefined, 'bold')
-    doc.text('Less: Escrow Fees', 20, yPos)
-    doc.setFont(undefined, 'normal')
-    doc.text(`-${formatCurrency(breakdown.escrowFees)}`, 150, yPos, { align: 'right' })
     
     yPos += 10
     doc.setFont(undefined, 'bold')
@@ -546,44 +526,6 @@ const NetSheetCalculator = () => {
                           <span>Total Title Fees:</span>
                           <span>{formatCurrency(titleCompanyFees.total)}</span>
                         </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="titleInsurance" className="block text-sm font-semibold text-gray-700 mb-2">
-                        Title Insurance ($)
-                      </label>
-                      <div className="relative">
-                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
-                        <input
-                          type="text"
-                          id="titleInsurance"
-                          name="titleInsurance"
-                          value={formData.titleInsurance}
-                          onChange={handleInputChange}
-                          placeholder="1,500"
-                          className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
-                          style={{ fontSize: '16px' }}
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="escrowFees" className="block text-sm font-semibold text-gray-700 mb-2">
-                        Escrow Fees ($)
-                      </label>
-                      <div className="relative">
-                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
-                        <input
-                          type="text"
-                          id="escrowFees"
-                          name="escrowFees"
-                          value={formData.escrowFees}
-                          onChange={handleInputChange}
-                          placeholder="500"
-                          className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-base"
-                          style={{ fontSize: '16px' }}
-                        />
                       </div>
                     </div>
 
