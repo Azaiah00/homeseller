@@ -346,54 +346,61 @@ function App() {
   useEffect(() => {
     let autocomplete = null
     let input = null
+    let isInitialized = false
 
     const initAutocomplete = () => {
-      if (window.google && window.google.maps && window.google.maps.places) {
+      if (window.google && window.google.maps && window.google.maps.places && !isInitialized) {
         input = document.getElementById('propertyAddress')
-        if (input && !input.hasAutocomplete) {
+        if (input) {
+          // Create autocomplete instance
           autocomplete = new window.google.maps.places.Autocomplete(input, {
             types: ['address'],
             componentRestrictions: { country: ['us'] },
             fields: ['formatted_address', 'address_components', 'geometry']
           })
           
-          // Only update on place selection, not while typing
+          // Only update on place selection from dropdown, not while typing
           autocomplete.addListener('place_changed', () => {
             const place = autocomplete.getPlace()
             if (place && place.formatted_address) {
-              setFormData(prev => ({ ...prev, propertyAddress: place.formatted_address }))
-              // Clear any existing error
-              if (formErrors.propertyAddress) {
-                setFormErrors(prev => ({ ...prev, propertyAddress: '' }))
-              }
+              // Use setTimeout to ensure React state update doesn't conflict
+              setTimeout(() => {
+                setFormData(prev => ({ ...prev, propertyAddress: place.formatted_address }))
+                // Clear any existing error
+                if (formErrors.propertyAddress) {
+                  setFormErrors(prev => ({ ...prev, propertyAddress: '' }))
+                }
+              }, 0)
             }
           })
           
-          // Mark that autocomplete is initialized
-          input.hasAutocomplete = true
+          isInitialized = true
         }
       }
     }
 
-    // Try to initialize immediately if Google Maps is already loaded
-    initAutocomplete()
+    // Try to initialize after component mounts and input is available
+    const timer = setTimeout(() => {
+      initAutocomplete()
+    }, 1000)
 
-    // Also try after delays in case the script loads later
-    const timer1 = setTimeout(initAutocomplete, 500)
-    const timer2 = setTimeout(initAutocomplete, 2000)
-
-    // Listen for when Google Maps script loads
+    // Also check periodically if Google Maps loads later
     const checkGoogle = setInterval(() => {
-      if (window.google && window.google.maps && window.google.maps.places) {
+      if (window.google && window.google.maps && window.google.maps.places && !isInitialized) {
         initAutocomplete()
-        clearInterval(checkGoogle)
+        if (isInitialized) {
+          clearInterval(checkGoogle)
+        }
       }
-    }, 500)
+    }, 1000)
 
     return () => {
-      clearTimeout(timer1)
-      clearTimeout(timer2)
+      clearTimeout(timer)
       clearInterval(checkGoogle)
+      // Clean up autocomplete if needed
+      if (autocomplete) {
+        window.google?.maps?.event?.clearInstanceListeners?.(autocomplete)
+      }
     }
   }, [])
 
