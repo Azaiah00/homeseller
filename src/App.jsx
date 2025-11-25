@@ -183,13 +183,17 @@ const VirtualStagingSlider = () => {
 
       {/* Slider Line */}
       <div
-        className="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-2xl z-10 cursor-col-resize"
-        style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
+        className="slider-handle absolute top-0 bottom-0 w-1 bg-white/90 shadow-2xl z-20 cursor-col-resize touch-none"
+        style={{ 
+          left: `${sliderPosition}%`, 
+          transform: 'translateX(-50%)',
+          transition: isDragging ? 'none' : 'left 0.1s ease-out'
+        }}
         onMouseDown={handleMouseDown}
-        onTouchStart={handleMouseDown}
+        onTouchStart={handleTouchStart}
       >
         {/* Slider Handle */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center border-4 border-primary hover:scale-110 transition-transform">
+        <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center border-4 border-primary transition-transform ${isDragging ? 'scale-110' : 'hover:scale-110'}`}>
           <div className="flex gap-1">
             <div className="w-1 h-4 bg-primary rounded-full"></div>
             <div className="w-1 h-4 bg-primary rounded-full"></div>
