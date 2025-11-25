@@ -31,6 +31,7 @@ import {
 import NetSheetCalculator from './components/NetSheetCalculator'
 import ROICalculator from './components/ROICalculator'
 import Glossary from './components/Glossary'
+import SmartSellTimeline from './components/SmartSellTimeline'
 
 // Virtual Staging Before/After Slider Component
 const VirtualStagingSlider = () => {
@@ -1335,6 +1336,13 @@ function App() {
               </button>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* SMART-SELL REVERSE TIMELINE SECTION */}
+      <section id="smart-sell-timeline" className="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div className="container">
+          <SmartSellTimeline />
         </div>
       </section>
 
