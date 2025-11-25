@@ -29,7 +29,9 @@
 
 1. Click on your newly created API key to edit it
 2. Under "API restrictions", select "Restrict key"
-3. Choose "Places API" from the list
+3. **Select both APIs from the list**:
+   - Maps JavaScript API
+   - Places API
 4. Under "Application restrictions", you can:
    - Select "HTTP referrers (web sites)" 
    - Add your website domains (e.g., `homesellerinformation.netlify.app`, `*.netlify.app`)
