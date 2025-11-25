@@ -342,17 +342,35 @@ function App() {
     setShowGlossary(false)
   }
 
+  // Load Google Maps script dynamically
+  useEffect(() => {
+    const apiKey = import.meta.env.VITE_GOOGLE_PLACES_API_KEY || 'AIzaSyBCsPHXj76xFdWuXs2OOZn3YV8-jYmoYLE'
+    
+    if (!window.google && !document.querySelector('script[src*="maps.googleapis.com"]')) {
+      const script = document.createElement('script')
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`
+      script.async = true
+      script.defer = true
+      document.head.appendChild(script)
+    }
+  }, [])
+
   // Initialize Google Places Autocomplete for property address
   useEffect(() => {
     let autocomplete = null
-    let input = null
-    let isInitialized = false
+    const inputId = 'propertyAddress'
 
     const initAutocomplete = () => {
-      if (window.google && window.google.maps && window.google.maps.places && !isInitialized) {
-        input = document.getElementById('propertyAddress')
-        if (input) {
-          // Create autocomplete instance
+      // Wait for input to be in DOM
+      const input = document.getElementById(inputId)
+      if (!input) return false
+
+      // Check if already initialized
+      if (input.dataset.autocompleteInitialized === 'true') return true
+
+      if (window.google && window.google.maps && window.google.maps.places) {
+        try {
+          // Create autocomplete instance - this should NOT interfere with typing
           autocomplete = new window.google.maps.places.Autocomplete(input, {
             types: ['address'],
             componentRestrictions: { country: ['us'] },
@@ -363,46 +381,54 @@ function App() {
           autocomplete.addListener('place_changed', () => {
             const place = autocomplete.getPlace()
             if (place && place.formatted_address) {
-              // Use setTimeout to ensure React state update doesn't conflict
-              setTimeout(() => {
-                setFormData(prev => ({ ...prev, propertyAddress: place.formatted_address }))
-                // Clear any existing error
-                if (formErrors.propertyAddress) {
-                  setFormErrors(prev => ({ ...prev, propertyAddress: '' }))
-                }
-              }, 0)
+              // Update React state when user selects from dropdown
+              setFormData(prev => ({ ...prev, propertyAddress: place.formatted_address }))
+              // Clear any existing error
+              if (formErrors.propertyAddress) {
+                setFormErrors(prev => ({ ...prev, propertyAddress: '' }))
+              }
             }
           })
           
-          isInitialized = true
+          // Mark as initialized
+          input.dataset.autocompleteInitialized = 'true'
+          return true
+        } catch (error) {
+          console.error('Error initializing autocomplete:', error)
+          return false
         }
+      }
+      return false
+    }
+
+    // Try to initialize
+    let attempts = 0
+    const maxAttempts = 10
+    const tryInit = () => {
+      attempts++
+      if (initAutocomplete() || attempts >= maxAttempts) {
+        clearInterval(initInterval)
       }
     }
 
-    // Try to initialize after component mounts and input is available
-    const timer = setTimeout(() => {
-      initAutocomplete()
-    }, 1000)
+    // Start trying immediately
+    tryInit()
+    
+    // Also try periodically in case Google Maps loads later
+    const initInterval = setInterval(tryInit, 500)
 
-    // Also check periodically if Google Maps loads later
-    const checkGoogle = setInterval(() => {
-      if (window.google && window.google.maps && window.google.maps.places && !isInitialized) {
-        initAutocomplete()
-        if (isInitialized) {
-          clearInterval(checkGoogle)
-        }
-      }
-    }, 1000)
-
+    // Cleanup
     return () => {
-      clearTimeout(timer)
-      clearInterval(checkGoogle)
-      // Clean up autocomplete if needed
-      if (autocomplete) {
-        window.google?.maps?.event?.clearInstanceListeners?.(autocomplete)
+      clearInterval(initInterval)
+      if (autocomplete && window.google?.maps?.event) {
+        try {
+          window.google.maps.event.clearInstanceListeners(autocomplete)
+        } catch (e) {
+          // Ignore cleanup errors
+        }
       }
     }
-  }, [])
+  }, [formErrors.propertyAddress])
 
   // Track active chapter based on scroll position
   useEffect(() => {

@@ -1,5 +1,7 @@
 # Google Places API Key Setup Instructions
 
+⚠️ **SECURITY ALERT**: Never commit your API key to public repositories! Always use environment variables.
+
 ## Step 1: Get Your Google Places API Key
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
@@ -25,15 +27,26 @@
    - Add your website domains (e.g., `homesellerinformation.netlify.app`, `*.netlify.app`)
 5. Click "Save"
 
-## Step 4: Add API Key to Your Project
+## Step 4: Add API Key to Your Project (Using Environment Variables)
 
-1. Open `index.html` in your project
-2. Find this line (around line 220):
-   ```html
-   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_PLACES_API_KEY&libraries=places" async defer></script>
+**IMPORTANT**: The API key is now loaded dynamically from environment variables for security. The key is no longer hardcoded in `index.html`.
+
+1. Create a `.env` file in your project root (if it doesn't exist):
+   ```bash
+   touch .env
    ```
-3. Replace `YOUR_GOOGLE_PLACES_API_KEY` with your actual API key
-4. Save the file
+
+2. Add your API key to the `.env` file:
+   ```
+   VITE_GOOGLE_PLACES_API_KEY=your_actual_api_key_here
+   ```
+
+3. **IMPORTANT**: The `.env` file is already in `.gitignore`, so it won't be committed to git.
+
+4. For production (Netlify), add the environment variable in your Netlify dashboard:
+   - Go to Site settings → Environment variables
+   - Add `VITE_GOOGLE_PLACES_API_KEY` with your API key value
+   - Redeploy your site after adding the variable
 
 ## Step 5: Test the Autocomplete
 
@@ -74,19 +87,21 @@ If you get 100 form submissions per month, and each user types an average of 5 a
 - Verify your API key restrictions allow your domain
 - Check that billing is enabled if you've exceeded the free tier
 
-## Alternative: Using Environment Variables (More Secure)
+## If Your API Key Was Compromised
 
-If you want to use environment variables instead:
+If you received a security alert from Google about your API key being publicly accessible:
 
-1. Create a `.env` file in your project root:
-   ```
-   VITE_GOOGLE_PLACES_API_KEY=your_actual_api_key_here
-   ```
+1. **Immediately regenerate your API key**:
+   - Go to Google Cloud Console → APIs & Services → Credentials
+   - Find your compromised API key
+   - Click "Regenerate key" to create a new one
+   - Update your `.env` file with the new key
 
-2. Update `index.html` to use the environment variable:
-   ```html
-   <script src={`https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_PLACES_API_KEY}&libraries=places`} async defer></script>
-   ```
+2. **Add proper restrictions** (see Step 3 above)
 
-   Note: For this to work, you'll need to load the script dynamically in your React component instead of in the HTML file.
+3. **Remove the old key from your code**:
+   - The code now uses environment variables, so your key is no longer in the repository
+   - Make sure your `.env` file is in `.gitignore` (it already is)
+
+4. **Monitor usage** in Google Cloud Console to ensure no unauthorized usage
 
