@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Download, Printer } from 'lucide-react'
+import { Download, Printer, Info } from 'lucide-react'
 import jsPDF from 'jspdf'
 
 // Title company fees (DMV average)
@@ -623,65 +623,193 @@ const NetSheetCalculator = () => {
                 <div className="bg-gray-50 rounded-lg p-6 space-y-4">
                   <h3 className="font-semibold text-gray-800 mb-4">Breakdown:</h3>
                   
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Listing Price:</span>
-                    <span className="font-semibold text-gray-800">{formatCurrency(breakdown.listingPrice)}</span>
-                  </div>
+                  <div className="space-y-3">
+                    <div>
+                      <div className="flex justify-between items-start text-sm">
+                        <div className="flex items-center gap-2 flex-1">
+                          <span className="text-gray-600">Listing Price:</span>
+                          <div className="group relative">
+                            <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                            <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                              The sale price of your home - the amount the buyer agrees to pay.
+                            </div>
+                          </div>
+                        </div>
+                        <span className="font-semibold text-gray-800">{formatCurrency(breakdown.listingPrice)}</span>
+                      </div>
+                    </div>
 
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">- Mortgage Payoff:</span>
-                    <span className="font-semibold text-red-600">-{formatCurrency(breakdown.mortgagePayoff)}</span>
-                  </div>
+                    <div>
+                      <div className="flex justify-between items-start text-sm">
+                        <div className="flex items-center gap-2 flex-1">
+                          <span className="text-gray-600">- Mortgage Payoff:</span>
+                          <div className="group relative">
+                            <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                            <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                              The remaining balance on your mortgage that must be paid off at closing. This is deducted from your sale proceeds.
+                            </div>
+                          </div>
+                        </div>
+                        <span className="font-semibold text-red-600">-{formatCurrency(breakdown.mortgagePayoff)}</span>
+                      </div>
+                    </div>
 
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">- Prorated Taxes:</span>
-                    <span className="font-semibold text-red-600">-{formatCurrency(breakdown.proratedTaxes)}</span>
-                  </div>
+                    <div>
+                      <div className="flex justify-between items-start text-sm">
+                        <div className="flex items-center gap-2 flex-1">
+                          <span className="text-gray-600">- Prorated Taxes:</span>
+                          <div className="group relative">
+                            <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                            <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                              Property taxes you owe for the portion of the year you owned the home. Calculated based on your closing date.
+                            </div>
+                          </div>
+                        </div>
+                        <span className="font-semibold text-red-600">-{formatCurrency(breakdown.proratedTaxes)}</span>
+                      </div>
+                    </div>
 
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">- Commission ({formData.commissionFees}%):</span>
-                    <span className="font-semibold text-red-600">-{formatCurrency(breakdown.commission)}</span>
-                  </div>
+                    <div>
+                      <div className="flex justify-between items-start text-sm">
+                        <div className="flex items-center gap-2 flex-1">
+                          <span className="text-gray-600">- Commission ({formData.commissionFees}%):</span>
+                          <div className="group relative">
+                            <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                            <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                              The fee paid to real estate agents (typically 5-6% total). Split between your listing agent and the buyer's agent. This is your largest closing cost.
+                            </div>
+                          </div>
+                        </div>
+                        <span className="font-semibold text-red-600">-{formatCurrency(breakdown.commission)}</span>
+                      </div>
+                    </div>
 
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">- Transfer Tax:</span>
-                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.transferTax)}</span>
+                    <div className="space-y-2 pt-2 border-t border-gray-200">
+                      <div>
+                        <div className="flex justify-between items-start text-sm">
+                          <div className="flex items-center gap-2 flex-1">
+                            <span className="text-gray-600">- Transfer Tax:</span>
+                            <div className="group relative">
+                              <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                              <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                                A tax paid when transferring property ownership, based on the sale price. Rates vary by location (DC: 1.1%, VA: varies by county, MD: 0.5%).
+                              </div>
+                            </div>
+                          </div>
+                          <span className="font-semibold text-red-600">-{formatCurrency(breakdown.transferTax)}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between items-start text-sm">
+                          <div className="flex items-center gap-2 flex-1">
+                            <span className="text-gray-600">- Recording Tax:</span>
+                            <div className="group relative">
+                              <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                              <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                                A fee paid to the local government to record the deed and transfer documents. Typically a small fixed fee ($30-50).
+                              </div>
+                            </div>
+                          </div>
+                          <span className="font-semibold text-red-600">-{formatCurrency(breakdown.recordingTax)}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between items-start text-sm">
+                          <div className="flex items-center gap-2 flex-1">
+                            <span className="text-gray-600">- Title Company Fees:</span>
+                            <div className="group relative">
+                              <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                              <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                                Fees paid to the title company for handling the closing, including closing fees, processing fees, deed preparation, and recording services. DMV average: $1,425.
+                              </div>
+                            </div>
+                          </div>
+                          <span className="font-semibold text-red-600">-{formatCurrency(breakdown.titleFees)}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between items-start text-sm">
+                          <div className="flex items-center gap-2 flex-1">
+                            <span className="text-gray-600">- HOA Fees:</span>
+                            <div className="group relative">
+                              <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                              <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                                Prorated homeowners association fees you owe up to the closing date. Only applies if your property is in an HOA.
+                              </div>
+                            </div>
+                          </div>
+                          <span className="font-semibold text-red-600">-{formatCurrency(breakdown.hoaFees)}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between items-start text-sm">
+                          <div className="flex items-center gap-2 flex-1">
+                            <span className="text-gray-600">- Home Warranty:</span>
+                            <div className="group relative">
+                              <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                              <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                                Optional service contract you may offer to buyers covering repairs to major systems and appliances (typically for one year). This can make your property more attractive.
+                              </div>
+                            </div>
+                          </div>
+                          <span className="font-semibold text-red-600">-{formatCurrency(breakdown.homeWarranty)}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between items-start text-sm">
+                          <div className="flex items-center gap-2 flex-1">
+                            <span className="text-gray-600">- Repairs/Concessions:</span>
+                            <div className="group relative">
+                              <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                              <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                                Money you agree to pay for repairs found during inspection or credits you give to the buyer. This can include fixing issues or offering credits instead of making repairs.
+                              </div>
+                            </div>
+                          </div>
+                          <span className="font-semibold text-red-600">-{formatCurrency(breakdown.repairsConcessions)}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between items-start text-sm">
+                          <div className="flex items-center gap-2 flex-1">
+                            <span className="text-gray-600">- Other Costs:</span>
+                            <div className="group relative">
+                              <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                              <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                                Any additional closing costs not covered in other categories, such as attorney fees, survey fees, or other miscellaneous expenses.
+                              </div>
+                            </div>
+                          </div>
+                          <span className="font-semibold text-red-600">-{formatCurrency(breakdown.miscClosingCosts)}</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between text-sm pt-2 border-t border-gray-300">
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-gray-700">Total Closing Costs:</span>
+                          <div className="group relative">
+                            <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                            <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                              The sum of all closing costs deducted from your sale proceeds. This includes taxes, fees, commissions, and any negotiated repairs or concessions.
+                            </div>
+                          </div>
+                        </div>
+                        <span className="font-bold text-red-600">-{formatCurrency(breakdown.totalClosingCosts)}</span>
+                      </div>
                     </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">- Recording Tax:</span>
-                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.recordingTax)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">- Title Company Fees:</span>
-                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.titleFees)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">- HOA Fees:</span>
-                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.hoaFees)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">- Home Warranty:</span>
-                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.homeWarranty)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">- Repairs/Concessions:</span>
-                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.repairsConcessions)}</span>
-                    </div>
-                  <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">- Other Costs:</span>
-                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.miscClosingCosts)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm pt-2 border-t border-gray-300">
-                      <span className="font-semibold text-gray-700">Total Closing Costs:</span>
-                      <span className="font-bold text-red-600">-{formatCurrency(breakdown.totalClosingCosts)}</span>
-                    </div>
-                  </div>
 
-                  <div className="border-t border-gray-300 pt-4 mt-4">
-                    <div className="flex justify-between">
-                      <span className="font-bold text-gray-800">Net Proceeds:</span>
-                      <span className="font-bold text-primary text-lg">{formatCurrency(netProceeds)}</span>
+                    <div className="border-t border-gray-300 pt-4 mt-4">
+                      <div className="flex justify-between items-start">
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-gray-800">Net Proceeds:</span>
+                          <div className="group relative">
+                            <Info size={14} className="text-gray-400 hover:text-primary cursor-help" />
+                            <div className="absolute left-0 bottom-full mb-2 hidden group-hover:block w-64 p-3 bg-navy text-white text-xs rounded-lg shadow-xl z-50">
+                              Your final "walk-away" amount - the actual cash you'll receive after all deductions. This is what goes into your bank account.
+                            </div>
+                          </div>
+                        </div>
+                        <span className="font-bold text-primary text-lg">{formatCurrency(netProceeds)}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
