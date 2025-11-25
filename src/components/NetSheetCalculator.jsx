@@ -657,14 +657,6 @@ const NetSheetCalculator = () => {
                       <span className="font-semibold text-red-600">-{formatCurrency(breakdown.titleFees)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">- Title Insurance:</span>
-                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.titleInsurance)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">- Escrow Fees:</span>
-                      <span className="font-semibold text-red-600">-{formatCurrency(breakdown.escrowFees)}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
                       <span className="text-gray-600">- HOA Fees:</span>
                       <span className="font-semibold text-red-600">-{formatCurrency(breakdown.hoaFees)}</span>
                     </div>
