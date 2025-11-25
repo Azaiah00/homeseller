@@ -25,7 +25,8 @@ import {
   Home,
   FileText,
   BarChart3,
-  MessageCircle
+  MessageCircle,
+  BookOpen
 } from 'lucide-react'
 import NetSheetCalculator from './components/NetSheetCalculator'
 import ROICalculator from './components/ROICalculator'
