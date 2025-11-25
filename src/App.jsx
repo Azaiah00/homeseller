@@ -348,9 +348,18 @@ function App() {
     
     if (!window.google && !document.querySelector('script[src*="maps.googleapis.com"]')) {
       const script = document.createElement('script')
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&loading=async`
       script.async = true
       script.defer = true
+      
+      // Add error handling
+      script.onerror = () => {
+        console.error('Failed to load Google Maps JavaScript API. Please check:')
+        console.error('1. Maps JavaScript API is enabled in Google Cloud Console')
+        console.error('2. Places API is enabled in Google Cloud Console')
+        console.error('3. API key is valid and has proper restrictions')
+      }
+      
       document.head.appendChild(script)
     }
   }, [])
@@ -368,7 +377,14 @@ function App() {
       // Check if already initialized
       if (input.dataset.autocompleteInitialized === 'true') return true
 
-      if (window.google && window.google.maps && window.google.maps.places) {
+      // Check if Google Maps is loaded and APIs are available
+      if (window.google && window.google.maps) {
+        // Check if Places API is available
+        if (!window.google.maps.places) {
+          console.warn('Google Maps Places API not loaded. Make sure Places API is enabled in Google Cloud Console.')
+          return false
+        }
+
         try {
           // Create autocomplete instance - this should NOT interfere with typing
           autocomplete = new window.google.maps.places.Autocomplete(input, {
@@ -392,34 +408,64 @@ function App() {
           
           // Mark as initialized
           input.dataset.autocompleteInitialized = 'true'
+          console.log('Google Places Autocomplete initialized successfully')
           return true
         } catch (error) {
           console.error('Error initializing autocomplete:', error)
+          if (error.message && error.message.includes('ApiNotActivatedMapError')) {
+            console.error('Maps JavaScript API is not enabled. Please enable it in Google Cloud Console.')
+          }
           return false
         }
       }
       return false
     }
 
-    // Try to initialize
-    let attempts = 0
-    const maxAttempts = 10
-    const tryInit = () => {
-      attempts++
-      if (initAutocomplete() || attempts >= maxAttempts) {
-        clearInterval(initInterval)
+    // Wait for Google Maps to load before trying to initialize
+    const waitForGoogleMaps = () => {
+      if (window.google && window.google.maps) {
+        // Google Maps is loaded, try to initialize
+        let attempts = 0
+        const maxAttempts = 20
+        const tryInit = () => {
+          attempts++
+          if (initAutocomplete() || attempts >= maxAttempts) {
+            clearInterval(initInterval)
+            if (attempts >= maxAttempts && !document.getElementById(inputId)?.dataset.autocompleteInitialized) {
+              console.warn('Failed to initialize autocomplete after multiple attempts. Check API activation in Google Cloud Console.')
+            }
+          }
+        }
+
+        // Start trying immediately
+        tryInit()
+        
+        // Also try periodically
+        const initInterval = setInterval(tryInit, 500)
+        return initInterval
       }
+      return null
     }
 
-    // Start trying immediately
-    tryInit()
+    // Check immediately
+    let initInterval = waitForGoogleMaps()
     
-    // Also try periodically in case Google Maps loads later
-    const initInterval = setInterval(tryInit, 500)
+    // Also listen for when Google Maps loads
+    const checkInterval = setInterval(() => {
+      if (window.google && window.google.maps && !initInterval) {
+        initInterval = waitForGoogleMaps()
+        if (initInterval) {
+          clearInterval(checkInterval)
+        }
+      }
+    }, 1000)
 
     // Cleanup
     return () => {
-      clearInterval(initInterval)
+      clearInterval(checkInterval)
+      if (initInterval) {
+        clearInterval(initInterval)
+      }
       if (autocomplete && window.google?.maps?.event) {
         try {
           window.google.maps.event.clearInstanceListeners(autocomplete)
