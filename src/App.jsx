@@ -1398,6 +1398,50 @@ function App() {
       {/* ROI CALCULATOR */}
       <ROICalculator />
 
+      {/* Glossary Promotion After Calculators */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border-2 border-primary/20 relative overflow-hidden">
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full -mr-20 -mt-20"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary/5 rounded-full -ml-16 -mb-16"></div>
+              
+              <div className="relative z-10 text-center">
+                <div className="inline-flex items-center justify-center gap-2 bg-primary/10 text-primary px-5 py-2.5 rounded-full mb-5 font-semibold">
+                  <FileText size={20} />
+                  <span>Seller Education</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-navy mb-4">
+                  Confused by Terms Like "Net Proceeds" or "Transfer Tax"?
+                </h3>
+                <p className="text-lg text-gray-700 mb-3 leading-relaxed max-w-2xl mx-auto">
+                  You just used our calculator, but do you know what all those line items mean? Our <strong>Seller's Real Estate Glossary</strong> breaks down every term you need to understand.
+                </p>
+                <p className="text-gray-600 mb-6">
+                  Learn the language of real estate so you can make informed decisions and ask the right questions.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleOpenGlossary}
+                  className="cta-button primary text-base px-6 py-3 inline-flex items-center gap-2"
+                  style={{ cursor: 'pointer' }}
+                >
+                  <FileText size={18} />
+                  View Seller's Glossary
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* CONTACT SECTION */}
       <section id="contact" className="py-20 bg-gradient-to-br from-navy to-navy-dark text-white">
         <div className="container">
@@ -1854,20 +1898,38 @@ function App() {
             transition={{ duration: 0.6 }}
             className="mt-12 text-center"
           >
-            <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl p-8 border-2 border-primary/20 max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold text-navy mb-4">Want to Learn More?</h3>
-              <p className="text-gray-700 mb-6 leading-relaxed">
-                Understanding real estate terminology is key to making informed decisions. 
-                Explore our comprehensive glossary to educate yourself on common terms you'll encounter during your home selling journey.
-              </p>
-              <button
-                type="button"
-                onClick={handleOpenGlossary}
-                className="cta-button primary"
-                style={{ cursor: 'pointer' }}
-              >
-                View Real Estate Glossary
-              </button>
+            <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-primary/10 rounded-xl p-8 md:p-10 border-2 border-primary/30 shadow-xl max-w-3xl mx-auto relative overflow-hidden">
+              {/* Decorative background elements */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-primary/5 rounded-full -ml-12 -mb-12"></div>
+              
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-2 bg-primary/20 text-primary px-4 py-2 rounded-full mb-4 font-semibold text-sm">
+                  <BookOpen size={18} />
+                  <span>Knowledge is Power</span>
+                </div>
+                <h3 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+                  Want to Learn the Terms Every Seller Needs to Know?
+                </h3>
+                <p className="text-lg text-gray-700 mb-2 leading-relaxed max-w-2xl mx-auto">
+                  Don't let confusing real estate jargon catch you off guard. Our comprehensive <strong>Seller's Glossary</strong> explains every term you'll encounter during your home sale.
+                </p>
+                <p className="text-gray-600 mb-6 text-sm">
+                  From "net proceeds" to "transfer taxes" - understand exactly what you're signing and what you're paying for.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleOpenGlossary}
+                  className="cta-button primary text-lg px-8 py-4 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
+                  style={{ cursor: 'pointer' }}
+                >
+                  <BookOpen size={20} className="inline mr-2" />
+                  Explore Seller's Real Estate Glossary
+                </button>
+                <p className="text-xs text-gray-500 mt-4">
+                  Free • No sign-up required • Seller-focused terms only
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
