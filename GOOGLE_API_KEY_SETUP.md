@@ -2,14 +2,22 @@
 
 ⚠️ **SECURITY ALERT**: Never commit your API key to public repositories! Always use environment variables.
 
-## Step 1: Get Your Google Places API Key
+## Step 1: Enable Required APIs
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Sign in with your Google account
 3. Create a new project or select an existing one
 4. Click on "APIs & Services" > "Library" in the left sidebar
-5. Search for "Places API" and click on it
-6. Click "Enable" to enable the Places API for your project
+
+5. **Enable Maps JavaScript API** (REQUIRED):
+   - Search for "Maps JavaScript API" and click on it
+   - Click "Enable" to enable the Maps JavaScript API for your project
+   - This API is required for the autocomplete to work
+
+6. **Enable Places API** (REQUIRED):
+   - Search for "Places API" and click on it
+   - Click "Enable" to enable the Places API for your project
+   - This API provides the address autocomplete suggestions
 
 ## Step 2: Create API Key
 
@@ -82,10 +90,24 @@ If you get 100 form submissions per month, and each user types an average of 5 a
 
 ## Troubleshooting
 
+### Common Errors
+
+**"ApiNotActivatedMapError"**:
+- This means the **Maps JavaScript API** is not enabled
+- Go to Google Cloud Console → APIs & Services → Library
+- Search for "Maps JavaScript API" and click "Enable"
+- Wait a few minutes for the API to activate, then refresh your page
+
+**"ApiNotActivatedMapError" for Places**:
+- Make sure both **Maps JavaScript API** and **Places API** are enabled
+- Both APIs are required for the autocomplete feature to work
+
+**Other Issues**:
 - If autocomplete doesn't work, check the browser console for errors
-- Make sure the Places API is enabled in your Google Cloud project
+- Make sure both Maps JavaScript API and Places API are enabled in your Google Cloud project
 - Verify your API key restrictions allow your domain
 - Check that billing is enabled if you've exceeded the free tier
+- Wait a few minutes after enabling APIs for them to become active
 
 ## If Your API Key Was Compromised
 
