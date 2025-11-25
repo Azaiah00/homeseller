@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
   Menu, 
@@ -36,122 +36,78 @@ import Glossary from './components/Glossary'
 const VirtualStagingSlider = () => {
   const [sliderPosition, setSliderPosition] = useState(50)
   const [isDragging, setIsDragging] = useState(false)
-  const containerRef = useRef(null)
 
-  const updateSliderPosition = (clientX) => {
-    if (!containerRef.current) return
-    
-    const rect = containerRef.current.getBoundingClientRect()
-    const x = clientX - rect.left
+  const handleMouseDown = (e) => {
+    e.preventDefault()
+    setIsDragging(true)
+  }
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return
+    const container = e.currentTarget.closest('.slider-container') || 
+                     document.querySelector('.slider-container')
+    if (!container) return
+    const rect = container.getBoundingClientRect()
+    const x = e.clientX - rect.left
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
     setSliderPosition(percentage)
   }
 
-  const handleStart = (clientX) => {
-    setIsDragging(true)
-    updateSliderPosition(clientX)
-  }
-
-  const handleMouseDown = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    handleStart(e.clientX)
-  }
-
-  const handleTouchStart = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (e.touches[0]) {
-      handleStart(e.touches[0].clientX)
-    }
-  }
-
-  const handleMove = (clientX) => {
-    if (!isDragging) return
-    updateSliderPosition(clientX)
-  }
-
-  const handleEnd = () => {
+  const handleMouseUp = () => {
     setIsDragging(false)
   }
 
+  const handleTouchMove = (e) => {
+    const container = e.currentTarget.closest('.slider-container') || 
+                     document.querySelector('.slider-container')
+    if (!container) return
+    const rect = container.getBoundingClientRect()
+    const touch = e.touches[0]
+    const x = touch.clientX - rect.left
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+    setSliderPosition(percentage)
+  }
+
   useEffect(() => {
-    if (!isDragging) return
-
-    const handleMouseMove = (e) => {
-      e.preventDefault()
-      handleMove(e.clientX)
-    }
-
-    const handleMouseUp = (e) => {
-      e.preventDefault()
-      handleEnd()
-    }
-
-    const handleTouchMove = (e) => {
-      e.preventDefault()
-      if (e.touches[0]) {
-        handleMove(e.touches[0].clientX)
+    if (isDragging) {
+      const handleGlobalMouseMove = (e) => handleMouseMove(e)
+      const handleGlobalMouseUp = () => handleMouseUp()
+      const handleGlobalTouchMove = (e) => handleTouchMove(e)
+      
+      document.addEventListener('mousemove', handleGlobalMouseMove)
+      document.addEventListener('mouseup', handleGlobalMouseUp)
+      document.addEventListener('touchmove', handleGlobalTouchMove, { passive: false })
+      
+      return () => {
+        document.removeEventListener('mousemove', handleGlobalMouseMove)
+        document.removeEventListener('mouseup', handleGlobalMouseUp)
+        document.removeEventListener('touchmove', handleGlobalTouchMove)
       }
-    }
-
-    const handleTouchEnd = (e) => {
-      e.preventDefault()
-      handleEnd()
-    }
-
-    // Add event listeners to document for smooth dragging
-    document.addEventListener('mousemove', handleMouseMove, { passive: false })
-    document.addEventListener('mouseup', handleMouseUp, { passive: false })
-    document.addEventListener('touchmove', handleTouchMove, { passive: false })
-    document.addEventListener('touchend', handleTouchEnd, { passive: false })
-    document.addEventListener('touchcancel', handleTouchEnd, { passive: false })
-    
-    // Prevent text selection while dragging
-    document.body.style.userSelect = 'none'
-    document.body.style.cursor = 'col-resize'
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseup', handleMouseUp)
-      document.removeEventListener('touchmove', handleTouchMove)
-      document.removeEventListener('touchend', handleTouchEnd)
-      document.removeEventListener('touchcancel', handleTouchEnd)
-      document.body.style.userSelect = ''
-      document.body.style.cursor = ''
     }
   }, [isDragging])
 
   const handleContainerClick = (e) => {
-    // Don't update if clicking on the handle
     if (e.target.closest('.slider-handle')) return
-    if (isDragging) return
-    
-    updateSliderPosition(e.clientX)
-  }
-
-  const handleContainerTouch = (e) => {
-    // Don't update if touching the handle
-    if (e.target.closest('.slider-handle')) return
-    if (isDragging) return
-    
-    if (e.touches[0]) {
-      updateSliderPosition(e.touches[0].clientX)
-    }
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+    setSliderPosition(percentage)
   }
 
   return (
     <div 
-      ref={containerRef}
-      className="slider-container relative w-full h-[500px] md:h-[600px] cursor-col-resize select-none touch-none"
+      className="slider-container relative w-full h-[500px] md:h-[600px] cursor-col-resize select-none"
       onClick={handleContainerClick}
-      onTouchStart={handleContainerTouch}
+      onTouchStart={(e) => {
+        const touch = e.touches[0]
+        const rect = e.currentTarget.getBoundingClientRect()
+        const x = touch.clientX - rect.left
+        const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+        setSliderPosition(percentage)
+      }}
     >
-      {/* Before Image (Left Side - Clipped from right) */}
-      <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ clipPath: `inset(0 0 0 ${100 - sliderPosition}%)` }}
-      >
+      {/* Before Image (Background - Left Side) */}
+      <div className="absolute inset-0">
         <img
           src="/images/public:images:virtual-staging-before.jpeg"
           alt="Empty room before virtual staging"
@@ -164,10 +120,10 @@ const VirtualStagingSlider = () => {
         </div>
       </div>
 
-      {/* After Image (Right Side - Clipped from left) */}
+      {/* After Image (Clipped - Right Side) */}
       <div
         className="absolute inset-0 overflow-hidden"
-        style={{ clipPath: `inset(0 ${sliderPosition}% 0 0)` }}
+        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
         <img
           src="/images/public:images:virtual-staging-afte.PNG"
@@ -183,17 +139,13 @@ const VirtualStagingSlider = () => {
 
       {/* Slider Line */}
       <div
-        className="slider-handle absolute top-0 bottom-0 w-1 bg-white/90 shadow-2xl z-20 cursor-col-resize touch-none"
-        style={{ 
-          left: `${sliderPosition}%`, 
-          transform: 'translateX(-50%)',
-          transition: isDragging ? 'none' : 'left 0.1s ease-out'
-        }}
+        className="slider-handle absolute top-0 bottom-0 w-1 bg-white shadow-2xl z-10 cursor-col-resize"
+        style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
         onMouseDown={handleMouseDown}
-        onTouchStart={handleTouchStart}
+        onTouchStart={handleMouseDown}
       >
         {/* Slider Handle */}
-        <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center border-4 border-primary transition-transform ${isDragging ? 'scale-110' : 'hover:scale-110'}`}>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-xl flex items-center justify-center border-4 border-primary hover:scale-110 transition-transform">
           <div className="flex gap-1">
             <div className="w-1 h-4 bg-primary rounded-full"></div>
             <div className="w-1 h-4 bg-primary rounded-full"></div>
