@@ -342,6 +342,49 @@ function App() {
     setShowGlossary(false)
   }
 
+  // Initialize Google Places Autocomplete for property address
+  useEffect(() => {
+    const initAutocomplete = () => {
+      if (window.google && window.google.maps && window.google.maps.places) {
+        const input = document.getElementById('propertyAddress')
+        if (input && !input.autocomplete) {
+          const autocomplete = new window.google.maps.places.Autocomplete(input, {
+            types: ['address'],
+            componentRestrictions: { country: ['us'] },
+            fields: ['formatted_address', 'address_components', 'geometry']
+          })
+          
+          autocomplete.addListener('place_changed', () => {
+            const place = autocomplete.getPlace()
+            if (place.formatted_address) {
+              setFormData(prev => ({ ...prev, propertyAddress: place.formatted_address }))
+              // Clear any existing error
+              if (formErrors.propertyAddress) {
+                setFormErrors(prev => ({ ...prev, propertyAddress: '' }))
+              }
+            }
+          })
+          
+          input.autocomplete = autocomplete
+        }
+      }
+    }
+
+    // Try to initialize immediately if Google Maps is already loaded
+    initAutocomplete()
+
+    // Also try after a delay in case the script loads later
+    const timer = setTimeout(initAutocomplete, 1000)
+
+    // Listen for when Google Maps script loads
+    window.addEventListener('load', initAutocomplete)
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('load', initAutocomplete)
+    }
+  }, [formErrors.propertyAddress])
+
   // Track active chapter based on scroll position
   useEffect(() => {
     const handleScroll = () => {
