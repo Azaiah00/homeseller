@@ -109,8 +109,11 @@ const VirtualStagingSlider = () => {
         setSliderPosition(percentage)
       }}
     >
-      {/* Before Image (Background) */}
-      <div className="absolute inset-0">
+      {/* Before Image (Left Side - Clipped from right) */}
+      <div
+        className="absolute inset-0 overflow-hidden"
+        style={{ clipPath: `inset(0 0 0 ${100 - sliderPosition}%)` }}
+      >
         <img
           src="/images/public:images:virtual-staging-before.jpeg"
           alt="Empty room before virtual staging"
@@ -123,10 +126,10 @@ const VirtualStagingSlider = () => {
         </div>
       </div>
 
-      {/* After Image (Clipped) */}
+      {/* After Image (Right Side - Clipped from left) */}
       <div
         className="absolute inset-0 overflow-hidden"
-        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+        style={{ clipPath: `inset(0 ${sliderPosition}% 0 0)` }}
       >
         <img
           src="/images/public:images:virtual-staging-afte.PNG"
@@ -1530,7 +1533,7 @@ function App() {
                 for your situation.
               </p>
             </div>
-              </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -1578,9 +1581,9 @@ function App() {
                   <FileText size={18} />
                   View Seller's Glossary
                 </button>
-              </div>
+                      </div>
             </div>
-          </motion.div>
+              </motion.div>
         </div>
       </section>
 
