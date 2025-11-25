@@ -119,7 +119,7 @@ const VirtualStagingSlider = () => {
         }
       }}
     >
-      {/* After Image (Background - Right Side) */}
+      {/* After Image (Background - Left Side) */}
       <div className="absolute inset-0">
         <img
           src="/images/public:images:virtual-staging-afte.PNG"
@@ -128,15 +128,15 @@ const VirtualStagingSlider = () => {
           draggable={false}
           loading="lazy"
         />
-        <div className="absolute top-4 right-4 bg-primary/90 text-white px-4 py-2 rounded-lg font-semibold backdrop-blur-sm">
+        <div className="absolute top-4 left-4 bg-primary/90 text-white px-4 py-2 rounded-lg font-semibold backdrop-blur-sm">
           After
         </div>
       </div>
 
-      {/* Before Image (Clipped - Left Side) */}
+      {/* Before Image (Clipped - Right Side) */}
       <div
         className="absolute inset-0 overflow-hidden"
-        style={{ clipPath: `inset(0 0 0 ${100 - sliderPosition}%)` }}
+        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
         <img
           src="/images/public:images:virtual-staging-before.jpeg"
@@ -145,7 +145,7 @@ const VirtualStagingSlider = () => {
           draggable={false}
           loading="lazy"
         />
-        <div className="absolute top-4 left-4 bg-black/70 text-white px-4 py-2 rounded-lg font-semibold backdrop-blur-sm">
+        <div className="absolute top-4 right-4 bg-black/70 text-white px-4 py-2 rounded-lg font-semibold backdrop-blur-sm">
           Before
         </div>
       </div>
