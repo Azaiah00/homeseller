@@ -42,12 +42,30 @@
 3. Click on the "Property Address" field
 4. Start typing an address - you should see Google Places autocomplete suggestions appear
 
-## Important Notes
+## Important Notes - Pricing Information
 
-- **Billing**: Google Places API has a free tier (usually $200/month credit), but you may need to enable billing in Google Cloud Console
-- **Rate Limits**: The free tier includes 10,000 requests per month
-- **Security**: Always restrict your API key to prevent unauthorized use
-- **Environment Variables**: For production, consider using environment variables instead of hardcoding the key
+### Is it Free?
+
+**Yes, for most use cases!** Google Places API is not completely free, but Google provides a **$200 monthly credit** to all users. This credit typically covers:
+
+- **~70,000 Autocomplete requests per month** (which is what we're using)
+- For a typical real estate website, this is usually more than enough
+
+### Pricing Details
+
+- **Free Tier**: $200/month credit (covers ~70,000 Autocomplete requests)
+- **After Free Tier**: $2.83 per 1,000 Autocomplete requests
+- **Billing Required**: You must enable billing in Google Cloud Console, but you won't be charged unless you exceed the $200 credit
+
+### For Your Use Case
+
+If you get 100 form submissions per month, and each user types an average of 5 autocomplete requests, that's only 500 requests/month - well within the free tier!
+
+### Security
+
+- Always restrict your API key to prevent unauthorized use
+- Set up API key restrictions (see Step 3)
+- Monitor your usage in Google Cloud Console to stay within the free tier
 
 ## Troubleshooting
 
