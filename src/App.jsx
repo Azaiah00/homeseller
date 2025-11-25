@@ -112,7 +112,7 @@ const VirtualStagingSlider = () => {
       {/* Before Image (Background) */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1200&h=800&fit=crop"
+          src="/images/public:images:virtual-staging-before.jpeg"
           alt="Empty room before virtual staging"
           className="w-full h-full object-cover"
           draggable={false}
@@ -129,7 +129,7 @@ const VirtualStagingSlider = () => {
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
         <img
-          src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&h=800&fit=crop"
+          src="/images/public:images:virtual-staging-afte.PNG"
           alt="Room after virtual staging"
           className="w-full h-full object-cover"
           draggable={false}
@@ -468,6 +468,7 @@ function App() {
     { id: 'financials', title: 'Financials' },
     { id: 'calculator', title: 'Seller Tools' },
     { id: 'faq', title: 'FAQ' },
+    { id: 'glossary', title: 'Glossary' },
     { id: 'trust', title: 'Why Us' }
   ]
 
@@ -486,7 +487,13 @@ function App() {
             {chapters.map((chapter, index) => (
               <div key={chapter.id}>
             <button
-                  onClick={() => scrollToSection(chapter.id)}
+                  onClick={() => {
+                    if (chapter.id === 'glossary') {
+                      handleOpenGlossary()
+                    } else {
+                      scrollToSection(chapter.id)
+                    }
+                  }}
                   className={`sidebar-button w-full text-left px-3 py-2.5 rounded-xl group ${
                     activeChapter === chapter.id ? 'active' : ''
                   }`}
@@ -1453,7 +1460,7 @@ function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Ready to Start Your Home Sale?</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Ready to Find Out Your Home's Value?</h2>
             <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-4">
               "All we ask from you is your loyalty. In return, you get our 100% commitment and expertise."
             </p>
