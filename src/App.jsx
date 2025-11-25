@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { 
   Menu, 
@@ -36,95 +36,91 @@ import Glossary from './components/Glossary'
 const VirtualStagingSlider = () => {
   const [sliderPosition, setSliderPosition] = useState(50)
   const [isDragging, setIsDragging] = useState(false)
+  const containerRef = useRef(null)
+
+  const updateSliderPosition = (clientX) => {
+    if (!containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    const x = clientX - rect.left
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
+    setSliderPosition(percentage)
+  }
 
   const handleMouseDown = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     setIsDragging(true)
+    updateSliderPosition(e.clientX)
   }
 
-  const handleMouseMove = (e) => {
-    if (!isDragging) return
-    const container = e.currentTarget.closest('.slider-container') || 
-                     document.querySelector('.slider-container')
-    if (!container) return
-    const rect = container.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
-    setSliderPosition(percentage)
-  }
-
-  const handleMouseUp = () => {
-    setIsDragging(false)
-  }
-
-  const handleTouchMove = (e) => {
-    const container = e.currentTarget.closest('.slider-container') || 
-                     document.querySelector('.slider-container')
-    if (!container) return
-    const rect = container.getBoundingClientRect()
-    const touch = e.touches[0]
-    const x = touch.clientX - rect.left
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
-    setSliderPosition(percentage)
+  const handleTouchStart = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(true)
+    if (e.touches[0]) {
+      updateSliderPosition(e.touches[0].clientX)
+    }
   }
 
   useEffect(() => {
-    if (isDragging) {
-      const handleGlobalMouseMove = (e) => handleMouseMove(e)
-      const handleGlobalMouseUp = () => handleMouseUp()
-      const handleGlobalTouchMove = (e) => handleTouchMove(e)
-      
-      document.addEventListener('mousemove', handleGlobalMouseMove)
-      document.addEventListener('mouseup', handleGlobalMouseUp)
-      document.addEventListener('touchmove', handleGlobalTouchMove, { passive: false })
-      
-      return () => {
-        document.removeEventListener('mousemove', handleGlobalMouseMove)
-        document.removeEventListener('mouseup', handleGlobalMouseUp)
-        document.removeEventListener('touchmove', handleGlobalTouchMove)
+    if (!isDragging) return
+
+    const handleMouseMove = (e) => {
+      e.preventDefault()
+      updateSliderPosition(e.clientX)
+    }
+
+    const handleMouseUp = () => {
+      setIsDragging(false)
+    }
+
+    const handleTouchMove = (e) => {
+      e.preventDefault()
+      if (e.touches[0]) {
+        updateSliderPosition(e.touches[0].clientX)
       }
+    }
+
+    const handleTouchEnd = () => {
+      setIsDragging(false)
+    }
+
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
+    document.addEventListener('touchmove', handleTouchMove, { passive: false })
+    document.addEventListener('touchend', handleTouchEnd)
+    document.addEventListener('touchcancel', handleTouchEnd)
+    
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+      document.removeEventListener('touchmove', handleTouchMove)
+      document.removeEventListener('touchend', handleTouchEnd)
+      document.removeEventListener('touchcancel', handleTouchEnd)
     }
   }, [isDragging])
 
   const handleContainerClick = (e) => {
     if (e.target.closest('.slider-handle')) return
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
-    setSliderPosition(percentage)
+    if (isDragging) return
+    updateSliderPosition(e.clientX)
   }
 
   return (
     <div 
+      ref={containerRef}
       className="slider-container relative w-full h-[500px] md:h-[600px] cursor-col-resize select-none"
       onClick={handleContainerClick}
       onTouchStart={(e) => {
-        const touch = e.touches[0]
-        const rect = e.currentTarget.getBoundingClientRect()
-        const x = touch.clientX - rect.left
-        const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
-        setSliderPosition(percentage)
+        if (e.target.closest('.slider-handle')) return
+        if (isDragging) return
+        if (e.touches[0]) {
+          updateSliderPosition(e.touches[0].clientX)
+        }
       }}
     >
-      {/* Before Image (Background - Left Side) */}
+      {/* After Image (Background - Right Side) */}
       <div className="absolute inset-0">
-        <img
-          src="/images/public:images:virtual-staging-before.jpeg"
-          alt="Empty room before virtual staging"
-          className="w-full h-full object-cover"
-          draggable={false}
-          loading="lazy"
-        />
-        <div className="absolute top-4 left-4 bg-black/70 text-white px-4 py-2 rounded-lg font-semibold backdrop-blur-sm">
-          Before
-        </div>
-      </div>
-
-      {/* After Image (Clipped - Right Side) */}
-      <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-      >
         <img
           src="/images/public:images:virtual-staging-afte.PNG"
           alt="Room after virtual staging"
@@ -134,6 +130,23 @@ const VirtualStagingSlider = () => {
         />
         <div className="absolute top-4 right-4 bg-primary/90 text-white px-4 py-2 rounded-lg font-semibold backdrop-blur-sm">
           After
+        </div>
+      </div>
+
+      {/* Before Image (Clipped - Left Side) */}
+      <div
+        className="absolute inset-0 overflow-hidden"
+        style={{ clipPath: `inset(0 0 0 ${100 - sliderPosition}%)` }}
+      >
+        <img
+          src="/images/public:images:virtual-staging-before.jpeg"
+          alt="Empty room before virtual staging"
+          className="w-full h-full object-cover"
+          draggable={false}
+          loading="lazy"
+        />
+        <div className="absolute top-4 left-4 bg-black/70 text-white px-4 py-2 rounded-lg font-semibold backdrop-blur-sm">
+          Before
         </div>
       </div>
 
