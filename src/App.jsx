@@ -344,19 +344,23 @@ function App() {
 
   // Initialize Google Places Autocomplete for property address
   useEffect(() => {
+    let autocomplete = null
+    let input = null
+
     const initAutocomplete = () => {
       if (window.google && window.google.maps && window.google.maps.places) {
-        const input = document.getElementById('propertyAddress')
-        if (input && !input.autocomplete) {
-          const autocomplete = new window.google.maps.places.Autocomplete(input, {
+        input = document.getElementById('propertyAddress')
+        if (input && !input.hasAutocomplete) {
+          autocomplete = new window.google.maps.places.Autocomplete(input, {
             types: ['address'],
             componentRestrictions: { country: ['us'] },
             fields: ['formatted_address', 'address_components', 'geometry']
           })
           
+          // Only update on place selection, not while typing
           autocomplete.addListener('place_changed', () => {
             const place = autocomplete.getPlace()
-            if (place.formatted_address) {
+            if (place && place.formatted_address) {
               setFormData(prev => ({ ...prev, propertyAddress: place.formatted_address }))
               // Clear any existing error
               if (formErrors.propertyAddress) {
@@ -365,7 +369,8 @@ function App() {
             }
           })
           
-          input.autocomplete = autocomplete
+          // Mark that autocomplete is initialized
+          input.hasAutocomplete = true
         }
       }
     }
@@ -373,23 +378,30 @@ function App() {
     // Try to initialize immediately if Google Maps is already loaded
     initAutocomplete()
 
-    // Also try after a delay in case the script loads later
-    const timer = setTimeout(initAutocomplete, 1000)
+    // Also try after delays in case the script loads later
+    const timer1 = setTimeout(initAutocomplete, 500)
+    const timer2 = setTimeout(initAutocomplete, 2000)
 
     // Listen for when Google Maps script loads
-    window.addEventListener('load', initAutocomplete)
+    const checkGoogle = setInterval(() => {
+      if (window.google && window.google.maps && window.google.maps.places) {
+        initAutocomplete()
+        clearInterval(checkGoogle)
+      }
+    }, 500)
 
     return () => {
-      clearTimeout(timer)
-      window.removeEventListener('load', initAutocomplete)
+      clearTimeout(timer1)
+      clearTimeout(timer2)
+      clearInterval(checkGoogle)
     }
-  }, [formErrors.propertyAddress])
+  }, [])
 
   // Track active chapter based on scroll position
   useEffect(() => {
     const handleScroll = () => {
       // Sections in order as they appear on the page
-      const sections = ['roadmap', 'marketing', 'financials', 'calculator', 'contact', 'relationship', 'faq', 'trust']
+      const sections = ['roadmap', 'marketing', 'financials', 'calculator', 'contact', 'relationship', 'faq', 'glossary']
       const scrollPosition = window.scrollY + 200
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -512,7 +524,7 @@ function App() {
     { id: 'calculator', title: 'Seller Tools' },
     { id: 'faq', title: 'FAQ' },
     { id: 'glossary', title: 'Glossary' },
-    { id: 'trust', title: 'Why Us' }
+    { id: 'contact', title: 'Home Value' }
   ]
 
   // Show glossary page if toggled
