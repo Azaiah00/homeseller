@@ -186,7 +186,7 @@ const SmartSellTimeline = () => {
     const pageHeight = pdf.internal.pageSize.getHeight()
     let yPosition = 20
 
-    // Add branding header (matching other PDFs)
+    // Add branding header (matching Net Sheet Calculator style)
     pdf.setFontSize(20)
     pdf.setTextColor(26, 32, 44) // navy
     pdf.text('Smart-Sell Reverse Timeline', pageWidth / 2, yPosition, { align: 'center' })
@@ -202,7 +202,7 @@ const SmartSellTimeline = () => {
     pdf.line(20, yPosition, pageWidth - 20, yPosition)
     yPosition += 8
 
-    // Add date and target closing date
+    // Add date and target closing date (matching Net Sheet style)
     pdf.setFontSize(10)
     pdf.setTextColor(100, 100, 100)
     pdf.text(`Generated: ${new Date().toLocaleDateString()}`, 20, yPosition)
@@ -213,9 +213,9 @@ const SmartSellTimeline = () => {
     pdf.text(`Target Closing Date: ${formatDate(new Date(targetDate))}`, 20, yPosition)
     yPosition += 12
 
-    // Timeline steps
+    // Timeline steps with better formatting (similar to Net Sheet structure)
     calculatedTimeline.forEach((step, index) => {
-      if (yPosition > pageHeight - 30) {
+      if (yPosition > pageHeight - 40) {
         pdf.addPage()
         yPosition = 20
         // Re-add branding on new pages
@@ -229,14 +229,15 @@ const SmartSellTimeline = () => {
         yPosition += 12
       }
 
-      // Step name
+      // Step number and name (bold, navy)
       pdf.setFontSize(12)
       pdf.setTextColor(26, 32, 44) // navy
       pdf.setFont(undefined, 'bold')
-      pdf.text(step.name, 20, yPosition)
-      yPosition += 7
+      const stepNumber = calculatedTimeline.length - index
+      pdf.text(`${stepNumber}. ${step.name}`, 20, yPosition)
+      yPosition += 8
 
-      // Date and days
+      // Date (left aligned, gray)
       pdf.setFontSize(10)
       pdf.setTextColor(100, 100, 100)
       pdf.setFont(undefined, 'normal')
@@ -245,27 +246,42 @@ const SmartSellTimeline = () => {
         : step.isToday 
         ? 'Today'
         : `${step.daysFromToday} days`
-      pdf.text(`${step.formattedDate} (${daysText})`, 20, yPosition)
+      pdf.text(`Date: ${step.formattedDate}`, 20, yPosition)
+      yPosition += 6
+
+      // Days away (right aligned, like Net Sheet values)
+      pdf.setFontSize(10)
+      pdf.setTextColor(100, 100, 100)
+      pdf.text(daysText, pageWidth - 20, yPosition, { align: 'right' })
       yPosition += 6
 
       // Description
-      pdf.setFontSize(9)
+      pdf.setFontSize(10)
       pdf.setTextColor(100, 100, 100)
-      pdf.text(step.description, 20, yPosition, { maxWidth: pageWidth - 40 })
-      yPosition += 10
+      const descriptionLines = pdf.splitTextToSize(`Description: ${step.description}`, pageWidth - 40)
+      pdf.text(descriptionLines, 20, yPosition)
+      yPosition += descriptionLines.length * 5 + 5
 
+      // Add separator line before next step (except for last item)
       if (index < calculatedTimeline.length - 1) {
-        pdf.setDrawColor(200, 200, 200)
+        pdf.setDrawColor(220, 220, 220)
         pdf.setLineWidth(0.3)
         pdf.line(20, yPosition, pageWidth - 20, yPosition)
-        yPosition += 5
+        yPosition += 8
       }
     })
 
-    // Footer
-    yPosition = pageHeight - 15
-    pdf.setFontSize(8)
-    pdf.setTextColor(150, 150, 150)
+    // Add final separator line (matching Net Sheet style)
+    yPosition += 5
+    pdf.setDrawColor(201, 169, 97)
+    pdf.setLineWidth(1)
+    pdf.line(20, yPosition, pageWidth - 20, yPosition)
+    yPosition += 10
+
+    // Add tagline
+    pdf.setFontSize(10)
+    pdf.setTextColor(100, 100, 100)
+    pdf.setFont(undefined, 'italic')
     pdf.text('Your personalized roadmap from "Thinking about it" to "Sold."', pageWidth / 2, yPosition, { align: 'center' })
 
     pdf.save(`smart-sell-timeline-${targetDate}.pdf`)
@@ -416,7 +432,8 @@ const SmartSellTimeline = () => {
                           </div>
                         </div>
                         <p className="text-sm text-gray-600 mb-2">
-                          📅 <span className="font-semibold">{step.formattedDate}</span>
+                          <Calendar className="w-4 h-4 inline mr-1" />
+                          <span className="font-semibold">{step.formattedDate}</span>
                         </p>
                         <p className="text-sm text-gray-700">
                           {step.description}
