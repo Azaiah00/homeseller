@@ -13,7 +13,7 @@ import {
   CheckCircle,
   DollarSign,
   Wrench,
-  Handshake,
+  Users,
   Home,
   Camera,
   Sparkles,
@@ -66,7 +66,7 @@ const timelineSteps = [
     name: 'Under Contract - Offer Accepted', 
     daysBefore: 42, 
     description: 'Offer accepted, contract signed, earnest money deposited',
-    icon: Handshake
+    icon: Users
   },
   { 
     name: 'Active Listings & Showings', 
