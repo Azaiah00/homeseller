@@ -385,7 +385,11 @@ const SmartSellTimeline = () => {
 
             <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
               {calculatedTimeline.map((step, index) => {
-                const statusClass = step.isToday 
+                // Unhighlight Home Inspection and Appraisal cards
+                const isUnhighlighted = step.name.includes('Home Inspection') || step.name.includes('Appraisal')
+                const statusClass = isUnhighlighted
+                  ? 'bg-gray-50 border-gray-200'
+                  : step.isToday 
                   ? 'bg-primary/10 border-primary' 
                   : step.isThisWeek 
                   ? 'bg-yellow-50 border-yellow-200' 
