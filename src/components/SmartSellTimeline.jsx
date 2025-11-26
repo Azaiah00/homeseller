@@ -67,9 +67,15 @@ const timelineSteps = [
   },
   { 
     name: 'Repairs & Improvements', 
-    daysBefore: 70, 
+    daysBefore: 71, 
     description: 'All repairs completed, improvements finished, contractor work done',
     icon: '🔨'
+  },
+  { 
+    name: 'MLS "Coming Soon" Status - Pre-Marketing Begins', 
+    daysBefore: 70, 
+    description: 'List property as "Coming Soon" on MLS for 21 days of pre-marketing before going "Active". This allows you to generate buzz, collect buyer interest, and schedule showings before the official listing date.',
+    icon: '🚀'
   },
   { 
     name: 'Decluttering & Deep Cleaning', 
@@ -121,7 +127,6 @@ const SmartSellTimeline = () => {
       stepDate.setDate(stepDate.getDate() - step.daysBefore)
       
       const daysFromToday = Math.ceil((stepDate - today) / (1000 * 60 * 60 * 24))
-      const isPast = daysFromToday < 0
       const isToday = daysFromToday === 0
       const isThisWeek = daysFromToday >= 0 && daysFromToday <= 7
       
@@ -129,7 +134,6 @@ const SmartSellTimeline = () => {
         ...step,
         date: stepDate,
         daysFromToday,
-        isPast,
         isToday,
         isThisWeek,
         formattedDate: stepDate.toLocaleDateString('en-US', { 
@@ -189,11 +193,16 @@ const SmartSellTimeline = () => {
       pdf.text(`${step.icon} ${step.name}`, 20, yPosition)
       yPosition += 7
 
-      // Date
+      // Date and days
       pdf.setFontSize(10)
       pdf.setTextColor(59, 130, 246) // primary blue
       pdf.setFont(undefined, 'normal')
-      pdf.text(`📅 ${step.formattedDate}`, 20, yPosition)
+      const daysText = step.daysFromToday < 0 
+        ? `${Math.abs(step.daysFromToday)} days ago`
+        : step.isToday 
+        ? 'Today'
+        : `${step.daysFromToday} days`
+      pdf.text(`📅 ${step.formattedDate} (${daysText})`, 20, yPosition)
       yPosition += 6
 
       // Description
@@ -316,13 +325,20 @@ const SmartSellTimeline = () => {
 
             <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
               {calculatedTimeline.map((step, index) => {
-                const statusClass = step.isPast 
-                  ? 'bg-green-50 border-green-200' 
-                  : step.isToday 
+                const statusClass = step.isToday 
                   ? 'bg-primary/10 border-primary' 
                   : step.isThisWeek 
                   ? 'bg-yellow-50 border-yellow-200' 
                   : 'bg-gray-50 border-gray-200'
+
+                // Format days display
+                const daysDisplay = step.daysFromToday < 0 
+                  ? `${Math.abs(step.daysFromToday)} days ago`
+                  : step.isToday 
+                  ? 'Today'
+                  : step.isThisWeek 
+                  ? `${step.daysFromToday} days` 
+                  : `${step.daysFromToday} days`
 
                 return (
                   <motion.div
@@ -344,15 +360,11 @@ const SmartSellTimeline = () => {
                           <div className="flex items-center gap-2 text-sm">
                             <Clock className="w-4 h-4 text-gray-500" />
                             <span className={`font-semibold ${
-                              step.isPast ? 'text-green-700' : 
                               step.isToday ? 'text-primary' : 
                               step.isThisWeek ? 'text-yellow-700' : 
                               'text-gray-700'
                             }`}>
-                              {step.isPast ? '✓ Completed' : 
-                               step.isToday ? 'Today!' : 
-                               step.isThisWeek ? `This Week (${step.daysFromToday} days)` : 
-                               `${step.daysFromToday} days away`}
+                              {daysDisplay}
                             </span>
                           </div>
                         </div>
