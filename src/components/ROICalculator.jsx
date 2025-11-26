@@ -3,8 +3,6 @@ import { motion } from 'framer-motion'
 import { 
   Download, 
   Printer, 
-  TrendingUp, 
-  TrendingDown, 
   CheckCircle, 
   XCircle, 
   Info,
@@ -340,18 +338,8 @@ const ROICalculator = () => {
       doc.setTextColor(100, 100, 100)
       doc.setFont(undefined, 'italic')
       doc.text(results.breakEvenAnalysis, 20, yPos, { maxWidth: 170 })
+      yPos += 10
     }
-    
-    yPos += 18
-    doc.setFontSize(10)
-    doc.setTextColor(26, 32, 44)
-    doc.setFont(undefined, 'bold')
-    doc.text('Recommendation:', 20, yPos)
-    yPos += 7
-    doc.setFont(undefined, 'normal')
-    const recommendationLines = doc.splitTextToSize(results.recommendation, 170)
-    doc.text(recommendationLines, 20, yPos)
-    yPos += recommendationLines.length * 5 + 5
     
     yPos += 10
     doc.setDrawColor(201, 169, 97)
@@ -615,16 +603,6 @@ const ROICalculator = () => {
                           </p>
                         )}
                       </div>
-                    </div>
-
-                    <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
-                      <h4 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
-                        <TrendingUp size={20} className="text-primary" />
-                        Recommendation
-                      </h4>
-                      <p className="text-sm text-gray-700 leading-relaxed">
-                        {results.recommendation}
-                      </p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
