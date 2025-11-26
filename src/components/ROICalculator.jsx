@@ -16,7 +16,7 @@ import {
   Window,
   Deck,
   Basement,
-  Roofing,
+  Building2,
   ChefHat,
   Droplets,
   Layers,
@@ -85,7 +85,7 @@ const ROICalculator = () => {
     'roof-replacement': { 
       roi: 60, 
       name: 'Roof Replacement',
-      icon: Roofing,
+      icon: Building2,
       description: 'Complete roof replacement. Often necessary for sale and provides peace of mind to buyers. Essential maintenance item.',
       costRange: { min: 8000, max: 30000 }
     },
