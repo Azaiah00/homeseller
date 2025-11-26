@@ -1,6 +1,27 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Calendar, Download, Printer, Clock, Target, ArrowLeft } from 'lucide-react'
+import { 
+  Calendar, 
+  Download, 
+  Printer, 
+  Clock, 
+  Target, 
+  ArrowLeft,
+  PartyPopper,
+  Eye,
+  FileText,
+  CheckCircle,
+  DollarSign,
+  Wrench,
+  Handshake,
+  Home,
+  Camera,
+  Sparkles,
+  Hammer,
+  Rocket,
+  Trash2,
+  BarChart3
+} from 'lucide-react'
 import jsPDF from 'jspdf'
 
 // Real estate standard practice timeline (in days before closing)
@@ -9,85 +30,85 @@ const timelineSteps = [
     name: 'Closing & Move-Out', 
     daysBefore: 0, 
     description: 'Final walkthrough, closing documents signed, keys handed over',
-    icon: '🎉'
+    icon: PartyPopper
   },
   { 
     name: 'Final Walkthrough', 
     daysBefore: 1, 
     description: 'Buyer conducts final inspection of the property',
-    icon: '🔍'
+    icon: Eye
   },
   { 
     name: 'Closing Preparation', 
     daysBefore: 3, 
     description: 'Review closing documents, wire transfer instructions, final HOA statements',
-    icon: '📋'
+    icon: FileText
   },
   { 
     name: 'Under Contract - Contingencies Removed', 
     daysBefore: 21, 
     description: 'All contingencies (inspection, appraisal, financing) satisfied',
-    icon: '✅'
+    icon: CheckCircle
   },
   { 
     name: 'Appraisal Completed', 
     daysBefore: 28, 
     description: 'Lender appraisal ordered and completed',
-    icon: '💰'
+    icon: DollarSign
   },
   { 
     name: 'Home Inspection & Negotiations', 
     daysBefore: 35, 
     description: 'Buyer inspection completed, repair requests negotiated',
-    icon: '🔧'
+    icon: Wrench
   },
   { 
     name: 'Under Contract - Offer Accepted', 
     daysBefore: 42, 
     description: 'Offer accepted, contract signed, earnest money deposited',
-    icon: '🤝'
+    icon: Handshake
   },
   { 
     name: 'Active Listings & Showings', 
     daysBefore: 49, 
     description: 'Property listed on MLS, open houses, showings, offers received',
-    icon: '🏠'
+    icon: Home
   },
   { 
     name: 'Professional Photography & Marketing Launch', 
     daysBefore: 56, 
     description: 'Professional photos taken, virtual tour created, marketing materials finalized',
-    icon: '📸'
+    icon: Camera
   },
   { 
     name: 'Staging & Final Touches', 
     daysBefore: 63, 
     description: 'Professional staging completed, final cleaning, curb appeal perfected',
-    icon: '✨'
+    icon: Sparkles
   },
   { 
     name: 'Repairs & Improvements', 
     daysBefore: 71, 
     description: 'All repairs completed, improvements finished, contractor work done',
-    icon: '🔨'
+    icon: Hammer
   },
   { 
     name: 'MLS "Coming Soon" Status - Pre-Marketing Begins', 
     daysBefore: 70, 
     description: 'List property as "Coming Soon" on MLS for 21 days of pre-marketing before going "Active". This allows you to generate buzz, collect buyer interest, and schedule showings before the official listing date.',
-    icon: '🚀'
+    icon: Rocket
   },
   { 
     name: 'Decluttering & Deep Cleaning', 
     daysBefore: 77, 
     description: 'Personal items removed, deep cleaning completed, depersonalization done',
-    icon: '🧹'
+    icon: Trash2
   },
   { 
     name: 'Pre-Listing Consultation & Strategy', 
     daysBefore: 84, 
     description: 'Meet with realtor, pricing strategy finalized, listing plan created',
-    icon: '📊'
+    icon: BarChart3
   }
 ]
 
@@ -190,7 +211,7 @@ const SmartSellTimeline = () => {
       pdf.setFontSize(12)
       pdf.setTextColor(15, 23, 42)
       pdf.setFont(undefined, 'bold')
-      pdf.text(`${step.icon} ${step.name}`, 20, yPosition)
+      pdf.text(step.name, 20, yPosition)
       yPosition += 7
 
       // Date and days
@@ -349,8 +370,11 @@ const SmartSellTimeline = () => {
                     className={`border-2 rounded-lg p-4 ${statusClass} transition-all`}
                   >
                     <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-white rounded-full flex items-center justify-center text-2xl shadow-sm">
-                        {step.icon}
+                      <div className="flex-shrink-0 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm">
+                        {step.icon && (() => {
+                          const IconComponent = step.icon
+                          return <IconComponent className="w-6 h-6 text-primary" />
+                        })()}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
