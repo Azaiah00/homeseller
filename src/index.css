@@ -925,7 +925,7 @@
   }
 }
 
-/* Print Styles for Net Sheet Calculator */
+/* Print Styles for Net Sheet Calculator and ROI Calculator */
 @media print {
   /* Hide navigation, sidebars, and other non-essential elements */
   nav,
@@ -938,8 +938,9 @@
     display: none !important;
   }
 
-  /* Ensure calculator section is visible and properly formatted */
-  #calculator {
+  /* Ensure calculator sections are visible and properly formatted */
+  #calculator,
+  #roi {
     page-break-inside: avoid;
     break-inside: avoid;
   }
@@ -977,6 +978,12 @@
   h2, h3, h4 {
     page-break-after: avoid;
     break-after: avoid;
+  }
+
+  /* Hide tooltips and info icons on print */
+  .group.relative,
+  [class*="tooltip"] {
+    display: none !important;
   }
 }
 
