@@ -30,16 +30,16 @@ const timelineSteps = [
     icon: '✅'
   },
   { 
-    name: 'Home Inspection & Negotiations', 
-    daysBefore: 28, 
-    description: 'Buyer inspection completed, repair requests negotiated',
-    icon: '🔧'
-  },
-  { 
     name: 'Appraisal Completed', 
-    daysBefore: 35, 
+    daysBefore: 28, 
     description: 'Lender appraisal ordered and completed',
     icon: '💰'
+  },
+  { 
+    name: 'Home Inspection & Negotiations', 
+    daysBefore: 35, 
+    description: 'Buyer inspection completed, repair requests negotiated',
+    icon: '🔧'
   },
   { 
     name: 'Under Contract - Offer Accepted', 
