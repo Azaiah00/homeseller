@@ -11,15 +11,14 @@ import {
   Home,
   Wrench,
   Paintbrush,
-  TreePine,
+  Leaf,
   Square,
-  Window,
-  Deck,
-  Basement,
-  Building2,
-  ChefHat,
-  Droplets,
+  RectangleHorizontal,
+  Box,
   Layers,
+  Building2,
+  Utensils,
+  Droplets,
   Hammer,
   Wind
 } from 'lucide-react'
@@ -50,7 +49,7 @@ const ROICalculator = () => {
     'kitchen-remodel': { 
       roi: 60, 
       name: 'Kitchen Remodel',
-      icon: ChefHat,
+      icon: Utensils,
       description: 'Complete kitchen renovation including cabinets, countertops, appliances, and fixtures. One of the most impactful improvements for home value.',
       costRange: { min: 15000, max: 75000 }
     },
@@ -92,28 +91,28 @@ const ROICalculator = () => {
     'windows': { 
       roi: 68, 
       name: 'Window Replacement',
-      icon: Window,
+      icon: RectangleHorizontal,
       description: 'Energy-efficient window replacement. Improves energy efficiency, reduces utility costs, and enhances curb appeal.',
       costRange: { min: 8000, max: 25000 }
     },
     'deck-addition': { 
       roi: 65, 
       name: 'Deck Addition',
-      icon: Deck,
+      icon: Box,
       description: 'Add or replace outdoor deck/patio. Expands living space and creates outdoor entertainment area highly valued by buyers.',
       costRange: { min: 5000, max: 20000 }
     },
     'landscaping': { 
       roi: 100, 
       name: 'Landscaping',
-      icon: TreePine,
+      icon: Leaf,
       description: 'Professional landscaping and curb appeal improvements. Highest ROI improvement - dramatically improves first impressions.',
       costRange: { min: 2000, max: 15000 }
     },
     'basement-finish': { 
       roi: 70, 
       name: 'Basement Finishing',
-      icon: Basement,
+      icon: Layers,
       description: 'Finish unfinished basement to add livable square footage. Significantly increases home value and appeal.',
       costRange: { min: 20000, max: 50000 }
     },
