@@ -29,7 +29,6 @@ import {
   BookOpen
 } from 'lucide-react'
 import NetSheetCalculator from './components/NetSheetCalculator'
-import ROICalculator from './components/ROICalculator'
 import Glossary from './components/Glossary'
 import SmartSellTimeline from './components/SmartSellTimeline'
 
@@ -564,13 +563,32 @@ function App() {
     formDataToSubmit.append('timeline', formData.timeline)
 
     try {
-      const response = await fetch('/', {
+      // Submit to Netlify Forms
+      const netlifyResponse = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(formDataToSubmit).toString()
       })
 
-      if (response.ok) {
+      // Also send to Follow Up Boss CRM (don't block on this)
+      try {
+        await fetch('/.netlify/functions/followupboss', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            propertyAddress: formData.propertyAddress,
+            timeline: formData.timeline
+          })
+        })
+      } catch (crmError) {
+        // Log error but don't fail the form submission
+        console.error('Failed to send to CRM:', crmError)
+      }
+
+      if (netlifyResponse.ok) {
         setShowSuccessModal(true)
         setFormData({ name: '', email: '', phone: '', propertyAddress: '', timeline: '' })
         setFormErrors({})
@@ -1554,9 +1572,6 @@ function App() {
 
       {/* NET SHEET CALCULATOR */}
       <NetSheetCalculator />
-
-      {/* ROI CALCULATOR */}
-      <ROICalculator />
 
       {/* Glossary Promotion After Calculators */}
       <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
