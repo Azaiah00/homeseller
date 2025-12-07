@@ -134,7 +134,7 @@ const SmartSellTimeline = () => {
     }
 
     const daysUntilClosing = Math.ceil((closingDate - today) / (1000 * 60 * 60 * 24))
-    
+   
     // Check if there's enough time (minimum 84 days recommended)
     if (daysUntilClosing < 84) {
       setError(`Warning: Only ${daysUntilClosing} days until closing. Recommended minimum is 84 days (12 weeks) for optimal preparation.`)
@@ -142,28 +142,58 @@ const SmartSellTimeline = () => {
       setError('')
     }
 
-    // Calculate each step's date
-    const timeline = timelineSteps.map(step => {
-      const stepDate = new Date(closingDate)
-      stepDate.setDate(stepDate.getDate() - step.daysBefore)
-      
+    // Calculate scale factor to fit timeline between today and closing date
+    // Standard timeline spans 84 days (from Pre-Listing at day 84 to Closing at day 0)
+    const standardTimelineDays = 84
+    const scaleFactor = daysUntilClosing / standardTimelineDays
+   
+    // Calculate each step's date with auto-adjustment
+    // All steps are calculated proportionally to fit between today and closing date
+    let timeline = timelineSteps.map(step => {
+      let stepDate
+     
+      // Closing & Move-Out should be exactly on the selected closing date
+      if (step.daysBefore === 0) {
+        stepDate = new Date(closingDate)
+      } else {
+        // Scale the daysBefore proportionally to fit available time
+        const scaledDaysBefore = step.daysBefore * scaleFactor
+        stepDate = new Date(closingDate)
+        stepDate.setDate(stepDate.getDate() - scaledDaysBefore)
+       
+        // Ensure no step goes before today (start date)
+        if (stepDate < today) {
+          stepDate = new Date(today)
+        }
+      }
+     
+      // Calculate days from today for display purposes
       const daysFromToday = Math.ceil((stepDate - today) / (1000 * 60 * 60 * 24))
       const isToday = daysFromToday === 0
       const isThisWeek = daysFromToday >= 0 && daysFromToday <= 7
-      
+     
       return {
         ...step,
         date: stepDate,
         daysFromToday,
         isToday,
         isThisWeek,
-        formattedDate: stepDate.toLocaleDateString('en-US', { 
-          weekday: 'short', 
-          year: 'numeric', 
-          month: 'short', 
-          day: 'numeric' 
+        formattedDate: stepDate.toLocaleDateString('en-US', {
+          weekday: 'short',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
         })
       }
+    })
+   
+    // Sort timeline in REVERSE order (latest to earliest) - closing date first, then backwards to today
+    // If dates are equal, maintain original order based on daysBefore
+    timeline.sort((a, b) => {
+      const dateDiff = b.date - a.date // Reverse: latest date first
+      if (dateDiff !== 0) return dateDiff
+      // If same date, sort by daysBefore (smaller daysBefore = closer to closing = should come first in reverse)
+      return a.daysBefore - b.daysBefore
     })
 
     setCalculatedTimeline(timeline)
@@ -241,9 +271,11 @@ const SmartSellTimeline = () => {
       pdf.setFontSize(10)
       pdf.setTextColor(100, 100, 100)
       pdf.setFont(undefined, 'normal')
-      const daysText = step.daysFromToday < 0 
+      const daysText = step.name === 'Pre-Listing Consultation & Strategy'
+        ? 'Start Today'
+        : step.daysFromToday < 0
         ? `${Math.abs(step.daysFromToday)} days ago`
-        : step.isToday 
+        : step.isToday
         ? 'Today'
         : `${step.daysFromToday} days`
       pdf.text(`Date: ${step.formattedDate}`, 20, yPosition)
@@ -396,12 +428,14 @@ const SmartSellTimeline = () => {
                   : 'bg-gray-50 border-gray-200'
 
                 // Format days display
-                const daysDisplay = step.daysFromToday < 0 
+                const daysDisplay = step.name === 'Pre-Listing Consultation & Strategy'
+                  ? 'Start Today'
+                  : step.daysFromToday < 0
                   ? `${Math.abs(step.daysFromToday)} days ago`
-                  : step.isToday 
+                  : step.isToday
                   ? 'Today'
-                  : step.isThisWeek 
-                  ? `${step.daysFromToday} days` 
+                  : step.isThisWeek
+                  ? `${step.daysFromToday} days`
                   : `${step.daysFromToday} days`
 
                 return (
